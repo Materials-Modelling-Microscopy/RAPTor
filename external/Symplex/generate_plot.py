@@ -1,11 +1,4 @@
 from typing import List, Iterable
-from pathlib import Path
-import sys
-
-SYMPLEX_ROOT = Path(__file__).resolve().parent
-
-if str(SYMPLEX_ROOT) not in sys.path:
-    sys.path.insert(0, str(SYMPLEX_ROOT))
 
 from main import main
 import numpy as np
@@ -33,7 +26,11 @@ def generate_symplex_plot(alloy_system, temperature, constraint_element, propert
     
     constraint_element_index = alloy_system.index(constraint_element)
     
+<<<<<<< Updated upstream
     fig = plt.figure(figsize=(6, 6))
+=======
+    fig = plt.figure(figsize=(5, 5))
+>>>>>>> Stashed changes
     ax1 = fig.add_subplot(projection='polar')
     ax1.set_yticks([])
     ax1.set_xticks([])
@@ -44,6 +41,8 @@ def generate_symplex_plot(alloy_system, temperature, constraint_element, propert
         property_str = 'phase_fraction'
     elif property_name == 'Number of Phases':
         property_str = 'no_of_phases'
+    elif property_name == 'Minimum Spinodal Eigenvalue':
+        property_str = 'eigen_value'
     
     custom_data = {
     key: interpolate_nans(value)
@@ -66,8 +65,13 @@ def generate_symplex_plot(alloy_system, temperature, constraint_element, propert
                     central_point=central_point,
                     special_points=special_points)
     
+<<<<<<< Updated upstream
     # ax1.text(0.95, -0.18, f"{temperature}K", ha='center', va='center', transform=ax1.transAxes)
     # fig.tight_layout()
+=======
+    ax1.text(0.95, -0.18, f"{temperature}K", ha='center', va='center', transform=ax1.transAxes)
+    fig.tight_layout(pad = 0.0)
+>>>>>>> Stashed changes
     return fig
 
     

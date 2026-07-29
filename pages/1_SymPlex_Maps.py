@@ -34,6 +34,7 @@ st.markdown(
 AVAILABLE_PROPERTIES = [
     "SPSS Phase Fraction",
     "Number of Phases",
+    "Minimum Spinodal Eigenvalue",
 ]
 
 

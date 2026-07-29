@@ -3,11 +3,25 @@ import numpy as np
 from pycalphad import Database, equilibrium
 from pycalphad import variables as v
 import pandas as pd
+
 from pathlib import Path
+
+from phase_diagram_generators.spinodal_predictor import (
+    load_interaction_data,
+    predict_spinodal,
+)
 
 
 MODULE_DIR = Path(__file__).resolve().parent
 PHASEFIELD_ROOT = MODULE_DIR.parents[0]
+
+SPINODAL_DATA_PATH = (
+    PHASEFIELD_ROOT
+    / "input"
+    / "spinodal"
+    / "binary_interactions.json"
+)
+
 
 class symplexDataGenerator:
 	
@@ -27,31 +41,21 @@ class symplexDataGenerator:
 		return '-'.join(self.alloy_system)
 	
 	def _extract_data_template(self):
-	    order = self._order()
+		order = self._order()
+		mol_dict = {}
+		if order == 4:
+			with open(f"/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Rapid_Phase_Field_Prediction/phase_diagram_generators/mol_grid_data/quaternary_raw.pkl", "rb") as f:
+				mol_dict = pickle.load(f)
+		if order == 5:
+			with open(f"/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Rapid_Phase_Field_Prediction/phase_diagram_generators/mol_grid_data/quinary_raw.pkl", "rb") as f:
+				mol_dict = pickle.load(f)
 	
-	    if order == 4:
-	        grid_path = MODULE_DIR / "mol_grid_data" / "quaternary_raw.pkl"
-	    elif order == 5:
-	        grid_path = MODULE_DIR / "mol_grid_data" / "quinary_raw.pkl"
-	    else:
-	        raise ValueError(f"Unsupported alloy order: {order}")
+		return mol_dict
 	
-	    if not grid_path.exists():
-	        raise FileNotFoundError(f"Mol grid file not found: {grid_path}")
-	
-	    with open(grid_path, "rb") as f:
-	        mol_dict = pickle.load(f)
-	
-	    return mol_dict
-
 	def _extract_tdb(self):
 		composition = self._composition()
-		tdb_path = PHASEFIELD_ROOT / "input" / "tdb" / f"{composition}.tdb"
-		
-		if not tdb_path.exists():
-			raise FileNotFoundError(f"TDB file not found: {tdb_path}")
-		
-		return str(tdb_path)
+		path = f"/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Rapid_Phase_Field_Prediction/input/tdb/{composition}.tdb"
+		return path
 	
 	@staticmethod
 	def predict_SPSS_fraction(df, comps, phases, feats, lattice):
@@ -94,27 +98,101 @@ class symplexDataGenerator:
 		if self.property == 'Number of Phases':
 			return self.predict_no_phases
 	
+	def _extract_spinodal_data(self):
+		return load_interaction_data(SPINODAL_DATA_PATH)
+	
+	def _is_spinodal_property(self):
+		return self.property in [
+			"Minimum Spinodal Eigenvalue",
+			"Number of Negative Eigenvalues",
+			"Spinodal Flag",
+		]
+	
+	def _spinodal_value(self, mol, interaction_data, lattice):
+		result = predict_spinodal(
+			composition=self.alloy_system,
+			temperature=self.temperature,
+			lattice=lattice,
+			mol=mol,
+			interaction_data=interaction_data,
+		)
+		
+		if self.property == "Minimum Spinodal Eigenvalue":
+			return result["lambda_min"]
+		
+		if self.property == "Number of Negative Eigenvalues":
+			return result["n_negative"]
+		
+		if self.property == "Spinodal Flag":
+			return 1.0 if result["spinodal"] else 0.0
+		
+		raise ValueError(f"Unknown spinodal property: {self.property}")
+	
 	def generate(self):
 		
-		lattice = 'BCC_A2'
+		lattice = "BCC_A2"
 		mol_dict = self._extract_data_template()
+		data = {}
+		
+		if self._is_spinodal_property():
+			interaction_data = self._extract_spinodal_data()
+			
+			for path, mol_bar in mol_dict.items():
+				temp_data = []
+				
+				for mol in mol_bar:
+					try:
+						property_value = self._spinodal_value(
+							mol=mol,
+							interaction_data=interaction_data,
+							lattice=lattice,
+						)
+					except Exception:
+						property_value = np.nan
+					
+					temp_data.append(property_value)
+				
+				data[path] = temp_data
+			
+			return data
+		
 		composition = self._composition()
 		tdb_path = self._extract_tdb()
 		df = Database(tdb_path)
-		data = {}
+		
 		property_fn = self._extract_property()
+		
 		for path, mol_bar in mol_dict.items():
 			temp_data = []
-			for idx, mol in enumerate(mol_bar):
-				eles = composition.split('-')
-				comps = [i.upper() for i in eles] + ['VA']
+			
+			for mol in mol_bar:
+				eles = composition.split("-")
+				comps = [i.upper() for i in eles] + ["VA"]
 				phases = list(df.phases.keys())
-				feats = {v.X(i): mol[idx] for idx, i in enumerate(comps[:-2])}
+				
+				independent_components = comps[:-2]
+				
+				feats = {
+					v.X(component): float(mol[i])
+					for i, component in enumerate(independent_components)
+				}
+				
 				feats[v.T] = self.temperature
 				feats[v.P] = 101325
-				property_value = property_fn(df, comps, phases, feats, lattice)
+				
+				try:
+					property_value = property_fn(
+						df,
+						comps,
+						phases,
+						feats,
+						lattice,
+					)
+				except Exception:
+					property_value = np.nan
+				
 				temp_data.append(property_value)
-		
+			
 			data[path] = temp_data
-	
+		
 		return data

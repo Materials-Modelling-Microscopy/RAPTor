@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.figure
 
 from external.Rapid_Phase_Field_Prediction.phase_diagram_analysis.temperature_profile_per_composition import generate_phase_fraction_temperature_profile
+from external.Rapid_Phase_Field_Prediction.phase_diagram_analysis.composition_profile_per_temperature import generate_composition_splitting_profile
 from external.Rapid_Phase_Field_Prediction.phase_diagram_analysis.phase_diagram_plotters import generate_binary_phase_diagram, generate_ternary_phase_diagram
 
 
@@ -74,6 +75,68 @@ def run_phase_fraction_temperature_prediction(
         data=data,
         figure=fig,
     )
+
+@dataclass
+class CompositionSplittingSingleResult:
+    temperature: float
+    data: pd.DataFrame
+    figure: matplotlib.figure.Figure
+
+    def to_csv_bytes(self) -> bytes:
+        return self.data.to_csv(index=False).encode("utf-8")
+
+    def to_png_bytes(self) -> bytes:
+        buf = io.BytesIO()
+        self.figure.savefig(buf, format="png", dpi=300, bbox_inches="tight")
+        buf.seek(0)
+        return buf.getvalue()
+
+
+@dataclass
+class CompositionSplittingResult:
+    alloy_system: list[str]
+    mols: list[list[float]]
+    results: list[CompositionSplittingSingleResult]
+
+
+def run_composition_splitting_prediction(
+    alloy_system: list[str],
+    mols: list[list[float]],
+    temperatures: list[float],
+    tdb_dir: str | Path,
+) -> CompositionSplittingResult:
+    composition = "-".join(alloy_system)
+
+    if len(temperatures) == 0:
+        raise ValueError("Provide at least one temperature.")
+
+    if len(temperatures) > 3:
+        raise ValueError("At most 3 temperatures are supported.")
+
+    results = []
+
+    for temperature in temperatures:
+        df, fig = generate_composition_splitting_profile(
+            composition=composition,
+            mols=mols,
+            temperature=float(temperature),
+            tdb_dir=tdb_dir,
+        )
+
+        results.append(
+            CompositionSplittingSingleResult(
+                temperature=float(temperature),
+                data=df,
+                figure=fig,
+            )
+        )
+
+    return CompositionSplittingResult(
+        alloy_system=alloy_system,
+        mols=mols,
+        results=results,
+    )
+
 
 
 @dataclass

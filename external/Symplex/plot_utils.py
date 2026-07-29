@@ -4,6 +4,7 @@ from grid_utils import load_properties_yaml
 
 property_yaml = load_properties_yaml()[1]
 
+
 def draw_circle_in_polar(radius: float, ax: plt.Axes, y_bias) -> None:
 
 	theta = np.linspace(0, 2 * np.pi, 100)
@@ -16,7 +17,8 @@ def draw_circle_in_polar(radius: float, ax: plt.Axes, y_bias) -> None:
 		linestyle="--",
 		alpha=property_yaml["circle_alpha"],
 	)
-	
+
+
 def scatter_center(scatter: float, ax: plt.Axes, cmap, norm, y_bias) -> None:
 	
 	theta = np.linspace(0, 2 * np.pi, 50)

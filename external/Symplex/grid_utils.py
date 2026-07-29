@@ -3,12 +3,9 @@ import numpy as np
 from typing import List, Iterable
 import yaml
 
-from pathlib import Path
 
 def load_properties_yaml():
-	
-	SYMPLEX_ROOT = Path(__file__).resolve().parent
-	file_path = SYMPLEX_ROOT / "plotting_parameters.yaml"
+	file_path = "/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Symplex/plotting_parameters.yaml"
 
 	with open(file_path,'r') as input_file:
 		return list(yaml.safe_load_all(input_file))
