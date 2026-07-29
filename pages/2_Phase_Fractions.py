@@ -15,6 +15,7 @@ from alloy_web.ui import (
     mole_fraction_inputs,
     show_input_summary,
     figure_to_png_bytes,
+    show_result_data,
 )
 from alloy_web.adapters.phasefield_adapter import (
     run_phase_fraction_temperature_prediction,
@@ -233,27 +234,20 @@ if run_button:
             with right:
                 st.subheader("Phase fraction plot")
                 st.pyplot(result.figure, use_container_width=True)
-
-            st.subheader("Phase fraction data")
-            st.dataframe(result.data, use_container_width=True)
-
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.download_button(
-                    "Download CSV",
-                    data=result.to_csv_bytes(),
-                    file_name=f"{result.composition}_phase_fractions.csv",
-                    mime="text/csv",
-                )
-
-            with col2:
-                st.download_button(
-                    "Download plot PNG",
-                    data=figure_to_png_bytes(result.figure),
-                    file_name=f"{result.composition}_phase_fractions.png",
-                    mime="image/png",
-                )
+            
+            show_result_data(
+	            data=result.data,
+	            title="Phase fraction data",
+	            file_name=f"{result.composition}_phase_fractions.csv",
+	            key_prefix=f"{result.composition}_phase_fractions",
+            )
+            
+            st.download_button(
+	            "Download plot PNG",
+	            data=figure_to_png_bytes(result.figure),
+	            file_name=f"{result.composition}_phase_fractions.png",
+	            mime="image/png",
+            )
 
             plt.close(result.figure)
 
@@ -309,33 +303,22 @@ if run_button:
                     st.subheader(f"Composition splitting at {single.temperature:.0f} K")
 
                     st.pyplot(single.figure, use_container_width=True)
-
-                    st.subheader("Composition splitting data")
-                    st.dataframe(single.data, use_container_width=True)
-
-                    col1, col2 = st.columns(2)
-
-                    with col1:
-                        st.download_button(
-                            "Download CSV",
-                            data=single.to_csv_bytes(),
-                            file_name=(
-                                f"{'-'.join(result.alloy_system)}_"
-                                f"{single.temperature:.0f}K_composition_splitting.csv"
-                            ),
-                            mime="text/csv",
-                        )
-
-                    with col2:
-                        st.download_button(
-                            "Download plot PNG",
-                            data=single.to_png_bytes(),
-                            file_name=(
-                                f"{'-'.join(result.alloy_system)}_"
-                                f"{single.temperature:.0f}K_composition_splitting.png"
-                            ),
-                            mime="image/png",
-                        )
+                    
+                    composition_label = "-".join(result.alloy_system)
+                    
+                    show_result_data(
+	                    data=single.data,
+	                    title="Composition splitting data",
+	                    file_name=f"{composition_label}_{single.temperature:.0f}K_composition_splitting.csv",
+	                    key_prefix=f"{composition_label}_{single.temperature:.0f}K_composition_splitting",
+                    )
+                    
+                    st.download_button(
+	                    "Download plot PNG",
+	                    data=single.to_png_bytes(),
+	                    file_name=f"{composition_label}_{single.temperature:.0f}K_composition_splitting.png",
+	                    mime="image/png",
+                    )
 
                     plt.close(single.figure)
 

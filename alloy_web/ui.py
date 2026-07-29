@@ -186,3 +186,58 @@ def show_input_summary(payload: dict, title: str = "Selected inputs"):
         # if "tdb_dir" in payload:
         #     with st.expander("TDB location"):
         #         st.code(str(payload["tdb_dir"]))
+
+
+def show_result_data(
+    data,
+    title: str,
+    file_name: str,
+    key_prefix: str,
+    preview_rows: int = 20,
+):
+    """
+    Cleaner presentation for numerical output.
+
+    Shows only a compact summary and download button by default.
+    The table preview is hidden inside an expander.
+    """
+
+    n_rows, n_cols = data.shape
+
+    with st.container(border=True):
+        st.markdown(f"#### {title}")
+
+        col1, col2, col3 = st.columns([1, 1, 2])
+
+        with col1:
+            st.metric("Rows", n_rows)
+
+        with col2:
+            st.metric("Columns", n_cols)
+
+        with col3:
+            st.download_button(
+                "Download CSV",
+                data=data.to_csv(index=False).encode("utf-8"),
+                file_name=file_name,
+                mime="text/csv",
+                key=f"{key_prefix}_csv_download",
+            )
+
+        with st.expander("Preview data table"):
+            max_rows = max(1, min(100, n_rows))
+            default_rows = min(preview_rows, max_rows)
+
+            n_preview = st.slider(
+                "Rows to preview",
+                min_value=1,
+                max_value=max_rows,
+                value=default_rows,
+                key=f"{key_prefix}_preview_rows",
+            )
+
+            st.dataframe(
+                data.head(n_preview),
+                use_container_width=True,
+                hide_index=True,
+            )

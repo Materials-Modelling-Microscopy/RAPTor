@@ -93,52 +93,33 @@ if run_button:
                 constraint_element=constraint_element,
                 property_name=property_name,
             )
-
+            
+            png_bytes = figure_to_png_bytes(result.figure)
+            
+            
+        
+        
         with right:
-            st.subheader("SymPlex plot")
-            st.pyplot(result.figure, use_container_width=False)
-
-        st.subheader("Raw path-wise data")
-
-        st.write(f"Number of paths: `{len(result.data)}`")
-
-        if result.data:
-            preview_key = list(result.data.keys())[0]
-            st.write(f"Preview path: `{preview_key}`")
-            st.write(result.data[preview_key][:10])
-
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.download_button(
-                "Download raw data",
-                data=result.to_pickle_bytes(),
-                file_name=(
-                    f"{'-'.join(result.alloy_system)}_"
-                    f"{result.temperature:.0f}K_"
-                    f"{result.property_name.replace(' ', '_')}.pkl"
-                ),
-                mime="application/octet-stream",
+            st.subheader("SymPlex map")
+            st.image(
+                png_bytes,
+                caption=f"{'-'.join(result.alloy_system)} | {result.property_name} | {result.temperature:.0f} K",
+                use_container_width=True,
             )
-
-        with col2:
-            st.download_button(
-                "Download plot PNG",
-                data=figure_to_png_bytes(result.figure),
-                file_name=(
-                    f"{'-'.join(result.alloy_system)}_"
-                    f"{result.temperature:.0f}K_"
-                    f"{result.property_name.replace(' ', '_')}.png"
-                ),
-                mime="image/png",
-            )
-
+        
+        st.download_button(
+            "Download plot PNG",
+            data=png_bytes,
+            file_name=f"{'-'.join(result.alloy_system)}_{result.property_name}_{result.temperature:.0f}K.png",
+            mime="image/png",
+        )
+        
         plt.close(result.figure)
 
     except Exception as exc:
-        pass
-        # st.error("SymPlex prediction failed.")
-        # st.code(str(exc))
-        #
-        # with st.expander("Full traceback"):
-        #     st.code(traceback.format_exc())
+        # pass
+        st.error("SymPlex prediction failed.")
+        st.code(str(exc))
+
+        with st.expander("Full traceback"):
+            st.code(traceback.format_exc())
