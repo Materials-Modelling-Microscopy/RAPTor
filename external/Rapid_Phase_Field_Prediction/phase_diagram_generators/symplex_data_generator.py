@@ -42,20 +42,31 @@ class symplexDataGenerator:
 	
 	def _extract_data_template(self):
 		order = self._order()
-		mol_dict = {}
 		if order == 4:
-			with open(f"/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Rapid_Phase_Field_Prediction/phase_diagram_generators/mol_grid_data/quaternary_raw.pkl", "rb") as f:
-				mol_dict = pickle.load(f)
-		if order == 5:
-			with open(f"/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Rapid_Phase_Field_Prediction/phase_diagram_generators/mol_grid_data/quinary_raw.pkl", "rb") as f:
-				mol_dict = pickle.load(f)
+			grid_path = MODULE_DIR / "mol_grid_data" / "quaternary_raw.pkl"
+		elif order == 5:
+			grid_path = MODULE_DIR / "mol_grid_data" / "quinary_raw.pkl"
+		else:
+			raise ValueError(
+				f"SymPlex generation supports quaternary and quinary systems; got {order} elements."
+			)
+
+		if not grid_path.exists():
+			raise FileNotFoundError(f"Composition grid not found: {grid_path}")
+
+		with grid_path.open("rb") as f:
+			mol_dict = pickle.load(f)
 	
 		return mol_dict
 	
 	def _extract_tdb(self):
 		composition = self._composition()
-		path = f"/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Rapid_Phase_Field_Prediction/input/tdb/{composition}.tdb"
-		return path
+		path = PHASEFIELD_ROOT / "input" / "tdb" / f"{composition}.tdb"
+
+		if not path.exists():
+			raise FileNotFoundError(f"TDB file not found: {path}")
+
+		return str(path)
 	
 	@staticmethod
 	def predict_SPSS_fraction(df, comps, phases, feats, lattice):

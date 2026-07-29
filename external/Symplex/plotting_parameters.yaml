@@ -1,12 +1,7 @@
 ---
 y_bias: 0.4
-<<<<<<< Updated upstream
-scaling_factor: 2.5
-fontsize: 13
-=======
 scaling_factor: 1.2
 fontsize: 12
->>>>>>> Stashed changes
 mol_gradation: 15
 bar_line_edgecolor: '#555555'
 bar_linewidth: 0.0

@@ -1,13 +1,14 @@
 from itertools import combinations
+from pathlib import Path
 import numpy as np
 from typing import List, Iterable
 import yaml
 
 
 def load_properties_yaml():
-	file_path = "/Users/pravanomprakash/Documents/Projects/RPFP_web/external/Symplex/plotting_parameters.yaml"
+	file_path = Path(__file__).resolve().parent / "plotting_parameters.yaml"
 
-	with open(file_path,'r') as input_file:
+	with file_path.open("r", encoding="utf-8") as input_file:
 		return list(yaml.safe_load_all(input_file))
 
 
