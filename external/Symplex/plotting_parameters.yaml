@@ -51,6 +51,17 @@ e_hull:
   metastable_bound: 0.05
   max_bound: 0.4
   label: "$E_{hull}$ (eV/atom)"
+bcc_e_hull:
+  cmap_color: 'OrRd'
+  cmap_n_colors: 10
+  stable_color: '#009988'
+  cmap_max_bound: 0.75
+  cmap_min_bound: 0.1
+  unstable_color: 'darkred'
+  stable_bound: 0.000001
+  metastable_bound: 50
+  max_bound: 400
+  label: "$E_{BCC}-E_{hull}$ (meV/atom)"
 phase_boundary:
   miscible_color: '#009988'
   immiscible_color: 'salmon'

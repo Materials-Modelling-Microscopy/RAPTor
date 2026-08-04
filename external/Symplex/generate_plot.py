@@ -95,6 +95,8 @@ def generate_symplex_plot(
     
     if property_name == "SPSS Phase Fraction":
         property_name = 'phase_fraction'
+    elif property_name == "BCC Energy Above Hull":
+        property_name = 'bcc_e_hull'
     elif property_name == "Number of Phases":
         property_name = 'no_of_phases'
     elif property_name == "Minimum Spinodal Eigenvalue":

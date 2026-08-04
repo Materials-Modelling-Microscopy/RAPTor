@@ -1,14 +1,18 @@
 import pickle
 import numpy as np
-from pycalphad import Database, equilibrium
+from pycalphad import Database, Workspace
 from pycalphad import variables as v
 import pandas as pd
 
 from pathlib import Path
 
-from phase_diagram_generators.spinodal_predictor import (
-    load_interaction_data,
-    predict_spinodal,
+from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.spinodal_predictor import (
+	load_interaction_data,
+	predict_spinodal,
+)
+from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.energy_above_hull import (
+	calculate_homogeneous_bcc_gibbs,
+	energy_above_hull_mev,
 )
 
 
@@ -69,8 +73,7 @@ class symplexDataGenerator:
 		return str(path)
 	
 	@staticmethod
-	def predict_SPSS_fraction(df, comps, phases, feats, lattice):
-		equi = equilibrium(df, comps, phases, feats)
+	def predict_SPSS_fraction(equi, lattice):
 		fracs_ans, phase_ans = np.round(equi.NP.values.squeeze(), 2), equi.Phase.values.squeeze()
 
 		target = lattice
@@ -85,8 +88,7 @@ class symplexDataGenerator:
 		return bcc_fraction
 	
 	@staticmethod
-	def predict_no_phases(df, comps, phases, feats, lattice):
-		equi = equilibrium(df, comps, phases, feats)
+	def predict_no_phases(equi, lattice):
 		phase_ans = equi.Phase.values.squeeze()
 		phases = np.asarray(phase_ans).ravel()
 		valid_phases = [
@@ -138,6 +140,84 @@ class symplexDataGenerator:
 			return 1.0 if result["spinodal"] else 0.0
 		
 		raise ValueError(f"Unknown spinodal property: {self.property}")
+
+	def _equilibrium_conditions(self, mol, independent_components):
+		conditions = {
+			v.X(component): float(mol[i])
+			for i, component in enumerate(independent_components)
+		}
+		conditions[v.T] = self.temperature
+		conditions[v.P] = 101325
+		return conditions
+
+	def _generate_equilibrium_data(self, mol_dict, lattice):
+		"""
+		Evaluate the full SymPlex grid with one reusable PyCalphad workspace.
+
+		Creating a new ``equilibrium`` workspace for every composition rebuilds
+		models and phase records hundreds of times. Updating only the condition
+		values preserves those compiled objects while still solving every grid
+		point independently.
+		"""
+		composition = self._composition()
+		db = Database(self._extract_tdb())
+		components = [element.upper() for element in composition.split("-")] + ["VA"]
+		phases = list(db.phases.keys())
+		independent_components = components[:-2]
+		property_fn = self._extract_property()
+		is_energy_above_hull = self.property == "BCC Energy Above Hull"
+
+		if property_fn is None and not is_energy_above_hull:
+			raise ValueError(f"Unknown equilibrium property: {self.property}")
+
+		all_mols = [mol for mol_bar in mol_dict.values() for mol in mol_bar]
+		bcc_gibbs = None
+		if is_energy_above_hull:
+			bcc_gibbs = calculate_homogeneous_bcc_gibbs(
+				database=db,
+				components=components[:-1],
+				mols=all_mols,
+				temperatures=[self.temperature],
+			)[0]
+
+		first_mol = next(iter(mol_dict.values()))[0]
+		workspace = Workspace(
+			database=db,
+			components=components,
+			phases=phases,
+			conditions=self._equilibrium_conditions(first_mol, independent_components),
+		)
+
+		data = {}
+		point_index = 0
+		for path, mol_bar in mol_dict.items():
+			temp_data = []
+			for mol in mol_bar:
+				try:
+					workspace.conditions.update(
+						self._equilibrium_conditions(mol, independent_components)
+					)
+					equilibrium_result = workspace.eq.get_dataset()
+					if is_energy_above_hull:
+						equilibrium_gibbs = float(
+							np.asarray(equilibrium_result.GM, dtype=float).ravel()[0]
+						)
+						property_value = float(
+							energy_above_hull_mev(
+								bcc_gibbs[point_index], equilibrium_gibbs
+							)
+						)
+					else:
+						property_value = property_fn(equilibrium_result, lattice)
+				except Exception:
+					property_value = np.nan
+
+				temp_data.append(property_value)
+				point_index += 1
+
+			data[path] = temp_data
+
+		return data
 	
 	def generate(self):
 		
@@ -167,43 +247,4 @@ class symplexDataGenerator:
 			
 			return data
 		
-		composition = self._composition()
-		tdb_path = self._extract_tdb()
-		df = Database(tdb_path)
-		
-		property_fn = self._extract_property()
-		
-		for path, mol_bar in mol_dict.items():
-			temp_data = []
-			
-			for mol in mol_bar:
-				eles = composition.split("-")
-				comps = [i.upper() for i in eles] + ["VA"]
-				phases = list(df.phases.keys())
-				
-				independent_components = comps[:-2]
-				
-				feats = {
-					v.X(component): float(mol[i])
-					for i, component in enumerate(independent_components)
-				}
-				
-				feats[v.T] = self.temperature
-				feats[v.P] = 101325
-				
-				try:
-					property_value = property_fn(
-						df,
-						comps,
-						phases,
-						feats,
-						lattice,
-					)
-				except Exception:
-					property_value = np.nan
-				
-				temp_data.append(property_value)
-			
-			data[path] = temp_data
-		
-		return data
+		return self._generate_equilibrium_data(mol_dict, lattice)

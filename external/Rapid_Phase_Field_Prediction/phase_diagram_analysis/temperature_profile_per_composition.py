@@ -8,6 +8,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 
+from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.energy_above_hull import (
+    calculate_homogeneous_bcc_gibbs,
+    energy_above_hull_mev,
+    plot_bcc_energy_above_hull,
+)
+
 
 def _rename_duplicate_phases(row):
     counts = {}
@@ -109,6 +115,8 @@ def generate_phase_fraction_temperature_profile(
         conditions,
     )
 
+    equilibrium_gibbs = np.squeeze(np.asarray(equi.GM, dtype=float))
+
     fractions = np.round(
         np.squeeze(np.array(equi.NP)).astype(float),
         3,
@@ -135,6 +143,27 @@ def generate_phase_fraction_temperature_profile(
     temperatures = temperatures[order_t]
     fractions = fractions[order_t]
     phase_names = phase_names[order_t]
+    equilibrium_gibbs = np.atleast_1d(equilibrium_gibbs)[order_t]
+
+    bcc_gibbs = calculate_homogeneous_bcc_gibbs(
+        database=dbf,
+        components=real_components,
+        mols=[mol_ratio],
+        temperatures=temperatures,
+    )[:, 0]
+    bcc_energy_above_hull = energy_above_hull_mev(
+        bcc_gibbs,
+        equilibrium_gibbs,
+    )
+    energy_figure, threshold_temperature, stable_temperature = (
+        plot_bcc_energy_above_hull(temperatures, bcc_energy_above_hull)
+    )
+    energy_df = pd.DataFrame(
+        {
+            "temperature": temperatures,
+            "BCC_A2 energy above hull (meV/atom)": bcc_energy_above_hull,
+        }
+    )
 
     processed_rows = [
         _rename_duplicate_phases(row)
@@ -250,4 +279,11 @@ def generate_phase_fraction_temperature_profile(
         bottom=0.1,
     )
 
-    return result_df, fig
+    return (
+        result_df,
+        fig,
+        energy_df,
+        energy_figure,
+        threshold_temperature,
+        stable_temperature,
+    )

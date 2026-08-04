@@ -51,7 +51,7 @@ def cbar_property(property, composition):
 			np.round(np.linspace(property_meta_data["norm_min_bound"], property_meta_data["norm_max_bound"], n), 0))
 		norm = mcolors.BoundaryNorm(boundaries, cmap.N)
 	
-	elif property == 'e_hull':
+	elif property in {'e_hull', 'bcc_e_hull'}:
 		
 		base_cmap = plt.get_cmap(property_meta_data['cmap_color'])
 		n = property_meta_data['cmap_n_colors']
@@ -62,11 +62,18 @@ def cbar_property(property, composition):
 		]
 		
 		cmap = mcolors.ListedColormap(colors)
-		boundaries = ([0.0,
-		               property_meta_data["stable_bound"]] +
-		              list(np.round(np.linspace(property_meta_data["stable_bound"] * 1.001,
-		                                        property_meta_data["metastable_bound"], n), 3))
-		              + [property_meta_data["max_bound"]])
+		middle_boundaries = np.linspace(
+			property_meta_data["stable_bound"] * 1.001,
+			property_meta_data["metastable_bound"],
+			n,
+		)
+		if property == 'e_hull':
+			middle_boundaries = np.round(middle_boundaries, 3)
+		boundaries = (
+			[0.0, property_meta_data["stable_bound"]]
+			+ list(middle_boundaries)
+			+ [property_meta_data["max_bound"]]
+		)
 		norm = mcolors.BoundaryNorm(boundaries, cmap.N)
 	
 	elif property == 'phase_boundary':
