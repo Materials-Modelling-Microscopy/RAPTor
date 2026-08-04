@@ -15,6 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports, TDB_DIR
+from alloy_web.icons import brand_favicon, page_title
 from alloy_web.ui import element_selector, show_input_summary
 
 
@@ -35,6 +36,7 @@ INTERACTION_DATA_PATH = (
 
 st.set_page_config(
     page_title="Alloy System Summary",
+    page_icon=brand_favicon(),
     layout="wide",
 )
 
@@ -207,7 +209,7 @@ def _plot_interaction_heatmap(matrix: pd.DataFrame, lattice: str):
     return fig
 
 
-st.title("Alloy System Summary")
+page_title("Alloy System Summary", "summary")
 st.markdown(
     "A compact thermodynamic overview of an alloy system and all of its equimolar subsystems."
 )

@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports, TDB_DIR
+from alloy_web.icons import brand_favicon, icon_markup
 from alloy_web.ui import element_selector
 
 
@@ -42,7 +43,11 @@ INTERACTION_DATA_PATH = (
 CACHE_PATH = ROOT / "alloy_web" / "data" / "inter_system_metrics.sqlite3"
 
 
-st.set_page_config(page_title="Inter-System Comparison", page_icon="⚖️", layout="wide")
+st.set_page_config(
+    page_title="Inter-System Comparison",
+    page_icon=brand_favicon(),
+    layout="wide",
+)
 
 st.markdown(
     """
@@ -57,19 +62,29 @@ st.markdown(
         }
         .comparison-hero h1 { color: white; margin: 0 0 0.45rem; }
         .comparison-hero p { color: rgba(255,255,255,0.88); margin: 0; max-width: 830px; }
+        .comparison-title { display: flex; align-items: center; gap: 0.85rem; }
+        .comparison-icon {
+            display: grid; place-items: center; flex: 0 0 auto;
+            width: 3.2rem; height: 3.2rem; border-radius: 0.85rem;
+            color: white; border: 1px solid rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.12);
+        }
         .metric-direction {
             display: inline-block; padding: 0.13rem 0.42rem; border-radius: 999px;
             background: rgba(91, 83, 183, 0.11); font-size: 0.72rem; font-weight: 700;
         }
     </style>
     <section class="comparison-hero">
-        <h1>Inter-System Comparison</h1>
+        <div class="comparison-title">
+            <div class="comparison-icon">__COMPARE_ICON__</div>
+            <h1>Inter-System Comparison</h1>
+        </div>
         <p>
             Turn an element pool into every fixed-order alloy system, rank the candidates,
             and reveal the Pareto set across the stability properties you care about.
         </p>
     </section>
-    """,
+    """.replace("__COMPARE_ICON__", icon_markup("compare", 30)),
     unsafe_allow_html=True,
 )
 

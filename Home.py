@@ -9,13 +9,14 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports
+from alloy_web.icons import brand_favicon, icon_markup
 
 
 ensure_project_imports()
 
 st.set_page_config(
     page_title="RAPGen",
-    page_icon="🧪",
+    page_icon=brand_favicon(),
     layout="wide",
 )
 
@@ -52,6 +53,22 @@ st.markdown(
                 linear-gradient(130deg, #10285f 0%, #3555c8 48%, #8a3fc0 100%);
             box-shadow: 0 24px 65px rgba(26, 48, 112, 0.24);
             margin-bottom: 1.4rem;
+        }
+
+        .rapgen-brand-mark {
+            position: absolute;
+            z-index: 1;
+            top: clamp(1.5rem, 4vw, 3rem);
+            right: clamp(1.5rem, 4vw, 3rem);
+            display: grid;
+            place-items: center;
+            width: clamp(4rem, 9vw, 6.4rem);
+            height: clamp(4rem, 9vw, 6.4rem);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 1.35rem;
+            color: white;
+            background: rgba(255,255,255,0.11);
+            backdrop-filter: blur(8px);
         }
 
         .rapgen-hero::after {
@@ -159,11 +176,28 @@ st.markdown(
         }
 
         .tool-header {
+            position: relative;
             margin: -0.15rem -0.15rem 0.9rem;
             padding: 1.15rem 1.25rem;
             border-radius: 0.85rem;
             color: white;
         }
+
+        .tool-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: grid;
+            place-items: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 0.72rem;
+            color: white;
+            background: rgba(255,255,255,0.12);
+        }
+
+        .tool-header h3, .tool-question { padding-right: 3.25rem; }
 
         .tool-header.summary { background: linear-gradient(115deg, #6d3cc4, #a64bc7); }
         .tool-header.compare { background: linear-gradient(115deg, #344bb2, #c14e8a); }
@@ -240,21 +274,22 @@ st.markdown(
             border-top: 1px solid rgba(100, 112, 150, 0.18);
             color: inherit;
             opacity: 0.66;
-            font-size: 0.83rem;
+            font-size: 1rem;
             line-height: 1.8;
         }
 
         .rapgen-footer a {
-            color: #5264bf;
+            color: #FFFFFF;
             text-decoration: none;
             font-weight: 650;
-            margin-right: 1rem;
+            margin-right: 1.5rem;
         }
 
         @media (max-width: 700px) {
             .rapgen-hero { border-radius: 1rem; }
             .rapgen-hero h1 { font-size: 2.6rem; }
             .workflow-strip { justify-content: flex-start; }
+            .rapgen-brand-mark { position: relative; top: auto; right: auto; margin-bottom: 1.2rem; }
         }
     </style>
     """,
@@ -263,9 +298,10 @@ st.markdown(
 
 
 st.markdown(
-    """
+    f"""
     <section class="rapgen-hero">
-        <div class="rapgen-eyebrow">🧪 RAPGen · First-principle based alloy thermodynamics </div>
+        <div class="rapgen-brand-mark">{icon_markup("brand", 62)}</div>
+        <div class="rapgen-eyebrow">RAPGen · First-principle based alloy thermodynamics</div>
         <h1>Rapid Alloy Phase-field GENerator</h1>
         <p>
             Explore solid solution formation, when they become miscible, which
@@ -319,7 +355,8 @@ TOOLS = [
         "tags": ["PMR", "Miscibility temperature", "Subsystems", "Intermetallics", "Interactions"],
         "page": "pages/5_Alloy_System_Summary.py",
         "link": "Open Alloy System Summary",
-        "icon": "🧪",
+        "icon_name": "summary",
+        "icon": ":material/summarize:",
     },
     {
         "number": "Candidate screening",
@@ -334,7 +371,8 @@ TOOLS = [
         "tags": ["Candidate ranking", "Pareto set", "Six properties", "SQLite cache"],
         "page": "pages/6_Inter_System_Comparison.py",
         "link": "Open Inter-System Comparison",
-        "icon": "⚖️",
+        "icon_name": "compare",
+        "icon": ":material/balance:",
     },
     {
         "number": "Composition-space map",
@@ -349,7 +387,8 @@ TOOLS = [
         "tags": ["4–5 components", "SPSS fraction", "BCC energy above hull", "Phase count", "Spinodal eigenvalue"],
         "page": "pages/1_SymPlex_Maps.py",
         "link": "Open SymPlex Maps",
-        "icon": "🧭",
+        "icon_name": "symplex",
+        "icon": ":material/hub:",
     },
     {
         "number": "Temperature and partitioning",
@@ -364,7 +403,8 @@ TOOLS = [
         "tags": ["Temperature profiles", "BCC stability", "Phase amounts", "Composition splitting", "CSV export"],
         "page": "pages/2_Phase_Fractions.py",
         "link": "Open Phase Fractions",
-        "icon": "📊",
+        "icon_name": "fractions",
+        "icon": ":material/stacked_bar_chart:",
     },
     {
         "number": "Phase-boundary detail",
@@ -379,7 +419,8 @@ TOOLS = [
         "tags": ["Binary T–x", "Ternary isotherms", "Tie lines", "Intermetallic phases"],
         "page": "pages/3_Phase_Diagrams.py",
         "link": "Open Phase Diagrams",
-        "icon": "📈",
+        "icon_name": "diagram",
+        "icon": ":material/timeline:",
     },
     {
         "number": "Local stability",
@@ -394,7 +435,8 @@ TOOLS = [
         "tags": ["Hessian spectrum", "Spinodal temperature", "Soft mode", "Decomposition direction"],
         "page": "pages/4_Spinodal_Analysis.py",
         "link": "Open Spinodal Analysis",
-        "icon": "🌀",
+        "icon_name": "spinodal",
+        "icon": ":material/waves:",
     },
 ]
 
@@ -402,9 +444,11 @@ TOOLS = [
 for tool in TOOLS:
     with st.container(border=True):
         tags = "".join(f'<span class="tool-tag">{tag}</span>' for tag in tool["tags"])
+        icon = icon_markup(tool["icon_name"], 30)
         st.markdown(
             f"""
             <div class="tool-header {tool['class']}">
+                <div class="tool-icon">{icon}</div>
                 <div class="tool-number">{tool['number']}</div>
                 <h3>{tool['title']}</h3>
                 <p class="tool-question">{tool['question']}</p>
@@ -420,7 +464,7 @@ for tool in TOOLS:
 st.markdown(
     """
     <div class="method-note">
-        <strong>Interpretation matters.</strong> RAPGen is designed for rapid screening and
+        <strong>DISCLAIMER: Interpretation matters.</strong> RAPGen is designed for rapid screening and
         scientific comparison. Every result inherits the assumptions, phase models, and data
         coverage of its thermodynamic database; use the downloadable numerical output when a
         decision needs closer validation.
@@ -433,16 +477,48 @@ st.markdown(
 with st.expander("Citation and research use"):
     st.markdown(
         """
-        If you use RAPGen or figures generated from this interface, please cite the
-        associated manuscript and thermodynamic framework.
+        If you use RAPGen or figures generated from this interface, please cite the following works accordingly:
+        
+        Thermodyanamic framework:
+        > Omprakash et al. First-principles-based Prediction of Phase Fields: Part I. Binary and Ternary Refractory Alloys, Manuscript under preparation.
+        
+        > Omprakash et al. First-principles-based Prediction of Phase Fields: Part II. Solid Solution Tunability in Refractory Complex Concentrated Alloys, Manuscript under preparation
 
-        > P. Omprakash *et al.*, “Rapid phase-field prediction and visualization
-        > of phase stability in multicomponent alloys,” manuscript in preparation.
-
-        Replace this text with the final DOI and citation once available.
+        SymPlex Maps:
+        > Cavin, John, Pravan Omprakash, Adrien Couet, and Rohan Mishra. "SymPlex plots for visualizing properties in high-dimensional alloy spaces." Scripta Materialia 268 (2025): 116840.
+        
+        
+        PyCalphad:
+        > Otis, Richard, and Zi-Kui Liu. "pycalphad: CALPHAD-based Computational Thermodynamics in Python." In Zentropy, pp. 373-392. Jenny Stanford Publishing, 2024.
+        
+        Spinodal Analysis:
+        > Omprakash et al. Thermodynamic design rules for tuning MPEA microstructures via spinodal decompositions, Manuscript under preparation
+        
+        Data:
+        > Dinsdale, Alan T. "SGTE data for pure elements." Calphad 15, no. 4 (1991): 317-425.
+        
+        > Jain, Anubhav, Shyue Ping Ong, Geoffroy Hautier, Wei Chen, William Davidson Richards, Stephen Dacek, Shreyas Cholia et al. "Commentary: The Materials Project: A materials genome approach to accelerating materials innovation." APL materials 1, no. 1 (2013).
+        
         """
     )
 
+with st.expander("Additional Reading"):
+    st.markdown(
+        """
+        These works provided the foundation for the related thermodynamic framework used in this interface:
+
+        > Zhang, Zhaohan, Mu Li, John Cavin, Katharine Flores, and Rohan Mishra. "A fast and robust method for predicting the phase stability of refractory complex concentrated alloys using pairwise mixing enthalpy." Acta Materialia 241 (2022): 118389.
+        
+        > Chen, Wei, Antoine Hilhorst, Georgios Bokas, Stéphane Gorsse, Pascal J. Jacques, and Geoffroy Hautier. "A map of single-phase high-entropy alloys." Nature Communications 14, no. 1 (2023): 2856.
+        
+        > Bokas, Georgios B., Wei Chen, Antoine Hilhorst, Pascal J. Jacques, Stéphane Gorsse, and Geoffroy Hautier. "Unveiling the thermodynamic driving forces for high entropy alloys formation through big data ab initio analysis." Scripta Materialia 202 (2021): 114000.
+        
+        > Kadirvel, Kamalnath, Shalini Roy Koneru, and Yunzhi Wang. "Exploration of spinodal decomposition in multi-principal element alloys (MPEAs) using CALPHAD modeling." Scripta Materialia 214 (2022): 114657.
+        
+        > Cavin, John, and Rohan Mishra. "Equilibrium phase diagrams of isostructural and heterostructural two-dimensional alloys from first principles." Iscience 25, no. 4 (2022).
+
+        """
+    )
 
 st.markdown(
     f"""

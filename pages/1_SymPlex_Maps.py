@@ -10,6 +10,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports
+from alloy_web.icons import brand_favicon, page_title
 from alloy_web.ui import element_selector, show_input_summary, figure_to_png_bytes
 
 
@@ -19,15 +20,14 @@ from alloy_web.adapters.symplex_adapter import run_symplex_prediction
 
 st.set_page_config(
     page_title="SymPlex Maps",
+    page_icon=brand_favicon(),
     layout="wide",
 )
 
-st.title("SymPlex Maps")
-
-st.markdown(
-    """
-    Generate quaternary or quinary SymPlex property maps.
-    """
+page_title(
+    "SymPlex Maps",
+    "symplex",
+    "Map composition-dependent thermodynamic properties across quaternary and quinary systems.",
 )
 
 AVAILABLE_PROPERTIES = [

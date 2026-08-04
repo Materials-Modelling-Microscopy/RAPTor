@@ -9,6 +9,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports, TDB_DIR
+from alloy_web.icons import brand_favicon, page_title
 from alloy_web.ui import element_selector, show_input_summary, figure_to_png_bytes
 from alloy_web.adapters.phasefield_adapter import run_phase_diagram_prediction
 
@@ -17,10 +18,11 @@ ensure_project_imports()
 
 st.set_page_config(
     page_title="Phase Diagrams",
+    page_icon=brand_favicon(),
     layout="wide",
 )
 
-st.title("Binary and Ternary Phase Diagrams")
+page_title("Binary and Ternary Phase Diagrams", "diagram")
 
 st.markdown(
     """

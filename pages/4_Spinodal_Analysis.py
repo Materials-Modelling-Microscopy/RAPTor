@@ -9,6 +9,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports
+from alloy_web.icons import brand_favicon, page_title
 from alloy_web.ui import element_selector, mole_fraction_inputs, show_input_summary
 from alloy_web.adapters.spinodal_adapter import run_spinodal_analysis
 
@@ -25,10 +26,11 @@ SPINODAL_DATA_PATH = (
 
 st.set_page_config(
     page_title="Spinodal Analysis",
+    page_icon=brand_favicon(),
     layout="wide",
 )
 
-st.title("Spinodal Analysis")
+page_title("Spinodal Analysis", "spinodal")
 
 st.markdown(
     """

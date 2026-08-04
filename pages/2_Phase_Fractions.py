@@ -10,6 +10,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from alloy_web.config import ensure_project_imports, TDB_DIR
+from alloy_web.icons import brand_favicon, page_title
 from alloy_web.ui import (
     element_selector,
     mole_fraction_inputs,
@@ -27,6 +28,7 @@ ensure_project_imports()
 
 st.set_page_config(
     page_title="Phase Fractions",
+    page_icon=brand_favicon(),
     layout="wide",
 )
 
@@ -118,7 +120,7 @@ def _parse_temperatures(raw_text: str) -> list[float]:
     return temperatures
 
 
-st.title("Phase Fractions and Composition Splitting")
+page_title("Phase Fractions and Composition Splitting", "fractions")
 
 st.markdown(
     """
