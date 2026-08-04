@@ -22,6 +22,12 @@ from alloy_web.ui import element_selector, show_input_summary
 ensure_project_imports()
 
 from alloy_web.adapters.alloy_summary_adapter import run_alloy_system_summary
+from alloy_web.adapters.experimental_adapter import (
+    DEFAULT_CITATION_PATH,
+    ExperimentalEvidence,
+    load_experimental_evidence,
+)
+from alloy_assistant.src.database import DEFAULT_DATABASE_PATH
 
 
 INTERACTION_DATA_PATH = (
@@ -67,6 +73,16 @@ def _cached_summary(
         miscibility_threshold=0.99,
         max_sample_points=400,
     )
+
+
+@st.cache_data(show_spinner=False)
+def _cached_experimental_evidence(
+    alloy_system: tuple[str, ...],
+    database_version: int,
+    citation_version: int,
+) -> ExperimentalEvidence:
+    del database_version, citation_version
+    return load_experimental_evidence(alloy_system)
 
 
 def _download_table(label: str, data: pd.DataFrame, file_name: str, key: str):
@@ -322,6 +338,21 @@ if summary is not None:
     computable_subsystems = summary.subsystems[reference_column].notna().sum()
     miscible_subsystems = (summary.subsystems[reference_column] == True).sum()
 
+    experimental_evidence = None
+    experimental_error = None
+    try:
+        experimental_evidence = _cached_experimental_evidence(
+            tuple(summary.alloy_system),
+            database_version=(
+                DEFAULT_DATABASE_PATH.stat().st_mtime_ns
+                if DEFAULT_DATABASE_PATH.is_file()
+                else 0
+            ),
+            citation_version=DEFAULT_CITATION_PATH.stat().st_mtime_ns,
+        )
+    except Exception as exc:
+        experimental_error = str(exc)
+
     with right:
         st.markdown(f"## {' – '.join(summary.alloy_system)}")
         st.caption(
@@ -354,9 +385,18 @@ if summary is not None:
     with metric_columns[4]:
         st.metric("Runtime", f"{summary.elapsed_seconds:.2f} s")
 
-    overview_tab, intermetallic_tab, interaction_tab, downloads_tab = st.tabs(
-        ["Overview", "Intermetallics", "Binary interactions", "Downloads"]
+    tab_names = ["Overview", "Intermetallics", "Binary interactions", "Downloads"]
+    has_experimental_evidence = (
+        experimental_evidence is not None
+        and not experimental_evidence.observations.empty
     )
+    if has_experimental_evidence:
+        tab_names.append(
+            f"Experimental evidence ({len(experimental_evidence.observations)})"
+        )
+    tabs = st.tabs(tab_names)
+    overview_tab, intermetallic_tab, interaction_tab, downloads_tab = tabs[:4]
+    experimental_tab = tabs[4] if has_experimental_evidence else None
 
     with overview_tab:
         chart_column, phase_column = st.columns([1.6, 1])
@@ -498,3 +538,44 @@ if summary is not None:
                 f"{full_system_label}_binary_interactions.csv",
                 "summary_interactions_csv",
             )
+
+    if experimental_tab is not None:
+        with experimental_tab:
+            st.markdown("#### Published experimental evidence")
+
+            evidence_metrics = st.columns(3)
+            with evidence_metrics[0]:
+                st.metric(
+                    "Experimental records",
+                    len(experimental_evidence.observations),
+                )
+            with evidence_metrics[1]:
+                st.metric(
+                    "Compositions",
+                    experimental_evidence.observations["Composition"].nunique(),
+                )
+            with evidence_metrics[2]:
+                st.metric("Publications", len(experimental_evidence.citations))
+
+            st.dataframe(
+                experimental_evidence.observations,
+                width="stretch",
+                hide_index=True,
+                column_config={
+                    "Processing temperature (K)": st.column_config.NumberColumn(
+                        format="%.0f"
+                    ),
+                },
+            )
+
+            st.markdown("##### Sources")
+            for citation in experimental_evidence.citations.itertuples(index=False):
+                st.markdown(f"**{citation[0]}** {citation[1]}")
+
+    if experimental_error:
+        with st.expander("Experimental evidence unavailable"):
+            st.caption(
+                "The thermodynamic summary is unaffected; the experimental evidence "
+                "source could not be validated."
+            )
+            st.code(experimental_error)

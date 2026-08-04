@@ -1,11 +1,15 @@
 # Alloy Research Assistant
 
-This directory is the knowledge workspace for a research assistant focused on
-the scientific and computational work represented in RPFP Web.
+This directory is RAPGen's provenance-aware knowledge workspace. It ingests
+reviewed structured data and documents into a local DuckDB database, exposes
+parameterized read-only queries, and supports lexical and semantic retrieval,
+tool routing, citation-preserving evidence, and answer synthesis.
 
-The initial goal is organization, provenance, and evaluation. Retrieval,
-database queries, embeddings, and answer generation will be added only after
-the source material and its authority levels are understood.
+The assistant complements the thermodynamic calculation engine; it does not
+replace live PyCalphad, spinodal, or SymPlex calculations. Use the repository
+[README](../README.md) and the [calculation-engine guide](../external/Rapid_Phase_Field_Prediction/README.md)
+for computational workflows. Use this directory when the task is to organize,
+query, retrieve, or cite stored research evidence.
 
 ## Directory roles
 
