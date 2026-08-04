@@ -17,6 +17,16 @@ pg = st.navigation(
         st.Page("pages/2_Phase_Fractions.py", title="Phase Fractions", icon="📊"),
         st.Page("pages/3_Phase_Diagrams.py", title="Phase Diagrams", icon="📈"),
         st.Page("pages/4_Spinodal_Analysis.py", title="Spinodal Analysis", icon="🌀"),
+        st.Page(
+            "pages/5_Alloy_System_Summary.py",
+            title="Alloy System Summary",
+            icon="🧪",
+        ),
+        st.Page(
+            "pages/6_Inter_System_Comparison.py",
+            title="Inter-System Comparison",
+            icon="⚖️",
+        ),
     ]
 )
 

@@ -9,3 +9,8 @@ xarray
 tinydb
 pymatgen
 pyyaml
+
+duckdb==1.5.4
+pypdf==6.10.0
+sentence-transformers==5.5.0
+groq==1.6.0

@@ -18,6 +18,10 @@ class PhaseFractionTemperatureResult:
     temp_range: tuple[float, float, float]
     data: pd.DataFrame
     figure: matplotlib.figure.Figure
+    energy_above_hull_data: pd.DataFrame
+    energy_above_hull_figure: matplotlib.figure.Figure
+    metastable_temperature: float | None
+    stable_temperature: float | None
 
     def to_csv_bytes(self) -> bytes:
         return self.data.to_csv(index=False).encode("utf-8")
@@ -61,7 +65,14 @@ def run_phase_fraction_temperature_prediction(
         float(temperature_step),
     )
 
-    data, fig = generate_phase_fraction_temperature_profile(
+    (
+        data,
+        fig,
+        energy_data,
+        energy_figure,
+        metastable_temperature,
+        stable_temperature,
+    ) = generate_phase_fraction_temperature_profile(
         composition=composition,
         mol_ratio=mol_ratio,
         input_file_path=tdb_dir,
@@ -74,6 +85,10 @@ def run_phase_fraction_temperature_prediction(
         temp_range=temp_range,
         data=data,
         figure=fig,
+        energy_above_hull_data=energy_data,
+        energy_above_hull_figure=energy_figure,
+        metastable_temperature=metastable_temperature,
+        stable_temperature=stable_temperature,
     )
 
 @dataclass

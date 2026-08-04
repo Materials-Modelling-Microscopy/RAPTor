@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+from time import perf_counter
 import traceback
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -10,10 +11,11 @@ if str(ROOT) not in sys.path:
 
 from alloy_web.config import ensure_project_imports
 from alloy_web.ui import element_selector, show_input_summary, figure_to_png_bytes
-from alloy_web.adapters.symplex_adapter import run_symplex_prediction
 
 
 ensure_project_imports()
+
+from alloy_web.adapters.symplex_adapter import run_symplex_prediction
 
 st.set_page_config(
     page_title="SymPlex Maps",
@@ -25,14 +27,12 @@ st.title("SymPlex Maps")
 st.markdown(
     """
     Generate quaternary or quinary SymPlex property maps.
-    
-    (The function is currently slow, please have patience!)
-
     """
 )
 
 AVAILABLE_PROPERTIES = [
     "SPSS Phase Fraction",
+    "BCC Energy Above Hull",
     "Number of Phases",
     "Minimum Spinodal Eigenvalue",
 ]
@@ -82,23 +82,37 @@ with left:
             "constraint_element": constraint_element,
         }
     )
+    if property_name == "BCC Energy Above Hull":
+        st.caption(
+            "Homogeneous BCC_A2 Gibbs energy minus the equilibrium Gibbs hull at each "
+            "composition, reported in meV/atom. Zero is stable; up to 50 meV/atom is "
+            "shown as metastable."
+        )
+    calculation_summary = st.empty()
 
 
 if run_button:
     try:
         with st.spinner("Running SymPlex prediction..."):
+            prediction_started_at = perf_counter()
             result = run_symplex_prediction(
                 alloy_system=alloy_system,
                 temperature=float(temperature),
                 constraint_element=constraint_element,
                 property_name=property_name,
             )
+            prediction_seconds = perf_counter() - prediction_started_at
+            calculation_count = sum(len(values) for values in result.data.values())
             
             png_bytes = figure_to_png_bytes(result.figure)
             
             
         
         
+        calculation_summary.caption(
+            f"{calculation_count:,} calculations in {prediction_seconds:.2f} seconds."
+        )
+
         with right:
             st.subheader("SymPlex map")
             st.image(

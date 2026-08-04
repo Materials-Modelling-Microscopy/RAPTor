@@ -233,13 +233,40 @@ if run_button:
 
             with right:
                 st.subheader("Phase fraction plot")
-                st.pyplot(result.figure, use_container_width=True)
+                st.pyplot(result.figure, width="stretch")
+
+                st.subheader("BCC solid-solution energy above hull")
+                st.caption(
+                    "Energy of the homogeneous BCC_A2 solution at the selected composition "
+                    "relative to the equilibrium Gibbs hull. The amber region is metastable "
+                    "at up to 50 meV/atom; green marks stability on the hull."
+                )
+                st.pyplot(result.energy_above_hull_figure, width="stretch")
+
+                transitions = []
+                if result.metastable_temperature is not None:
+                    transitions.append(
+                        f"50 meV/atom at {result.metastable_temperature:.0f} K"
+                    )
+                if result.stable_temperature is not None:
+                    transitions.append(
+                        f"0 meV/atom at {result.stable_temperature:.0f} K"
+                    )
+                if transitions:
+                    st.caption(" · ".join(transitions))
             
             show_result_data(
 	            data=result.data,
 	            title="Phase fraction data",
 	            file_name=f"{result.composition}_phase_fractions.csv",
 	            key_prefix=f"{result.composition}_phase_fractions",
+            )
+
+            show_result_data(
+	            data=result.energy_above_hull_data,
+	            title="BCC energy-above-hull data",
+	            file_name=f"{result.composition}_bcc_energy_above_hull.csv",
+	            key_prefix=f"{result.composition}_bcc_energy_above_hull",
             )
             
             st.download_button(
@@ -249,7 +276,15 @@ if run_button:
 	            mime="image/png",
             )
 
+            st.download_button(
+	            "Download BCC energy-above-hull plot PNG",
+	            data=figure_to_png_bytes(result.energy_above_hull_figure),
+	            file_name=f"{result.composition}_bcc_energy_above_hull.png",
+	            mime="image/png",
+            )
+
             plt.close(result.figure)
+            plt.close(result.energy_above_hull_figure)
 
         except Exception as exc:
             st.error("Phase fraction prediction failed.")

@@ -1,0 +1,30 @@
+# Private or licensed source material
+data/inbox/**
+data/raw/**
+
+# Rebuildable artifacts
+data/generated/**
+
+# Curated bulk data; commit individual safe files explicitly with git add -f
+data/curated/documents/**
+data/curated/tables/**
+
+# Keep the directory scaffold
+!data/inbox/
+!data/inbox/**/
+!data/raw/
+!data/curated/
+!data/curated/**/
+!data/generated/
+!data/generated/**/
+!data/**/.gitkeep
+
+# Local Python artifacts
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
