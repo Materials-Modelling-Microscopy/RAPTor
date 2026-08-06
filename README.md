@@ -2,7 +2,7 @@
 
 **Rapid Alloy Phase-field GENerator** is research software for exploring phase stability in multi-principal-element and refractory alloy systems. It combines thermodynamic equilibrium calculations, spinodal analysis, high-dimensional SymPlex maps, phase-diagram plotting, system-level summaries, and experimental evidence in one source repository.
 
-The Streamlit website is one way to use RAPGen. The numerical routines and validated adapter functions can also be run directly from Python for scripted studies, batch calculations, and downstream analysis.
+The Streamlit website is one way to use RAPGen. The numerical routines and validated adapter functions can also be run directly from Python for scripted studies, batch calculations, and downstream analysis. Access the website here: https://rapgen.streamlit.app
 
 > **Research-code status:** RAPGen is currently used from a source checkout. It is not yet distributed as an installable Python package, and the internal Python interfaces are not a versioned public API. The examples below use the same calculation paths as the web interface, but function signatures may evolve while the package boundary is formalized.
 
@@ -23,7 +23,7 @@ The current thermodynamic calculations focus on the BCC_A2, FCC_A1, and HCP_A3 s
 
 ## Quick start
 
-Python 3.11 is the supported runtime used by the Docker image.
+Python 3.11 is the supported runtime
 
 ```bash
 git clone https://github.com/Pravanop/Phase_Field_Prediction_Visualization.git
@@ -34,21 +34,6 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
-
-Start the web interface:
-
-```bash
-streamlit run app.py
-```
-
-Or run it in Docker:
-
-```bash
-docker build -t rapgen .
-docker run --rm -p 7860:7860 rapgen
-```
-
-Then open `http://localhost:7860`.
 
 ## Repository guide
 
