@@ -1,12 +1,12 @@
-# RAPGen
+# RAPTor
 
-**Rapid Alloy Phase-field GENerator** is research software for exploring phase stability in multi-principal-element and refractory alloy systems. It combines thermodynamic equilibrium calculations, spinodal analysis, high-dimensional SymPlex maps, phase-diagram plotting, system-level summaries, and experimental evidence in one source repository.
+**Rapid Alloy Phase-field generaTOR** is research software for exploring phase stability in multi-principal-element and refractory alloy systems. It combines thermodynamic equilibrium calculations, spinodal analysis, high-dimensional SymPlex maps, phase-diagram plotting, system-level summaries, and experimental evidence in one source repository.
 
-The Streamlit website is one way to use RAPGen. The numerical routines and validated adapter functions can also be run directly from Python for scripted studies, batch calculations, and downstream analysis.
+The Streamlit website is one way to use RAPTor. The numerical routines and validated adapter functions can also be run directly from Python for scripted studies, batch calculations, and downstream analysis. Access the website here: https://rapgen.streamlit.app
 
-> **Research-code status:** RAPGen is currently used from a source checkout. It is not yet distributed as an installable Python package, and the internal Python interfaces are not a versioned public API. The examples below use the same calculation paths as the web interface, but function signatures may evolve while the package boundary is formalized.
+> **Research-code status:** RAPTor is currently used from a source checkout. It is not yet distributed as an installable Python package, and the internal Python interfaces are not a versioned public API. The examples below use the same calculation paths as the web interface, but function signatures may evolve while the package boundary is formalized.
 
-## What RAPGen can calculate
+## What RAPTor can calculate
 
 | Capability | Main outputs | Implementation |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ The current thermodynamic calculations focus on the BCC_A2, FCC_A1, and HCP_A3 s
 
 ## Quick start
 
-Python 3.11 is the supported runtime used by the Docker image.
+Python 3.11 is the supported runtime
 
 ```bash
 git clone https://github.com/Pravanop/Phase_Field_Prediction_Visualization.git
@@ -34,21 +34,6 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
-
-Start the web interface:
-
-```bash
-streamlit run app.py
-```
-
-Or run it in Docker:
-
-```bash
-docker build -t rapgen .
-docker run --rm -p 7860:7860 rapgen
-```
-
-Then open `http://localhost:7860`.
 
 ## Repository guide
 
@@ -172,8 +157,8 @@ If you use the SymPlex visualization method, cite:
 
 > J. Cavin, P. Omprakash, A. Couet, and R. Mishra, “SymPlex plots for visualizing properties in high-dimensional alloy spaces,” *Scripta Materialia* 268 (2025) 116840.
 
-Other RAPGen components are associated with work in preparation. Until component-specific citations are published, cite the repository and record the commit or release used so the calculation can be reproduced.
+Other RAPTor components are associated with work in preparation. Until component-specific citations are published, cite the repository and record the commit or release used so the calculation can be reproduced.
 
 ## License
 
-RAPGen is provided under the [MIT License](LICENSE). Thermodynamic databases and literature sources may have their own terms; users are responsible for complying with the terms of the data they supply or redistribute.
+RAPTor is provided under the [MIT License](LICENSE). Thermodynamic databases and literature sources may have their own terms; users are responsible for complying with the terms of the data they supply or redistribute.
