@@ -205,6 +205,7 @@ st.markdown(
         .tool-header.fractions { background: linear-gradient(115deg, #167f73, #27a87d); }
         .tool-header.diagrams { background: linear-gradient(115deg, #c45929, #dc8731); }
         .tool-header.spinodal { background: linear-gradient(115deg, #b72f5e, #dc4b7c); }
+        .tool-header.pathways { background: linear-gradient(115deg, #4f3ba7, #2f83ad); }
 
         .tool-number {
             opacity: 0.76;
@@ -365,14 +366,31 @@ TOOLS = [
         "question": "Which alloy systems best balance the stability properties I care about?",
         "description": (
             "Expand an element pool into every binary through quinary candidate at one selected "
-            "order. Rank six thermodynamic properties, identify Pareto-optimal tradeoffs, and "
-            "reuse settings-aware SQLite results when the same systems are compared again."
+            "order. Rank directional thermodynamic properties, inspect the non-directional "
+            "path-burden landscape, identify Pareto-optimal tradeoffs, and reuse settings-aware "
+            "SQLite results when the same systems are compared again."
         ),
-        "tags": ["Candidate ranking", "Pareto set", "Six properties", "SQLite cache"],
+        "tags": ["Candidate ranking", "Pareto set", "Path-burden landscape", "SQLite cache"],
         "page": "pages/6_Inter_System_Comparison.py",
         "link": "Open Inter-System Comparison",
         "icon_name": "compare",
         "icon": ":material/balance:",
+    },
+    {
+        "number": "Processing-order sensitivity",
+        "class": "pathways",
+        "title": "Processing Pathways",
+        "question": "How strongly does the thermodynamic burden depend on the alloying sequence?",
+        "description": (
+            "Enumerate unique sequential alloying routes to one target composition. Compare the "
+            "integrated BCC energy above the equilibrium hull, quantify path dependence with the "
+            "variance between routes, and inspect equilibrium phase fractions along each path."
+        ),
+        "tags": ["Sequential alloying", "Path burden", "Path variance", "Phase fractions"],
+        "page": "pages/7_Processing_Pathways.py",
+        "link": "Open Processing Pathways",
+        "icon_name": "diagram",
+        "icon": ":material/route:",
     },
     {
         "number": "Composition-space map",

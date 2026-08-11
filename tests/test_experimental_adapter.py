@@ -5,6 +5,7 @@ import unittest
 from alloy_assistant.src.database import DEFAULT_DATABASE_PATH
 from alloy_web.adapters.experimental_adapter import (
     DEFAULT_CITATION_PATH,
+    DEFAULT_EXPERIMENTAL_SOURCE_PATH,
     _reference_for_source_row,
     load_citation_catalog,
     load_experimental_evidence,
@@ -39,8 +40,8 @@ class ExperimentalCitationCatalogTests(unittest.TestCase):
                 load_citation_catalog(invalid_path)
 
 
-@unittest.skipUnless(DEFAULT_DATABASE_PATH.is_file(), "Alloy Assistant DB unavailable")
 class ExperimentalEvidenceIntegrationTests(unittest.TestCase):
+    @unittest.skipUnless(DEFAULT_DATABASE_PATH.is_file(), "Alloy Assistant DB unavailable")
     def test_cr_mo_ta_ti_records_keep_their_distinct_citations(self):
         evidence = load_experimental_evidence(["Cr", "Mo", "Ta", "Ti"])
 
@@ -61,6 +62,7 @@ class ExperimentalEvidenceIntegrationTests(unittest.TestCase):
         self.assertEqual(records[1]["Reference"], "[1]")
         self.assertEqual(evidence.citations["Reference"].tolist(), ["[1]", "[3]"])
 
+    @unittest.skipUnless(DEFAULT_DATABASE_PATH.is_file(), "Alloy Assistant DB unavailable")
     def test_unlisted_exact_system_returns_no_evidence(self):
         evidence = load_experimental_evidence(["Cr", "Ta", "Ti", "W"])
 
@@ -68,11 +70,24 @@ class ExperimentalEvidenceIntegrationTests(unittest.TestCase):
         self.assertTrue(evidence.observations.empty)
         self.assertTrue(evidence.citations.empty)
 
-    def test_missing_database_is_nonfatal(self):
+    def test_missing_database_uses_reviewed_source_file(self):
         evidence = load_experimental_evidence(
             ["Cr", "Mo", "Ta", "Ti"],
             database_path=Path("does-not-exist.duckdb"),
             citation_path=DEFAULT_CITATION_PATH,
+            source_path=DEFAULT_EXPERIMENTAL_SOURCE_PATH,
+        )
+
+        self.assertFalse(evidence.database_available)
+        self.assertEqual(len(evidence.observations), 2)
+        self.assertEqual(evidence.observations["Reference"].tolist(), ["[3]", "[1]"])
+
+    def test_missing_database_and_source_are_nonfatal(self):
+        evidence = load_experimental_evidence(
+            ["Cr", "Mo", "Ta", "Ti"],
+            database_path=Path("does-not-exist.duckdb"),
+            citation_path=DEFAULT_CITATION_PATH,
+            source_path=Path("does-not-exist.csv"),
         )
 
         self.assertFalse(evidence.database_available)

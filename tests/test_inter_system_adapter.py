@@ -6,9 +6,11 @@ import pandas as pd
 
 from alloy_web.adapters.inter_system_adapter import (
     ACTIVE_PHASE_COUNT,
+    MEAN_PATH_BURDEN,
     METRICS,
     MISCIBILITY_TEMPERATURE,
     PMR,
+    PATH_BURDEN_VARIANCE,
     SPINODAL_TEMPERATURE,
     _metastability_gap,
     generate_candidate_systems,
@@ -56,6 +58,10 @@ class ParetoTests(unittest.TestCase):
     def test_spinodal_has_no_universal_pareto_direction(self):
         self.assertEqual(METRICS[SPINODAL_TEMPERATURE].favorable, "context")
 
+    def test_pathway_metrics_have_no_assumed_favorable_direction(self):
+        self.assertEqual(METRICS[MEAN_PATH_BURDEN].favorable, "context")
+        self.assertEqual(METRICS[PATH_BURDEN_VARIANCE].favorable, "context")
+
     def test_negative_metastability_gap_is_bounded_at_zero(self):
         self.assertEqual(_metastability_gap(1200.0, 1400.0), 0.0)
         self.assertEqual(_metastability_gap(1500.0, 1200.0), 300.0)
@@ -94,6 +100,35 @@ class CacheIntegrationTests(unittest.TestCase):
                 second.data[ACTIVE_PHASE_COUNT].tolist(),
             )
             self.assertEqual(tdb_mtime, tdb_path.stat().st_mtime_ns)
+
+    def test_pathway_metric_pair_is_computed_once_and_cached(self):
+        parameters = dict(
+            element_pool=["Cr", "Mo", "Ti"],
+            order=3,
+            selected_metrics=[MEAN_PATH_BURDEN, PATH_BURDEN_VARIANCE],
+            primary_metric=MEAN_PATH_BURDEN,
+            reference_temperature=1500.0,
+            temperature_min=300.0,
+            temperature_max=3000.0,
+            temperature_step=100.0,
+            lattice="BCC_A2",
+            tdb_dir=TDB_DIR,
+            interaction_data_path=INTERACTION_DATA_PATH,
+            pathway_points_per_segment=2,
+        )
+
+        with TemporaryDirectory() as directory:
+            cache_path = Path(directory) / "pathway_metrics.sqlite3"
+            first = run_inter_system_comparison(cache_path=cache_path, **parameters)
+            second = run_inter_system_comparison(cache_path=cache_path, **parameters)
+
+            self.assertEqual(first.cache_misses, 1)
+            self.assertGreater(first.equilibrium_calculations, 0)
+            self.assertEqual(second.cache_hits, 2)
+            self.assertEqual(second.equilibrium_calculations, 0)
+            self.assertTrue(first.data[MEAN_PATH_BURDEN].notna().all())
+            self.assertTrue(first.data[PATH_BURDEN_VARIANCE].notna().all())
+            self.assertTrue(first.data["Rank"].isna().all())
 
 
 if __name__ == "__main__":

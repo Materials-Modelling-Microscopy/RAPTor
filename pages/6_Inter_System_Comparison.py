@@ -24,11 +24,16 @@ from alloy_web.adapters.inter_system_adapter import (
     ACTIVE_PHASE_COUNT,
     EQUIMOLAR_SOLID_SOLUTION_FRACTION,
     METASTABILITY_GAP,
+    MEAN_PATH_BURDEN,
     METRICS,
     MISCIBILITY_TEMPERATURE,
+    PATH_BURDEN_VARIANCE,
     PMR,
     SPINODAL_TEMPERATURE,
     run_inter_system_comparison,
+)
+from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_analysis import (
+    plot_system_path_burden_landscape,
 )
 
 
@@ -94,11 +99,13 @@ with st.container(border=True):
         "Each candidate is an equimolar combination from the selected element pool. "
         "A composition counts as miscible only when at least 99% forms one BCC_A2, "
         "FCC_A1, or HCP_A3 solution; two composition sets of the same phase are multiphase. "
-        "Spinodal temperature is reported but is not treated as inherently better in either direction."
+        "Spinodal temperature and the two pathway quantities are reported as context; "
+        "none is treated as inherently better in either direction."
     )
 
 
-metric_keys = list(METRICS)
+PATHWAY_METRICS = [MEAN_PATH_BURDEN, PATH_BURDEN_VARIANCE]
+metric_keys = [key for key in METRICS if key not in PATHWAY_METRICS]
 default_metrics = [MISCIBILITY_TEMPERATURE, SPINODAL_TEMPERATURE, PMR]
 
 with st.sidebar:
@@ -122,7 +129,7 @@ with st.sidebar:
         help="Every combination of this size is compared.",
     )
 
-    selected_metrics = st.multiselect(
+    base_selected_metrics = st.multiselect(
         "Properties",
         metric_keys,
         default=default_metrics,
@@ -130,14 +137,34 @@ with st.sidebar:
     )
     primary_metric = st.selectbox(
         "Primary ranking property",
-        selected_metrics or [MISCIBILITY_TEMPERATURE],
+        base_selected_metrics or [MISCIBILITY_TEMPERATURE],
         format_func=lambda key: METRICS[key].label,
         help="The table rank and leading chart use this property.",
     )
 
+    include_pathway_metrics = st.checkbox(
+        "Include path-burden landscape",
+        value=False,
+        disabled=system_order < 3,
+        help=(
+            "Calculate mean integrated burden and variance across every unique "
+            "equimolar processing path. Available for ternary and higher systems."
+        ),
+    )
+    if system_order < 3:
+        include_pathway_metrics = False
+    selected_metrics = list(base_selected_metrics)
+    if include_pathway_metrics:
+        selected_metrics.extend(PATHWAY_METRICS)
+
     reference_needed = bool(
         set(selected_metrics)
-        & {PMR, EQUIMOLAR_SOLID_SOLUTION_FRACTION, ACTIVE_PHASE_COUNT}
+        & {
+            PMR,
+            EQUIMOLAR_SOLID_SOLUTION_FRACTION,
+            ACTIVE_PHASE_COUNT,
+            *PATHWAY_METRICS,
+        }
     )
     reference_temperature = 1500.0
     if reference_needed:
@@ -150,6 +177,23 @@ with st.sidebar:
                 step=50,
             )
         )
+
+    pathway_points_per_segment = 5
+    if include_pathway_metrics:
+        with st.expander("Pathway resolution"):
+            pathway_points_per_segment = int(
+                st.number_input(
+                    "Points per pathway segment",
+                    min_value=2,
+                    max_value=15,
+                    value=5,
+                    step=1,
+                    help=(
+                        "Applied equally to every composition segment. Higher values "
+                        "increase the cost for every candidate system."
+                    ),
+                )
+            )
 
     lattice = "BCC_A2"
     if set(selected_metrics) & {SPINODAL_TEMPERATURE, METASTABILITY_GAP}:
@@ -192,7 +236,7 @@ with st.sidebar:
     )
 
 
-with st.expander("The six properties and ranking directions"):
+with st.expander("Comparison properties and interpretation"):
     columns = st.columns(2)
     for position, (key, definition) in enumerate(METRICS.items()):
         with columns[position % 2]:
@@ -215,8 +259,9 @@ with st.expander("Pareto-optimality rules"):
         PMR and equimolar solid-solution fraction are maximized. Miscibility temperature,
         active phase count, and metastability gap are minimized. Spinodal temperature is
         excluded because whether a higher or lower spinodal temperature is desirable depends
-        on the intended alloy behavior. A candidate missing any included property is not placed
-        on the Pareto set.
+        on the intended alloy behavior. Mean path burden and path-burden variance are likewise
+        treated as descriptive context, not optimization objectives. A candidate missing any
+        included property is not placed on the Pareto set.
         """
     )
 
@@ -224,7 +269,7 @@ with st.expander("Pareto-optimality rules"):
 input_signature = (
     tuple(element_pool), int(system_order), tuple(selected_metrics), primary_metric,
     float(reference_temperature), float(temperature_min), float(temperature_max),
-    float(temperature_step), lattice,
+    float(temperature_step), lattice, int(pathway_points_per_segment),
 )
 
 if run_button:
@@ -249,6 +294,7 @@ if run_button:
             cache_path=CACHE_PATH,
             miscibility_threshold=0.99,
             max_sample_points=400,
+            pathway_points_per_segment=pathway_points_per_segment,
             progress_callback=update_progress,
         )
         progress.empty()
@@ -270,6 +316,8 @@ if st.session_state.get("inter_system_signature") == input_signature:
 def ranking_figure(result):
     metric = result.primary_metric
     definition = METRICS[metric]
+    if definition.favorable == "context":
+        return None
     plot_data = result.data.dropna(subset=[metric]).head(30).sort_values(metric)
     if plot_data.empty:
         return None
@@ -285,11 +333,17 @@ def ranking_figure(result):
 
 
 def desirability_figure(result):
-    plot_data = result.data.dropna(subset=result.selected_metrics).head(20).copy()
+    comparison_metrics = [
+        metric for metric in result.selected_metrics
+        if METRICS[metric].favorable in {"higher", "lower"}
+    ]
+    if not comparison_metrics:
+        return None
+    plot_data = result.data.dropna(subset=comparison_metrics).head(20).copy()
     if plot_data.empty:
         return None
     desirability = []
-    for metric in result.selected_metrics:
+    for metric in comparison_metrics:
         values = plot_data[metric].to_numpy(dtype=float)
         spread = values.max() - values.min()
         normalized = np.full(len(values), 0.5) if spread == 0 else (values - values.min()) / spread
@@ -297,18 +351,31 @@ def desirability_figure(result):
             normalized = 1.0 - normalized
         desirability.append(100.0 * normalized)
     matrix = np.column_stack(desirability)
-    fig, ax = plt.subplots(figsize=(max(6.8, 1.7 * len(result.selected_metrics)), max(4.2, 0.36 * len(plot_data) + 1.4)))
+    fig, ax = plt.subplots(figsize=(max(6.8, 1.7 * len(comparison_metrics)), max(4.2, 0.36 * len(plot_data) + 1.4)))
     image = ax.imshow(matrix, aspect="auto", cmap="viridis", vmin=0, vmax=100)
-    ax.set_xticks(range(len(result.selected_metrics)), [METRICS[key].label for key in result.selected_metrics], rotation=24, ha="right")
+    ax.set_xticks(range(len(comparison_metrics)), [METRICS[key].label for key in comparison_metrics], rotation=24, ha="right")
     ax.set_yticks(range(len(plot_data)), plot_data["System"])
     ax.set_title("Normalized property comparison", loc="left", fontweight="bold")
     for row in range(len(plot_data)):
-        for column, metric in enumerate(result.selected_metrics):
+        for column, metric in enumerate(comparison_metrics):
             ax.text(column, row, plot_data.iloc[row][f"{metric}__display"], ha="center", va="center", fontsize=7.5, color="white" if matrix[row, column] < 42 else "black")
     colorbar = fig.colorbar(image, ax=ax, shrink=0.78)
     colorbar.set_label("Normalized score (0–100)")
     fig.tight_layout()
     return fig
+
+
+def pathway_context_figure(result):
+    if not set(PATHWAY_METRICS).issubset(result.data.columns):
+        return None
+    plot_data = result.data.dropna(subset=PATHWAY_METRICS).copy()
+    if plot_data.empty:
+        return None
+    return plot_system_path_burden_landscape(
+        plot_data,
+        mean_column=MEAN_PATH_BURDEN,
+        variance_column=PATH_BURDEN_VARIANCE,
+    )
 
 
 if result is not None:
@@ -344,6 +411,22 @@ if result is not None:
             "Pareto optimal": st.column_config.CheckboxColumn(width="small"),
         },
     )
+
+    pathway_figure = pathway_context_figure(result)
+    if pathway_figure is not None:
+        st.markdown("### Path-burden landscape")
+        st.caption(
+            "Each point is one alloy system at the selected reference temperature. "
+            "The axes provide comparative context only: neither high nor low mean "
+            "burden or variance is assigned a universally favorable meaning."
+        )
+        st.pyplot(pathway_figure, width="stretch")
+        plt.close(pathway_figure)
+        if result.candidate_count > 40:
+            st.caption(
+                "System labels are omitted above 40 candidates to keep the plot readable; "
+                "the table and CSV identify every point."
+            )
 
     left, right = st.columns([0.92, 1.08])
     with left:

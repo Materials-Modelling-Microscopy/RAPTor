@@ -31,6 +31,9 @@ from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.spinodal_ana
 from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.spinodal_predictor import (
     load_interaction_data,
 )
+from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_analysis import (
+    analyze_processing_paths,
+)
 from external.Rapid_Phase_Field_Prediction.utils.combination_generation import (
     MultinaryCombinations,
 )
@@ -42,6 +45,8 @@ PMR = "pmr"
 EQUIMOLAR_SOLID_SOLUTION_FRACTION = "equimolar_solid_solution_fraction"
 ACTIVE_PHASE_COUNT = "active_phase_count"
 METASTABILITY_GAP = "metastability_gap"
+MEAN_PATH_BURDEN = "mean_path_burden"
+PATH_BURDEN_VARIANCE = "path_burden_variance"
 
 
 @dataclass(frozen=True)
@@ -76,6 +81,14 @@ METRICS: dict[str, MetricDefinition] = {
     METASTABILITY_GAP: MetricDefinition(
         "Metastability gap", "K", "lower",
         "Miscibility temperature minus spinodal temperature for the equimolar alloy, bounded at zero.",
+    ),
+    MEAN_PATH_BURDEN: MetricDefinition(
+        "Mean integrated path burden", "meV/atom", "context",
+        "Mean path integral of equimolar BCC_A2 energy above the equilibrium hull across every unique sequential alloying route.",
+    ),
+    PATH_BURDEN_VARIANCE: MetricDefinition(
+        "Path-burden variance", "(meV/atom)²", "context",
+        "Variance between the integrated burdens of unique sequential alloying routes; no universally favorable direction is assigned.",
     ),
 }
 
@@ -295,6 +308,7 @@ def run_inter_system_comparison(
     cache_path: str | Path,
     miscibility_threshold: float = 0.99,
     max_sample_points: int = 400,
+    pathway_points_per_segment: int = 5,
     progress_callback: Callable[[int, int, str], None] | None = None,
 ) -> InterSystemComparisonResult:
     started_at = perf_counter()
@@ -306,6 +320,12 @@ def run_inter_system_comparison(
         raise ValueError("The primary ranking property must be selected.")
     if temperature_min >= temperature_max or temperature_step <= 0:
         raise ValueError("Use a valid increasing temperature range and positive step.")
+    pathway_metrics = {MEAN_PATH_BURDEN, PATH_BURDEN_VARIANCE}
+    if set(selected_metrics) & pathway_metrics:
+        if order < 3:
+            raise ValueError("Path-burden comparison requires ternary or higher-order systems.")
+        if pathway_points_per_segment < 2:
+            raise ValueError("Use at least two points per pathway segment.")
 
     systems = generate_candidate_systems(element_pool, order)
     tdb_dir = Path(tdb_dir)
@@ -337,6 +357,11 @@ def run_inter_system_comparison(
         "max_sample_points": int(max_sample_points),
     }
     equimolar_settings = {"reference_temperature": float(reference_temperature)}
+    pathway_settings = {
+        "reference_temperature": float(reference_temperature),
+        "points_per_segment": int(pathway_points_per_segment),
+        "definition_version": 1,
+    }
 
     with MetricCache(cache_path) as cache:
         for completed, system in enumerate(systems, start=1):
@@ -513,6 +538,97 @@ def run_inter_system_comparison(
                     current[key] = result
                 return current[metric]
 
+            def pathway_state() -> tuple[MetricValue, MetricValue]:
+                if tdb_path is None:
+                    raise FileNotFoundError("TDB unavailable")
+                analysis = analyze_processing_paths(
+                    tdb_path=tdb_path,
+                    target_composition={
+                        element: 1.0 / len(system)
+                        for element in system
+                    },
+                    temperature=reference_temperature,
+                    points_per_segment=pathway_points_per_segment,
+                )
+                metrics = analysis["system_metrics"]
+                path_count = len(analysis["paths"])
+                composition_columns = [
+                    column for column in analysis["path_points"].columns
+                    if column.startswith("X_")
+                ]
+                calculation_count = len(
+                    analysis["path_points"][composition_columns].drop_duplicates()
+                )
+                details = {"path_count": path_count}
+                mean_value = metrics[
+                    "mean_integrated_burden_meV_per_atom"
+                ]
+                variance_value = metrics[
+                    "path_dependence_variance_meV2_per_atom2"
+                ]
+                return (
+                    MetricValue(
+                        mean_value, f"{mean_value:.2f} meV/atom", "ok",
+                        details=details, calculation_count=calculation_count,
+                    ),
+                    MetricValue(
+                        variance_value, f"{variance_value:.2f} (meV/atom)²", "ok",
+                        details=details,
+                    ),
+                )
+
+            def get_pathway_metric(metric: str) -> MetricValue:
+                nonlocal cache_hits, cache_misses, calculations
+                if metric in current:
+                    return current[metric]
+                cached = cache.get(
+                    system_key, metric, pathway_settings, tdb_signature
+                )
+                if cached is not None:
+                    cache_hits += 1
+                    current[metric] = cached
+                    return cached
+
+                mean_cached = cache.get(
+                    system_key, MEAN_PATH_BURDEN,
+                    pathway_settings, tdb_signature,
+                )
+                variance_cached = cache.get(
+                    system_key, PATH_BURDEN_VARIANCE,
+                    pathway_settings, tdb_signature,
+                )
+                if mean_cached is not None and variance_cached is not None:
+                    cache_hits += 1
+                    current[MEAN_PATH_BURDEN] = mean_cached
+                    current[PATH_BURDEN_VARIANCE] = variance_cached
+                    return current[metric]
+
+                cache_misses += 1
+                metric_started = perf_counter()
+                try:
+                    mean_result, variance_result = pathway_state()
+                except Exception as exc:
+                    failure = MetricValue(
+                        None, f"Calculation failed: {exc}", "failed",
+                        details={"error": str(exc)},
+                    )
+                    mean_result = failure
+                    variance_result = MetricValue(**failure.__dict__)
+                elapsed = perf_counter() - metric_started
+                mean_result.elapsed_seconds = elapsed
+                variance_result.elapsed_seconds = elapsed
+                calculations += mean_result.calculation_count
+                for key, result in (
+                    (MEAN_PATH_BURDEN, mean_result),
+                    (PATH_BURDEN_VARIANCE, variance_result),
+                ):
+                    cache.put(
+                        system_key, key, pathway_settings,
+                        tdb_signature, result,
+                    )
+                    current[key] = result
+                return current[metric]
+
             def metric_value(metric: str) -> MetricValue:
                 if metric == MISCIBILITY_TEMPERATURE:
                     return cached_or_compute(
@@ -558,6 +674,8 @@ def run_inter_system_comparison(
                         metric, gap_settings,
                         f"{tdb_signature}|{interaction_signature}", gap,
                     )
+                if metric in pathway_metrics:
+                    return get_pathway_metric(metric)
                 raise KeyError(metric)
 
             row: dict = {"System": system_key}
@@ -585,12 +703,21 @@ def run_inter_system_comparison(
         if METRICS[metric].favorable in {"lower", "higher"}
     ]
     data["Pareto optimal"] = pareto_optimal_mask(data, pareto_metrics)
-    ascending = METRICS[primary_metric].favorable != "higher"
-    ranks = data[primary_metric].rank(method="min", ascending=ascending, na_option="keep")
-    data["Rank"] = ranks.astype("Int64")
-    data = data.sort_values(
-        [primary_metric, "System"], ascending=[ascending, True], na_position="last"
-    ).reset_index(drop=True)
+    primary_direction = METRICS[primary_metric].favorable
+    if primary_direction == "context":
+        data["Rank"] = pd.Series(pd.NA, index=data.index, dtype="Int64")
+        data = data.sort_values("System").reset_index(drop=True)
+    else:
+        ascending = primary_direction == "lower"
+        ranks = data[primary_metric].rank(
+            method="min", ascending=ascending, na_option="keep"
+        )
+        data["Rank"] = ranks.astype("Int64")
+        data = data.sort_values(
+            [primary_metric, "System"],
+            ascending=[ascending, True],
+            na_position="last",
+        ).reset_index(drop=True)
 
     return InterSystemComparisonResult(
         data=data,

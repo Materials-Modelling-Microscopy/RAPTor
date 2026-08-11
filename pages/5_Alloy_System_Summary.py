@@ -24,6 +24,7 @@ ensure_project_imports()
 from alloy_web.adapters.alloy_summary_adapter import run_alloy_system_summary
 from alloy_web.adapters.experimental_adapter import (
     DEFAULT_CITATION_PATH,
+    DEFAULT_EXPERIMENTAL_SOURCE_PATH,
     ExperimentalEvidence,
     load_experimental_evidence,
 )
@@ -80,8 +81,9 @@ def _cached_experimental_evidence(
     alloy_system: tuple[str, ...],
     database_version: int,
     citation_version: int,
+    source_version: int,
 ) -> ExperimentalEvidence:
-    del database_version, citation_version
+    del database_version, citation_version, source_version
     return load_experimental_evidence(alloy_system)
 
 
@@ -349,6 +351,11 @@ if summary is not None:
                 else 0
             ),
             citation_version=DEFAULT_CITATION_PATH.stat().st_mtime_ns,
+            source_version=(
+                DEFAULT_EXPERIMENTAL_SOURCE_PATH.stat().st_mtime_ns
+                if DEFAULT_EXPERIMENTAL_SOURCE_PATH.is_file()
+                else 0
+            ),
         )
     except Exception as exc:
         experimental_error = str(exc)
@@ -390,13 +397,13 @@ if summary is not None:
         experimental_evidence is not None
         and not experimental_evidence.observations.empty
     )
+    experimental_label = "Experimental evidence"
     if has_experimental_evidence:
-        tab_names.append(
-            f"Experimental evidence ({len(experimental_evidence.observations)})"
-        )
+        experimental_label += f" ({len(experimental_evidence.observations)})"
+    tab_names.append(experimental_label)
     tabs = st.tabs(tab_names)
     overview_tab, intermetallic_tab, interaction_tab, downloads_tab = tabs[:4]
-    experimental_tab = tabs[4] if has_experimental_evidence else None
+    experimental_tab = tabs[4]
 
     with overview_tab:
         chart_column, phase_column = st.columns([1.6, 1])
@@ -539,10 +546,17 @@ if summary is not None:
                 "summary_interactions_csv",
             )
 
-    if experimental_tab is not None:
-        with experimental_tab:
-            st.markdown("#### Published experimental evidence")
+    with experimental_tab:
+        st.markdown("#### Published experimental evidence")
 
+        if experimental_evidence is None:
+            st.warning("Experimental evidence could not be loaded.")
+        elif experimental_evidence.observations.empty:
+            st.info(
+                "No exact-system experimental records were found in the reviewed "
+                "dataset for this element combination."
+            )
+        else:
             evidence_metrics = st.columns(3)
             with evidence_metrics[0]:
                 st.metric(

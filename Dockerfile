@@ -1,22 +1,37 @@
 FROM python:3.11-slim
 
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    MPLCONFIGDIR=/tmp/raptor-matplotlib \
+    PORT=7860
+
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    git \
-    gfortran \
-    libopenblas-dev \
-    liblapack-dev \
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        build-essential \
+        git \
+        gfortran \
+        libopenblas-dev \
+        liblapack-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY requirements.txt ./
 
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --upgrade pip \
+    && python -m pip install -r requirements.txt
 
-COPY . .
+RUN useradd --create-home --uid 10001 raptor
+
+COPY --chown=raptor:raptor . .
+
+USER raptor
 
 EXPOSE 7860
 
-CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD python -c "import os, urllib.request; urllib.request.urlopen('http://127.0.0.1:' + os.getenv('PORT', '7860') + '/_stcore/health', timeout=4)"
+
+CMD ["sh", "-c", "exec streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT} --server.headless=true --server.fileWatcherType=none --browser.gatherUsageStats=false"]

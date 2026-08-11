@@ -45,7 +45,10 @@ def mole_fraction_inputs(elements: Sequence[str]) -> list[float]:
 
     st.markdown("#### Mole fractions")
 
-    default_fraction = round(1.0 / len(elements), 4)
+    # Keep the underlying value exactly equimolar. The widget controls how the
+    # number is displayed, so rounding here can make valid ternaries sum to
+    # 0.9999 and disable calculations across every analysis page.
+    default_fraction = 1.0 / len(elements)
     values = []
 
     cols = st.columns(len(elements))

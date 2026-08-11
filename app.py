@@ -27,6 +27,11 @@ pg = st.navigation(
             title="Inter-System Comparison",
             icon=":material/balance:",
         ),
+        st.Page(
+            "pages/7_Processing_Pathways.py",
+            title="Processing Pathways",
+            icon=":material/route:",
+        ),
     ]
 )
 

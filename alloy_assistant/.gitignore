@@ -12,6 +12,7 @@ data/curated/tables/**
 # Keep the directory scaffold
 !data/inbox/
 !data/inbox/**/
+!data/inbox/experimental_validation/refractory_hea_validation.csv
 !data/raw/
 !data/curated/
 !data/curated/**/

@@ -1,0 +1,33 @@
+# The production image is intentionally allow-listed. Local research folders,
+# generated databases, credentials, environments, and Git metadata never enter
+# the Docker build context.
+**
+
+!Dockerfile
+!requirements.txt
+!app.py
+!Home.py
+
+!pages/
+!pages/**
+
+!alloy_web/
+!alloy_web/**
+alloy_web/data/*.sqlite3*
+
+!alloy_assistant/
+!alloy_assistant/__init__.py
+!alloy_assistant/src/
+!alloy_assistant/src/**
+
+# This reviewed source is the deployment fallback for experimental evidence.
+!alloy_assistant/data/
+!alloy_assistant/data/inbox/
+!alloy_assistant/data/inbox/experimental_validation/
+!alloy_assistant/data/inbox/experimental_validation/refractory_hea_validation.csv
+
+!external/
+!external/Rapid_Phase_Field_Prediction/
+!external/Rapid_Phase_Field_Prediction/**
+!external/Symplex/
+!external/Symplex/**

@@ -27,6 +27,7 @@ Scientific algorithms should live in `external/Rapid_Phase_Field_Prediction/`, n
 | `spinodal_adapter.py` | `run_spinodal_analysis(...)` | Eigenvalue spectrum, crossing temperature, soft mode, interpretation, and figures. |
 | `alloy_summary_adapter.py` | `run_alloy_system_summary(...)` | System and subsystem miscibility, PMR, interaction data, and considered intermetallics. |
 | `inter_system_adapter.py` | `run_inter_system_comparison(...)` | Ranked systems, selected metrics, Pareto membership, cache statistics, and timings. |
+| `pathway_adapter.py` | `run_pathway_analysis(...)` | Integrated burden for every unique processing path, energy and equilibrium phase fractions along each path, and system-level path dependence. |
 | `experimental_adapter.py` | `load_experimental_evidence(...)` | Citation-linked experimental records matching an alloy system. |
 
 The function definitions and dataclasses in each adapter are the authoritative description of current arguments and fields.

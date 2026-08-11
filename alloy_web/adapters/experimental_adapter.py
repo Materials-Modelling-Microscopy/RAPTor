@@ -10,11 +10,20 @@ import re
 import pandas as pd
 
 from alloy_assistant.src.database import DEFAULT_DATABASE_PATH, connect
+from alloy_assistant.src.normalization import parse_composition_formula
 from alloy_assistant.src.queries import get_experimental_observations_for_system
 
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CITATION_PATH = ROOT / "alloy_web" / "data" / "experimental_citations.json"
+DEFAULT_EXPERIMENTAL_SOURCE_PATH = (
+    ROOT
+    / "alloy_assistant"
+    / "data"
+    / "inbox"
+    / "experimental_validation"
+    / "refractory_hea_validation.csv"
+)
 _SOURCE_ROW_PATTERN = re.compile(r"^csv-row:(\d+)$")
 _SAMPLE_ROW_SUFFIX = re.compile(r"\s+row\s+\d+$")
 
@@ -92,11 +101,92 @@ def _display_composition(sample_label: str | None, fallback: str) -> str:
     return fallback
 
 
+def _optional_text(value: object) -> str | None:
+    if value is None or pd.isna(value):
+        return None
+    return str(value).strip() or None
+
+
+def _source_file_evidence(
+    alloy_system: list[str] | tuple[str, ...],
+    *,
+    source_path: Path,
+    catalog: dict,
+) -> ExperimentalEvidence:
+    """Read the approved source CSV when the generated DuckDB is unavailable."""
+    if not source_path.is_file():
+        return _empty_evidence(database_available=False)
+
+    source = pd.read_csv(source_path, encoding="utf-8-sig")
+    required = {
+        "Composition",
+        "Expt. Reported Phases",
+        "Processing",
+        "Processing. Temp",
+    }
+    missing = required.difference(source.columns)
+    if missing:
+        raise ValueError(
+            "Experimental source is missing required columns: "
+            + ", ".join(sorted(missing))
+        )
+    if source["Composition"].notna().sum() != len(catalog["reference_numbers"]):
+        raise ValueError(
+            "Experimental source and citation catalog contain different record counts"
+        )
+
+    requested_elements = frozenset(alloy_system)
+    records: list[dict[str, object]] = []
+    used_references: set[int] = set()
+    for frame_index, row in source.iterrows():
+        formula = _optional_text(row["Composition"])
+        if formula is None:
+            continue
+        if frozenset(parse_composition_formula(formula)) != requested_elements:
+            continue
+
+        source_row = int(frame_index) + 2
+        reference_number = _reference_for_source_row(source_row, catalog)
+        used_references.add(reference_number)
+        processing_temperature = row["Processing. Temp"]
+        records.append(
+            {
+                "Composition": formula,
+                "Reported phases": _optional_text(row["Expt. Reported Phases"]),
+                "Processing method": _optional_text(row["Processing"]),
+                "Processing temperature (K)": (
+                    None
+                    if pd.isna(processing_temperature)
+                    else float(processing_temperature)
+                ),
+                "Reference": f"[{reference_number}]",
+            }
+        )
+
+    if not records:
+        return _empty_evidence(database_available=False)
+
+    return ExperimentalEvidence(
+        observations=pd.DataFrame(records),
+        citations=pd.DataFrame(
+            [
+                {
+                    "Reference": f"[{reference_number}]",
+                    "Citation": catalog["references"][str(reference_number)],
+                }
+                for reference_number in sorted(used_references)
+            ]
+        ),
+        database_available=False,
+    )
+
+
 def load_experimental_evidence(
     alloy_system: list[str] | tuple[str, ...],
     *,
     database_path: Path = DEFAULT_DATABASE_PATH,
     citation_path: Path = DEFAULT_CITATION_PATH,
+    source_path: Path = DEFAULT_EXPERIMENTAL_SOURCE_PATH,
 ) -> ExperimentalEvidence:
     """Return exact-system experimental records without modifying the database.
 
@@ -105,10 +195,14 @@ def load_experimental_evidence(
     belongs to each existing ``csv-row`` source locator.
     """
     database_path = Path(database_path)
-    if not database_path.is_file():
-        return _empty_evidence(database_available=False)
-
     catalog = load_citation_catalog(citation_path)
+    if not database_path.is_file():
+        return _source_file_evidence(
+            alloy_system,
+            source_path=Path(source_path),
+            catalog=catalog,
+        )
+
     system_name = "-".join(alloy_system)
     with connect(database_path, read_only=True) as connection:
         observations = get_experimental_observations_for_system(
