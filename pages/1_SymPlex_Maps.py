@@ -46,6 +46,7 @@ with st.sidebar:
         default=["Cr", "Mo", "Nb", "Ta"],
         min_elements=4,
         max_elements=5,
+        key="symplex_alloy_system",
     )
 
     temperature = st.number_input(

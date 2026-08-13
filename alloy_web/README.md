@@ -1,6 +1,6 @@
-# RAPGen web integration layer
+# RAPTor web integration layer
 
-`alloy_web` connects the calculation engine to Streamlit. Its adapters are also the most convenient way to run RAPGen calculations from a Python script because they validate inputs and return named result objects containing DataFrames, figures, metadata, and serialization helpers.
+`alloy_web` connects the calculation engine to Streamlit. Its adapters are also the most convenient way to run RAPTor calculations from a Python script because they validate inputs and return named result objects containing DataFrames, figures, metadata, and serialization helpers.
 
 This is an internal integration interface, not yet a stable public API. Scripts intended for long-term reproduction should record the repository commit they use.
 
@@ -11,7 +11,7 @@ This is an internal integration interface, not yet a stable public API. Scripts 
 | `adapters/` | Validate inputs, call one shared numerical implementation, and normalize results for Python or UI use. |
 | `config.py` | Resolve repository, calculation-engine, SymPlex, and TDB paths. |
 | `ui.py` | Reusable Streamlit controls and page presentation helpers. |
-| `icons.py` and `assets/` | RAPGen branding and page icons. |
+| `icons.py` and `assets/` | RAPTor branding and page icons. |
 | `data/` | Small application datasets and generated local caches. |
 
 Scientific algorithms should live in `external/Rapid_Phase_Field_Prediction/`, not in Streamlit pages or CSS/UI helpers.

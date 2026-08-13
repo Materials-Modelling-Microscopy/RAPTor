@@ -66,6 +66,50 @@ def _resolve_tdb_path(
     return sorted(candidates, key=lambda path: path.name)[0]
 
 
+def resolve_tdb_for_system(
+    elements: Iterable[str],
+    tdb_dir: str | Path,
+    index: dict[frozenset[str], list[Path]] | None = None,
+) -> tuple[Path, list[str]]:
+    """
+    Resolve the TDB file for a set of elements whatever order they arrive in,
+    and report the element order that file's name uses.
+
+    Callers routinely hand the joined element string to pycalphad helpers that
+    positionally pair mole fractions with ``name.split("-")``. Any per-element
+    data must therefore be reordered onto the returned order, otherwise the
+    fractions are silently assigned to the wrong elements.
+
+    Raises FileNotFoundError when no database covers the element set.
+    """
+    elements = list(elements)
+    tdb_dir = Path(tdb_dir)
+
+    if index is None:
+        index = _tdb_index(tdb_dir)
+
+    tdb_path = _resolve_tdb_path(elements, tdb_dir, index)
+    if tdb_path is None:
+        raise FileNotFoundError(
+            f"No TDB file was found for {'-'.join(elements)}."
+        )
+
+    by_upper = {element.upper(): element for element in elements}
+    ordered = [
+        by_upper[part.upper()]
+        for part in tdb_path.stem.split("-")
+        if part and part.upper() in by_upper
+    ]
+
+    if len(ordered) != len(elements):
+        raise FileNotFoundError(
+            f"TDB file {tdb_path.name} does not match the requested elements "
+            f"{'-'.join(elements)}."
+        )
+
+    return tdb_path, ordered
+
+
 def _conditions(
     components: list[str],
     mol: Iterable[float],

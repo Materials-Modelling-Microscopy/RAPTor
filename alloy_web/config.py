@@ -10,6 +10,20 @@ SYMPLEX_DIR = EXTERNAL_DIR / "Symplex"
 
 TDB_DIR = PHASEFIELD_DIR / "input/tdb"
 
+# The 9 refractory elements every calculation adapter accepts. Lives here
+# (not in ui.py) so it can be imported without pulling in streamlit.
+AVAILABLE_ELEMENTS = [
+    "Cr",
+    "Hf",
+    "Mo",
+    "Nb",
+    "Ta",
+    "Ti",
+    "V",
+    "W",
+    "Zr",
+]
+
 
 def ensure_project_imports() -> None:
     """

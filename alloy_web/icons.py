@@ -23,7 +23,7 @@ ICON_NAMES = {
 
 def icon_path(name: str) -> Path:
     if name not in ICON_NAMES:
-        raise KeyError(f"Unknown RAPGen icon: {name}")
+        raise KeyError(f"Unknown RAPTor icon: {name}")
     return ICON_DIR / f"{name}.svg"
 
 
@@ -42,7 +42,7 @@ def icon_markup(name: str, size: int = 28, class_name: str = "") -> str:
 
 
 def brand_favicon() -> Image.Image:
-    """Render the RAPGen mark to a small raster image Streamlit can use as a favicon."""
+    """Render the RAPTor mark to a small raster image Streamlit can use as a favicon."""
     image = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
     draw.rounded_rectangle((2, 2, 62, 62), radius=14, fill=(70, 86, 181, 255))
@@ -75,20 +75,20 @@ def brand_favicon() -> Image.Image:
 
 def page_title(title: str, icon: str, subtitle: str | None = None) -> None:
     subtitle_markup = (
-        f'<p class="rapgen-page-subtitle">{escape(subtitle)}</p>'
+        f'<p class="raptor-page-subtitle">{escape(subtitle)}</p>'
         if subtitle
         else ""
     )
     style = dedent(
         """
         <style>
-            .rapgen-page-heading {
+            .raptor-page-heading {
                 display: flex;
                 align-items: center;
                 gap: 0.82rem;
                 margin: 0.15rem 0 0.9rem;
             }
-            .rapgen-page-icon {
+            .raptor-page-icon {
                 display: grid;
                 place-items: center;
                 flex: 0 0 auto;
@@ -99,13 +99,13 @@ def page_title(title: str, icon: str, subtitle: str | None = None) -> None:
                 background: linear-gradient(145deg, rgba(75, 101, 205, 0.14), rgba(162, 72, 190, 0.10));
                 border: 1px solid rgba(91, 103, 184, 0.16);
             }
-            .rapgen-page-heading h1 {
+            .raptor-page-heading h1 {
                 margin: 0;
                 padding: 0;
                 line-height: 1.08;
                 letter-spacing: -0.035em;
             }
-            .rapgen-page-subtitle {
+            .raptor-page-subtitle {
                 margin: 0.3rem 0 0;
                 opacity: 0.64;
                 line-height: 1.45;
@@ -114,8 +114,8 @@ def page_title(title: str, icon: str, subtitle: str | None = None) -> None:
         """,
     ).strip()
     heading = (
-        '<div class="rapgen-page-heading">'
-        f'<div class="rapgen-page-icon">{icon_markup(icon, 30)}</div>'
+        '<div class="raptor-page-heading">'
+        f'<div class="raptor-page-icon">{icon_markup(icon, 30)}</div>'
         f'<div><h1>{escape(title)}</h1>{subtitle_markup}</div>'
         "</div>"
     )

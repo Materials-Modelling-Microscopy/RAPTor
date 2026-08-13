@@ -1,6 +1,6 @@
 # Alloy Research Assistant
 
-This directory is RAPGen's provenance-aware knowledge workspace. It ingests
+This directory is RAPTor's provenance-aware knowledge workspace. It ingests
 reviewed structured data and documents into a local DuckDB database, exposes
 parameterized read-only queries, and supports lexical and semantic retrieval,
 tool routing, citation-preserving evidence, and answer synthesis.

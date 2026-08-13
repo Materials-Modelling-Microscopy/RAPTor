@@ -1,3 +1,5 @@
+from alloy_web.adapters.alloy_summary_adapter import resolve_tdb_for_system
+from alloy_web.config import TDB_DIR
 from external.Symplex.generate_plot import generate_symplex_plot
 from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.symplex_data_generator import symplexDataGenerator
 from dataclasses import dataclass
@@ -36,6 +38,10 @@ def run_symplex_prediction(
         raise ValueError(
             f"constraint_element={constraint_element} is not in alloy_system={alloy_system}"
         )
+
+    # The generator builds its TDB path straight from this list, so hand it
+    # the order the database file is named with.
+    _, alloy_system = resolve_tdb_for_system(alloy_system, TDB_DIR)
 
     data = symplexDataGenerator(
         alloy_system=alloy_system,

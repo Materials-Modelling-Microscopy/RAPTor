@@ -249,6 +249,7 @@ with st.sidebar:
         default=["Cr", "Ta", "Ti", "W"],
         min_elements=2,
         max_elements=5,
+        key="alloy_summary_alloy_system",
     )
 
     reference_temperature = st.number_input(

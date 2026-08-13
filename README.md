@@ -4,7 +4,7 @@
 
 The Streamlit website is one way to use RAPTor. The numerical routines and validated adapter functions can also be run directly from Python for scripted studies, batch calculations, and downstream analysis. Access the website here: https://rapgen.streamlit.app
 
-> **Research-code status:** RAPTor is currently used from a source checkout. It is not yet distributed as an installable Python package, and the internal Python interfaces are not a versioned public API. The examples below use the same calculation paths as the web interface, but function signatures may evolve while the package boundary is formalized.
+> **Research-code status:** the calculation engine and its adapters are installable as the `raptor_alloys` Python package from a checkout of this repository (not yet published to PyPI), but the interface is pre-1.0 and may still evolve. The Streamlit website is a separate, unaffected way to use the same code and continues to run from a plain `requirements.txt` install as before. Both come from this one repository, updated together.
 
 ## What RAPTor can calculate
 
@@ -21,7 +21,7 @@ The Streamlit website is one way to use RAPTor. The numerical routines and valid
 
 The current thermodynamic calculations focus on the BCC_A2, FCC_A1, and HCP_A3 solid-solution phases represented in the supplied thermodynamic databases, together with applicable intermetallic phases.
 
-## Quick start
+## Quick start: Streamlit website
 
 Python 3.11 is the supported runtime
 
@@ -33,12 +33,49 @@ python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+streamlit run app.py
 ```
+
+## Quick start: compute package (`raptor_alloys`)
+
+If you just want to call calculations from your own scripts or notebooks — no Streamlit, no web browser — install the `raptor_alloys` package from the same checkout instead of `requirements.txt`. It pulls in only what the calculations themselves need (numpy, pandas, matplotlib, scipy, pycalphad, symengine, xarray, tinydb, pymatgen, pyyaml); Streamlit and the Alloy Assistant's dependencies are left out unless you ask for them.
+
+```bash
+git clone https://github.com/Pravanop/Phase_Field_Prediction_Visualization.git
+cd Phase_Field_Prediction_Visualization
+
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+```python
+import raptor_alloys as rap
+
+result = rap.run_phase_diagram_prediction(
+    alloy_system=["Cr", "W"],  # any element order is fine
+    tdb_dir=rap.TDB_DIR,
+)
+result.figure.savefig("Cr-W.png", dpi=300, bbox_inches="tight")
+```
+
+This installs in editable mode, so the package always reflects your current checkout — pulling the repository picks up updates to both the compute package and the website together, since they're built from the same source. `pip install .` (without `-e`) instead builds a self-contained copy if you'd rather not track the checkout.
+
+Two optional extras add back what the base install leaves out:
+
+```bash
+python -m pip install -e ".[web]"        # streamlit, to also run the website from this environment
+python -m pip install -e ".[assistant]"  # duckdb, sentence-transformers, groq, for alloy_assistant
+```
+
+`raptor_alloys` is a thin, stable façade over the same calculation engine and adapters the website calls — see [Using the calculations without Streamlit](#using-the-calculations-without-streamlit) below for what it exposes.
 
 ## Repository guide
 
 | Path | Role |
 | --- | --- |
+| [`raptor_alloys/`](raptor_alloys/) | Public, installable façade over the calculation engine and adapters below. The stable entry point for calling RAPTor from your own scripts. |
 | [`external/Rapid_Phase_Field_Prediction/`](external/Rapid_Phase_Field_Prediction/) | Thermodynamic, phase-field, spinodal, and phase-diagram calculation engine. See its [calculation guide](external/Rapid_Phase_Field_Prediction/README.md). |
 | [`external/Symplex/`](external/Symplex/) | High-dimensional simplex decomposition and plotting. See the [SymPlex guide](external/Symplex/README.md). |
 | [`alloy_web/`](alloy_web/) | Validation and result adapters shared by the pages, plus UI components. See the [adapter guide](alloy_web/README.md). |
@@ -48,26 +85,20 @@ python -m pip install -r requirements.txt
 
 ## Using the calculations without Streamlit
 
-Run these examples from the repository root after activating the environment. The `alloy_web.adapters` functions are convenient internal entry points: they perform the same input checks and return the same structured results used by the website.
+Install `raptor_alloys` as shown above, then import it directly — no `sys.path` setup required, and no Streamlit dependency pulled in. It re-exports the same adapter functions the website calls, so results are identical to what the corresponding page produces.
 
 ### Phase fractions and BCC energy above hull
 
 ```python
-from alloy_web.config import TDB_DIR, ensure_project_imports
+import raptor_alloys as rap
 
-ensure_project_imports()
-
-from alloy_web.adapters.phasefield_adapter import (
-    run_phase_fraction_temperature_prediction,
-)
-
-result = run_phase_fraction_temperature_prediction(
+result = rap.run_phase_fraction_temperature_prediction(
     alloy_system=["Cr", "Ta", "Ti", "W"],
     mol_ratio=[0.25, 0.25, 0.25, 0.25],
     temperature_min=300,
     temperature_max=3000,
     temperature_step=50,
-    tdb_dir=TDB_DIR,
+    tdb_dir=rap.TDB_DIR,
 )
 
 result.data.to_csv("phase_fractions.csv", index=False)
@@ -85,18 +116,14 @@ print("Stable BCC threshold:", result.stable_temperature)
 ```python
 from pathlib import Path
 
-from alloy_web.config import ensure_project_imports
-
-ensure_project_imports()
-
-from alloy_web.adapters.spinodal_adapter import run_spinodal_analysis
+import raptor_alloys as rap
 
 interaction_file = Path(
     "external/Rapid_Phase_Field_Prediction/input/spinodal/"
     "binary_interactions.json"
 )
 
-result = run_spinodal_analysis(
+result = rap.run_spinodal_analysis(
     alloy_system=["Cr", "Ta", "Ti", "W"],
     mol_ratio=[0.25, 0.25, 0.25, 0.25],
     lattice="BCC",
@@ -114,7 +141,9 @@ print("Estimated spinodal temperature:", result.spinodal_temperature)
 print(result.interpretation)
 ```
 
-Direct, lower-level functions are documented in the [calculation-engine guide](external/Rapid_Phase_Field_Prediction/README.md). Use those when you need finer control over grids or plotting; use adapters when you want the website's validation and result containers.
+The remaining six calculations (`run_phase_diagram_prediction`, `run_composition_splitting_prediction`, `run_symplex_prediction`, `run_pathway_analysis`, `run_alloy_system_summary`, `run_inter_system_comparison`) follow the same pattern — call `rap.<name>(...)`; run `help(rap)` or check [`raptor_alloys/__init__.py`](raptor_alloys/__init__.py) for the full list and each function's result type.
+
+If you're working from a checkout without installing (e.g. editing the adapters themselves), the same functions are reachable directly as `alloy_web.adapters.<module>.run_...` after calling `alloy_web.config.ensure_project_imports()` — that's what `raptor_alloys` does internally. Direct, lower-level engine functions below the adapter layer are documented in the [calculation-engine guide](external/Rapid_Phase_Field_Prediction/README.md); use those when you need finer control over grids or plotting than an adapter exposes.
 
 ## Scientific definitions used by the interface
 

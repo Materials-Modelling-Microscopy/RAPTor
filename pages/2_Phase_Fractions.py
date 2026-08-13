@@ -147,6 +147,7 @@ with st.sidebar:
         default=["Cr", "Mo", "Nb", "Ta"],
         min_elements=2,
         max_elements=5,
+        key="phase_fractions_alloy_system",
     )
 
     if analysis_mode == "Phase fractions vs temperature":

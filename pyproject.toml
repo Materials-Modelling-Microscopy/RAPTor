@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raptor-alloys"
+version = "0.1.0"
+description = "CALPHAD-based phase stability predictions for multi-principal-element refractory alloys"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Pravan Omprakash" }]
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+# Kept intentionally minimal: numerics, plotting, and CALPHAD. Anything only
+# needed to run the Streamlit site or the literature-assistant subsystem is
+# an optional extra below, so a script/notebook user isn't forced to install
+# streamlit, duckdb, or an embeddings model just to run a calculation.
+dependencies = [
+    "numpy>=1.25",
+    "pandas>=1.5",
+    "matplotlib>=3.8",
+    "scipy>=1.12",
+    "pycalphad>=0.10",
+    "symengine>=0.11",
+    "xarray>=2023.1",
+    "tinydb>=4.8",
+    "pymatgen>=2023.1",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# Needed only to run `streamlit run app.py` (the RAPTor web app itself).
+web = ["streamlit>=1.30"]
+# Needed only for alloy_assistant, the literature/evidence Q&A subsystem.
+assistant = [
+    "duckdb==1.5.4",
+    "pypdf==6.10.0",
+    "sentence-transformers==5.5.0",
+    "groq==1.6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Materials-Modelling-Microscopy/RAPTor"
+Repository = "https://github.com/Materials-Modelling-Microscopy/RAPTor"
+
+[tool.setuptools.packages.find]
+include = [
+    "raptor_alloys*",
+    "alloy_web*",
+    "alloy_assistant*",
+    "external*",
+]
+exclude = [
+    "*.tests*",
+    "*__pycache__*",
+]
+
+[tool.setuptools.package-data]
+"external.Rapid_Phase_Field_Prediction" = [
+    "input/tdb/*.tdb",
+    "input/DFT_calculated/*.json",
+    "input/Empirical_database/*.json",
+    "input/MP_database/*.pickle",
+    "input/spinodal/*.json",
+    "phase_diagram_generators/mol_grid_data/*.pkl",
+]
+"external.Symplex" = ["plotting_parameters.yaml"]

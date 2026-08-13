@@ -40,6 +40,7 @@ with st.sidebar:
         default=["Cr", "Mo"],
         min_elements=2,
         max_elements=3,
+        key="phase_diagrams_alloy_system",
     )
 
     include_intermetallics = True

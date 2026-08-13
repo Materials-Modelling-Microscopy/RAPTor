@@ -5,18 +5,51 @@ from pathlib import Path
 import matplotlib.figure
 import streamlit as st
 
+from alloy_web.config import AVAILABLE_ELEMENTS
 
-AVAILABLE_ELEMENTS = [
-    "Cr",
-    "Hf",
-    "Mo",
-    "Nb",
-    "Ta",
-    "Ti",
-    "V",
-    "W",
-    "Zr",
+# Mirrors the real periodic-table positions of the 9 available elements:
+# groups 4-6 across periods 4-6.
+_PERIODIC_LAYOUT = [
+    ["Ti", "V", "Cr"],
+    ["Zr", "Nb", "Mo"],
+    ["Hf", "Ta", "W"],
 ]
+
+def _element_grid_css(container_key: str) -> str:
+    # st.container(key=...) stamps its outer div with a "st-key-<key>" class,
+    # which actually wraps the child widgets in the DOM (unlike st.markdown
+    # divs, which don't) — scope the styling to it so it doesn't leak onto
+    # other buttons on the page (e.g. a page's "Run" button).
+    scope = f".st-key-{container_key}"
+    return f"""
+    <style>
+        {scope} [data-testid="stButton"] > button {{
+            border-radius: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            padding: 0.5rem 0;
+            border: 1px solid rgba(128, 128, 128, 0.25);
+            background: rgba(128, 128, 128, 0.06);
+            transition: all 120ms ease-in-out;
+        }}
+
+        {scope} [data-testid="stButton"] > button[kind="primary"] {{
+            background: linear-gradient(145deg, rgba(75, 101, 205, 0.85), rgba(122, 72, 190, 0.80));
+            border: 1px solid rgba(91, 103, 184, 0.35);
+            color: white;
+            box-shadow: 0 6px 16px rgba(60, 76, 160, 0.22);
+        }}
+
+        {scope} .raptor-element-order-badge {{
+            margin-top: -0.35rem;
+            margin-bottom: 0.35rem;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            opacity: 0.65;
+        }}
+    </style>
+    """
 
 
 def element_selector(
@@ -24,19 +57,73 @@ def element_selector(
     default: list[str],
     min_elements: int,
     max_elements: int,
+    key: str | None = None,
 ):
-    elements = st.multiselect(
-        label,
-        AVAILABLE_ELEMENTS,
-        default=default,
-    )
+    """
+    Periodic-table-style button grid for picking elements.
 
-    if len(elements) < min_elements or len(elements) > max_elements:
+    The selection is always kept in alphabetical order, regardless of the
+    order the buttons were clicked. This is the canonical form the rest of
+    the project expects: TDB files are named by joining the elements
+    alphabetically (e.g. "Nb-Ti-V-Zr.tdb"), and adapters resolve them with
+    `"-".join(alloy_system)`, so an unsorted list silently misses the file.
+    Mole-fraction columns and composition rows line up with this list's
+    index, so they follow the same alphabetical order.
+
+    `key` scopes the selection state to one call site. Pages should always
+    pass an explicit `key` — falling back to `label` risks collisions since
+    several pages share the same label text (e.g. "Alloy system").
+    """
+    widget_key = key or label
+    state_key = f"_element_grid__{widget_key}"
+    container_key = f"raptor_element_grid__{widget_key}"
+
+    if state_key not in st.session_state:
+        st.session_state[state_key] = sorted(default)
+
+    # Normalise state that predates the alphabetical ordering rule, so a
+    # session left open across the change cannot keep feeding an unsorted
+    # list to the TDB lookup.
+    if st.session_state[state_key] != sorted(st.session_state[state_key]):
+        st.session_state[state_key] = sorted(st.session_state[state_key])
+
+    selected: list[str] = st.session_state[state_key]
+
+    st.markdown(f"##### {label}")
+    st.markdown(_element_grid_css(container_key), unsafe_allow_html=True)
+
+    with st.container(key=container_key):
+        for row in _PERIODIC_LAYOUT:
+            cols = st.columns(3)
+            for col, symbol in zip(cols, row):
+                with col:
+                    is_selected = symbol in selected
+                    clicked = st.button(
+                        symbol,
+                        key=f"{state_key}__{symbol}",
+                        use_container_width=True,
+                        type="primary" if is_selected else "secondary",
+                    )
+                    if is_selected:
+                        order = selected.index(symbol) + 1
+                        st.markdown(
+                            f'<div class="raptor-element-order-badge">{order}</div>',
+                            unsafe_allow_html=True,
+                        )
+                    if clicked:
+                        if is_selected:
+                            selected.remove(symbol)
+                        else:
+                            selected.append(symbol)
+                        st.session_state[state_key] = sorted(selected)
+                        st.rerun()
+
+    if len(selected) < min_elements or len(selected) > max_elements:
         st.warning(
             f"Choose between {min_elements} and {max_elements} elements."
         )
 
-    return elements
+    return list(selected)
 
 
 def mole_fraction_inputs(elements: Sequence[str]) -> list[float]:

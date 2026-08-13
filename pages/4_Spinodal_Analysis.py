@@ -51,6 +51,7 @@ with st.sidebar:
         default=["Cr", "Mo", "Nb", "Ta"],
         min_elements=2,
         max_elements=6,
+        key="spinodal_alloy_system",
     )
 
     lattice = st.selectbox(

@@ -15,7 +15,7 @@ from alloy_web.icons import brand_favicon, icon_markup
 ensure_project_imports()
 
 st.set_page_config(
-    page_title="RAPGen",
+    page_title="RAPTor",
     page_icon=brand_favicon(),
     layout="wide",
 )
@@ -42,7 +42,7 @@ st.markdown(
             padding-bottom: 4rem;
         }
 
-        .rapgen-hero {
+        .raptor-hero {
             position: relative;
             overflow: hidden;
             padding: clamp(2rem, 5vw, 4.5rem);
@@ -55,7 +55,7 @@ st.markdown(
             margin-bottom: 1.4rem;
         }
 
-        .rapgen-brand-mark {
+        .raptor-brand-mark {
             position: absolute;
             z-index: 1;
             top: clamp(1.5rem, 4vw, 3rem);
@@ -71,7 +71,7 @@ st.markdown(
             backdrop-filter: blur(8px);
         }
 
-        .rapgen-hero::after {
+        .raptor-hero::after {
             content: "";
             position: absolute;
             width: 18rem;
@@ -84,7 +84,7 @@ st.markdown(
                         0 0 0 5rem rgba(255,255,255,0.035);
         }
 
-        .rapgen-eyebrow {
+        .raptor-eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
@@ -98,7 +98,7 @@ st.markdown(
             text-transform: uppercase;
         }
 
-        .rapgen-hero h1 {
+        .raptor-hero h1 {
             max-width: 760px;
             margin: 1.15rem 0 0.9rem;
             font-size: clamp(2.5rem, 6vw, 4.6rem);
@@ -107,7 +107,7 @@ st.markdown(
             color: white;
         }
 
-        .rapgen-hero p {
+        .raptor-hero p {
             max-width: 730px;
             margin: 0;
             color: rgba(255,255,255,0.88);
@@ -269,7 +269,7 @@ st.markdown(
             line-height: 1.6;
         }
 
-        .rapgen-footer {
+        .raptor-footer {
             margin-top: 2.5rem;
             padding: 1.4rem 0 0.3rem;
             border-top: 1px solid rgba(100, 112, 150, 0.18);
@@ -279,7 +279,7 @@ st.markdown(
             line-height: 1.8;
         }
 
-        .rapgen-footer a {
+        .raptor-footer a {
             color: #FFFFFF;
             text-decoration: none;
             font-weight: 650;
@@ -287,10 +287,10 @@ st.markdown(
         }
 
         @media (max-width: 700px) {
-            .rapgen-hero { border-radius: 1rem; }
-            .rapgen-hero h1 { font-size: 2.6rem; }
+            .raptor-hero { border-radius: 1rem; }
+            .raptor-hero h1 { font-size: 2.6rem; }
             .workflow-strip { justify-content: flex-start; }
-            .rapgen-brand-mark { position: relative; top: auto; right: auto; margin-bottom: 1.2rem; }
+            .raptor-brand-mark { position: relative; top: auto; right: auto; margin-bottom: 1.2rem; }
         }
     </style>
     """,
@@ -300,10 +300,10 @@ st.markdown(
 
 st.markdown(
     f"""
-    <section class="rapgen-hero">
-        <div class="rapgen-brand-mark">{icon_markup("brand", 62)}</div>
-        <div class="rapgen-eyebrow">RAPGen · First-principle based alloy thermodynamics</div>
-        <h1>Rapid Alloy Phase-field GENerator</h1>
+    <section class="raptor-hero">
+        <div class="raptor-brand-mark">{icon_markup("brand", 62)}</div>
+        <div class="raptor-eyebrow">RAPTor · First-principle based alloy thermodynamics</div>
+        <h1>Rapid Alloy Phase-field generaTOR</h1>
         <p>
             Explore solid solution formation, when they become miscible, which
             intermetallics compete, and how instability develops across composition
@@ -482,7 +482,7 @@ for tool in TOOLS:
 st.markdown(
     """
     <div class="method-note">
-        <strong>DISCLAIMER: Interpretation matters.</strong> RAPGen is designed for rapid screening and
+        <strong>DISCLAIMER: Interpretation matters.</strong> RAPTor is designed for rapid screening and
         scientific comparison. Every result inherits the assumptions, phase models, and data
         coverage of its thermodynamic database; use the downloadable numerical output when a
         decision needs closer validation.
@@ -495,7 +495,7 @@ st.markdown(
 with st.expander("Citation and research use"):
     st.markdown(
         """
-        If you use RAPGen or figures generated from this interface, please cite the following works accordingly:
+        If you use RAPTor or figures generated from this interface, please cite the following works accordingly:
         
         Thermodyanamic framework:
         > Omprakash et al. First-principles-based Prediction of Phase Fields: Part I. Binary and Ternary Refractory Alloys, Manuscript under preparation.
@@ -540,7 +540,7 @@ with st.expander("Additional Reading"):
 
 st.markdown(
     f"""
-    <footer class="rapgen-footer">
+    <footer class="raptor-footer">
         <div>
             <a href="{LAB_URL}" target="_blank">M-Cube @ WashU</a>
             <a href="{PROFILE_URL}" target="_blank">Developer</a>

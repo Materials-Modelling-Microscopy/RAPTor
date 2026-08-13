@@ -63,6 +63,7 @@ with st.sidebar:
         default=["Nb", "Ti", "V", "Zr"],
         min_elements=3,
         max_elements=5,
+        key="processing_pathways_alloy_system",
     )
 
     mol_ratio = mole_fraction_inputs(alloy_system)

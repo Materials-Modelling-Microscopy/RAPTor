@@ -6,9 +6,16 @@ import io
 import pandas as pd
 import matplotlib.figure
 
+from alloy_web.adapters.alloy_summary_adapter import resolve_tdb_for_system
 from external.Rapid_Phase_Field_Prediction.phase_diagram_analysis.temperature_profile_per_composition import generate_phase_fraction_temperature_profile
 from external.Rapid_Phase_Field_Prediction.phase_diagram_analysis.composition_profile_per_temperature import generate_composition_splitting_profile
 from external.Rapid_Phase_Field_Prediction.phase_diagram_analysis.phase_diagram_plotters import generate_binary_phase_diagram, generate_ternary_phase_diagram
+
+
+def _reorder(values: list[float], elements: list[str], ordered: list[str]) -> list[float]:
+    """Move per-element values onto the element order the TDB file uses."""
+    position = {element.upper(): index for index, element in enumerate(elements)}
+    return [float(values[position[element.upper()]]) for element in ordered]
 
 
 @dataclass
@@ -58,7 +65,10 @@ def run_phase_fraction_temperature_prediction(
             f"Mole fractions must sum to 1. Current sum = {sum(mol_ratio):.6f}"
         )
 
-    composition = "-".join(alloy_system)
+    _, ordered_elements = resolve_tdb_for_system(alloy_system, tdb_dir)
+    mol_ratio = _reorder(mol_ratio, alloy_system, ordered_elements)
+    composition = "-".join(ordered_elements)
+
     temp_range = (
         float(temperature_min),
         float(temperature_max),
@@ -120,13 +130,15 @@ def run_composition_splitting_prediction(
     temperatures: list[float],
     tdb_dir: str | Path,
 ) -> CompositionSplittingResult:
-    composition = "-".join(alloy_system)
-
     if len(temperatures) == 0:
         raise ValueError("Provide at least one temperature.")
 
     if len(temperatures) > 3:
         raise ValueError("At most 3 temperatures are supported.")
+
+    _, ordered_elements = resolve_tdb_for_system(alloy_system, tdb_dir)
+    mols = [_reorder(mol, alloy_system, ordered_elements) for mol in mols]
+    composition = "-".join(ordered_elements)
 
     results = []
 
@@ -147,7 +159,7 @@ def run_composition_splitting_prediction(
         )
 
     return CompositionSplittingResult(
-        alloy_system=alloy_system,
+        alloy_system=ordered_elements,
         mols=mols,
         results=results,
     )
@@ -203,6 +215,7 @@ def run_phase_diagram_prediction(
             "Phase diagram plotting currently supports only binary or ternary systems."
         )
 
+    _, alloy_system = resolve_tdb_for_system(alloy_system, tdb_dir)
     composition = "-".join(alloy_system)
 
     if len(alloy_system) == 2:

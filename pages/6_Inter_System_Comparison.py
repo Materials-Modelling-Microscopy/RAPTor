@@ -115,6 +115,7 @@ with st.sidebar:
         default=["Cr", "Mo", "Nb", "Ta", "Ti", "W"],
         min_elements=2,
         max_elements=9,
+        key="inter_system_element_pool",
     )
 
     max_order = min(5, len(element_pool))
