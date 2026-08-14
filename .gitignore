@@ -11,6 +11,7 @@ alloy_web/data/*.sqlite3*
 eutectics/
 higher-order-intermetallics/
 local_pathway_screening/
+phase_field/
 tests/test_eutectic_annotation_database.py
 tests/test_validated_eutectic_analysis.py
 

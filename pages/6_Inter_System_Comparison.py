@@ -37,6 +37,17 @@ from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_anal
 )
 
 
+# Matches the precision each metric's `__display` string already uses
+# (see alloy_web/adapters/inter_system_adapter.py), keyed by MetricDefinition.unit.
+UNIT_NUMBER_FORMATS = {
+    "K": "%.0f K",
+    "%": "%.1f%%",
+    "meV/atom": "%.2f meV/atom",
+    "(meV/atom)²": "%.2f (meV/atom)²",
+    "": "%.0f",
+}
+
+
 INTERACTION_DATA_PATH = (
     ROOT
     / "external"
@@ -399,18 +410,34 @@ if result is not None:
         )
 
     table = result.data[["Rank", "System", "Pareto optimal"]].copy()
+    column_config = {
+        "Rank": st.column_config.NumberColumn(width="small", format="%d"),
+        "Pareto optimal": st.column_config.CheckboxColumn(width="small"),
+    }
     for metric in result.selected_metrics:
-        table[METRICS[metric].label] = result.data[f"{metric}__display"]
+        # Use the numeric value, not the "1500 K" / "≤ 300 K" display string:
+        # st.dataframe sorts by the underlying cell value, so a text column
+        # sorts lexicographically ("1500 K" before "300 K"). NumberColumn's
+        # `format` still renders the unit, but sorting stays numeric.
+        label = METRICS[metric].label
+        table[label] = result.data[metric]
+        column_config[label] = st.column_config.NumberColumn(
+            format=UNIT_NUMBER_FORMATS.get(METRICS[metric].unit, "%.2f"),
+            help=METRICS[metric].description,
+        )
     table["Solid solution phase"] = result.data["Solid solution phase"]
     table["Data status"] = result.data["Data status"]
     st.dataframe(
         table,
         hide_index=True,
         width="stretch",
-        column_config={
-            "Rank": st.column_config.NumberColumn(width="small", format="%d"),
-            "Pareto optimal": st.column_config.CheckboxColumn(width="small"),
-        },
+        column_config=column_config,
+    )
+    st.caption(
+        "Columns sort numerically on click. A blank cell means the property "
+        "was unavailable for that system (see Data status); a temperature "
+        "shown at the scan floor or ceiling may be a bound rather than an "
+        "exact crossing."
     )
 
     pathway_figure = pathway_context_figure(result)
