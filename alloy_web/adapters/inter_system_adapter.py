@@ -31,9 +31,6 @@ from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.spinodal_ana
 from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.spinodal_predictor import (
     load_interaction_data,
 )
-from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_analysis import (
-    analyze_processing_paths,
-)
 from external.Rapid_Phase_Field_Prediction.utils.combination_generation import (
     MultinaryCombinations,
 )
@@ -539,6 +536,10 @@ def run_inter_system_comparison(
                 return current[metric]
 
             def pathway_state() -> tuple[MetricValue, MetricValue]:
+                from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_analysis import (
+                    analyze_processing_paths,
+                )
+
                 if tdb_path is None:
                     raise FileNotFoundError("TDB unavailable")
                 analysis = analyze_processing_paths(

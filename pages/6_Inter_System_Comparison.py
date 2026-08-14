@@ -32,11 +32,6 @@ from alloy_web.adapters.inter_system_adapter import (
     SPINODAL_TEMPERATURE,
     run_inter_system_comparison,
 )
-from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_analysis import (
-    plot_system_path_burden_landscape,
-)
-
-
 # Matches the precision each metric's `__display` string already uses
 # (see alloy_web/adapters/inter_system_adapter.py), keyed by MetricDefinition.unit.
 UNIT_NUMBER_FORMATS = {
@@ -110,8 +105,8 @@ with st.container(border=True):
         "Each candidate is an equimolar combination from the selected element pool. "
         "A composition counts as miscible only when at least 99% forms one BCC_A2, "
         "FCC_A1, or HCP_A3 solution; two composition sets of the same phase are multiphase. "
-        "Spinodal temperature and the two pathway quantities are reported as context; "
-        "none is treated as inherently better in either direction."
+        "Spinodal temperature is reported as context and is not treated as inherently "
+        "better in either direction."
     )
 
 
@@ -154,20 +149,8 @@ with st.sidebar:
         help="The table rank and leading chart use this property.",
     )
 
-    include_pathway_metrics = st.checkbox(
-        "Include path-burden landscape",
-        value=False,
-        disabled=system_order < 3,
-        help=(
-            "Calculate mean integrated burden and variance across every unique "
-            "equimolar processing path. Available for ternary and higher systems."
-        ),
-    )
-    if system_order < 3:
-        include_pathway_metrics = False
+    include_pathway_metrics = False
     selected_metrics = list(base_selected_metrics)
-    if include_pathway_metrics:
-        selected_metrics.extend(PATHWAY_METRICS)
 
     reference_needed = bool(
         set(selected_metrics)
@@ -382,6 +365,12 @@ def pathway_context_figure(result):
         return None
     plot_data = result.data.dropna(subset=PATHWAY_METRICS).copy()
     if plot_data.empty:
+        return None
+    try:
+        from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_analysis import (
+            plot_system_path_burden_landscape,
+        )
+    except ImportError:
         return None
     return plot_system_path_burden_landscape(
         plot_data,
