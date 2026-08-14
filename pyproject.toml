@@ -37,7 +37,11 @@ dependencies = [
 
 [project.optional-dependencies]
 # Needed only to run `streamlit run app.py` (the RAPTor web app itself).
-web = ["streamlit>=1.30"]
+# DuckDB backs the experimental-evidence panel on the alloy summary page.
+web = [
+    "streamlit>=1.30",
+    "duckdb==1.5.4",
+]
 # Needed only for alloy_assistant, the literature/evidence Q&A subsystem.
 assistant = [
     "duckdb==1.5.4",

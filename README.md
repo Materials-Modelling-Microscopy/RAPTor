@@ -36,6 +36,24 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
+`requirements.txt` contains only the Streamlit interface and its calculation
+runtime. The optional literature assistant is kept separate because its
+embedding stack installs PyTorch and can make an environment or container much
+larger:
+
+```bash
+python -m pip install -r requirements-assistant.txt
+```
+
+The default container is likewise the lightweight web deployment. Use the
+assistant variant only when PDF ingestion, embeddings, or Groq-backed Q&A is
+required:
+
+```bash
+docker build -t raptor-web .
+docker build -f Dockerfile.assistant -t raptor-assistant .
+```
+
 ## Quick start: compute package (`raptor_alloys`)
 
 If you just want to call calculations from your own scripts or notebooks — no Streamlit, no web browser — install the `raptor_alloys` package from the same checkout instead of `requirements.txt`. It pulls in only what the calculations themselves need (numpy, pandas, matplotlib, scipy, pycalphad, symengine, xarray, tinydb, pymatgen, pyyaml); Streamlit and the Alloy Assistant's dependencies are left out unless you ask for them.

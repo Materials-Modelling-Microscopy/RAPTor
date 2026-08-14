@@ -9,15 +9,6 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-        build-essential \
-        git \
-        gfortran \
-        libopenblas-dev \
-        liblapack-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 COPY requirements.txt ./
 
 RUN python -m pip install --upgrade pip \

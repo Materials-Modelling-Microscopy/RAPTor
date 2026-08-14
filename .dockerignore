@@ -4,7 +4,9 @@
 **
 
 !Dockerfile
+!Dockerfile.assistant
 !requirements.txt
+!requirements-assistant.txt
 !app.py
 !Home.py
 
