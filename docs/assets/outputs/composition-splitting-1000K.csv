@@ -1,0 +1,2 @@
+input_mol,label,splitting
+"[0.5, 0.5]",Cr$_{0.50}$W$_{0.50}$,"[{'phase': 'BCC_A2', 'phase_fraction': 0.5045046918989802, 'phase_composition': array([0.98630837, 0.01369163]), 'phase_instance': 'BCC_A2 #1'}, {'phase': 'BCC_A2', 'phase_fraction': 0.4954953081010198, 'phase_composition': array([0.00484928, 0.99515072]), 'phase_instance': 'BCC_A2 #2'}]"

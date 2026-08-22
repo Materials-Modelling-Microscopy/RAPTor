@@ -10,6 +10,16 @@ import matplotlib.figure
 
 @dataclass
 class SymplexPredictionResult:
+    """Generated SymPlex property data and its Matplotlib figure.
+
+    Attributes:
+        alloy_system: Elements in resolved TDB order.
+        temperature: Calculation temperature in kelvin.
+        constraint_element: Element used to organize the projection.
+        property_name: Exact generated-property identifier.
+        data: SymPlex grid and property values consumed by the plotter.
+        figure: Generated Matplotlib figure.
+    """
     alloy_system: list[str]
     temperature: float
     constraint_element: str
@@ -27,6 +37,27 @@ def run_symplex_prediction(
     constraint_element: str,
     property_name: str,
 ) -> SymplexPredictionResult:
+    """Generate a property map for a quaternary or quinary alloy system.
+
+    Args:
+        alloy_system: Four or five element symbols.
+        temperature: Calculation temperature in kelvin.
+        constraint_element: An element in ``alloy_system`` used to organize the
+            SymPlex projection.
+        property_name: Property identifier understood by the SymPlex generator.
+
+    Returns:
+        Generated property data and a ready-to-save Matplotlib figure.
+
+    Raises:
+        ValueError: If the system order is unsupported or the constraint element
+            is absent.
+        FileNotFoundError: If no packaged TDB covers the requested elements.
+
+    Notes:
+        This function uses RAPTor's packaged ``TDB_DIR`` and can be
+        computationally expensive for fine high-dimensional grids.
+    """
 
     if len(alloy_system) not in [4, 5]:
         raise ValueError(

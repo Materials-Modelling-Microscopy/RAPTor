@@ -20,6 +20,24 @@ def _reorder(values: list[float], elements: list[str], ordered: list[str]) -> li
 
 @dataclass
 class PhaseFractionTemperatureResult:
+    """Phase fractions and homogeneous-BCC stability over a temperature grid.
+
+    Temperatures are expressed in kelvin and energy-above-hull values in the
+    returned table are expressed in meV/atom. ``metastable_temperature`` and
+    ``stable_temperature`` are ``None`` when the corresponding threshold is
+    not found on the requested grid.
+
+    Attributes:
+        composition: Hyphenated element system in resolved TDB order.
+        mol_ratio: Mole fractions reordered to match ``composition``.
+        temp_range: ``(minimum, maximum, step)`` in kelvin.
+        data: Temperature-dependent phase-fraction table.
+        figure: Phase-fraction plot.
+        energy_above_hull_data: Homogeneous-BCC energy table in meV/atom.
+        energy_above_hull_figure: BCC energy-above-hull plot.
+        metastable_temperature: Detected 50 meV/atom threshold in kelvin.
+        stable_temperature: Detected zero-energy threshold in kelvin.
+    """
     composition: str
     mol_ratio: list[float]
     temp_range: tuple[float, float, float]
@@ -48,8 +66,28 @@ def run_phase_fraction_temperature_prediction(
     temperature_step: float,
     tdb_dir: str | Path,
 ) -> PhaseFractionTemperatureResult:
-    """
-    Adapter for phase fraction vs temperature calculation.
+    """Calculate phase fractions and BCC energy above hull versus temperature.
+
+    Args:
+        alloy_system: Element symbols. At least two elements are required.
+        mol_ratio: Mole fractions paired positionally with ``alloy_system``.
+            Fractions must sum to one.
+        temperature_min: Inclusive lower temperature bound in kelvin.
+        temperature_max: Upper temperature bound in kelvin.
+        temperature_step: Temperature-grid spacing in kelvin.
+        tdb_dir: Directory containing RAPTor ``.tdb`` databases.
+
+    Returns:
+        Phase-fraction and BCC energy-above-hull tables, figures, and detected
+        metastability/stability thresholds.
+
+    Raises:
+        ValueError: If the element or composition inputs are inconsistent.
+        FileNotFoundError: If no database covers the requested elements.
+
+    Notes:
+        The returned element order can follow the matching TDB filename rather
+        than the input order. ``result.mol_ratio`` is reordered consistently.
     """
 
     if len(alloy_system) < 2:
@@ -103,6 +141,13 @@ def run_phase_fraction_temperature_prediction(
 
 @dataclass
 class CompositionSplittingSingleResult:
+    """Equilibrium phase compositions at one temperature in kelvin.
+
+    Attributes:
+        temperature: Evaluation temperature in kelvin.
+        data: Equilibrium phase-composition table.
+        figure: Composition-splitting plot.
+    """
     temperature: float
     data: pd.DataFrame
     figure: matplotlib.figure.Figure
@@ -119,6 +164,13 @@ class CompositionSplittingSingleResult:
 
 @dataclass
 class CompositionSplittingResult:
+    """Composition-splitting results for one to three temperatures.
+
+    Attributes:
+        alloy_system: Elements in resolved TDB order.
+        mols: Overall mole-fraction vectors in resolved TDB order.
+        results: One result object per requested temperature.
+    """
     alloy_system: list[str]
     mols: list[list[float]]
     results: list[CompositionSplittingSingleResult]
@@ -130,6 +182,24 @@ def run_composition_splitting_prediction(
     temperatures: list[float],
     tdb_dir: str | Path,
 ) -> CompositionSplittingResult:
+    """Calculate equilibrium composition splitting at selected temperatures.
+
+    Args:
+        alloy_system: Element symbols paired with each row in ``mols``.
+        mols: Overall compositions; each inner list contains mole fractions in
+            ``alloy_system`` order and must satisfy the underlying engine's
+            composition constraints.
+        temperatures: One to three temperatures in kelvin.
+        tdb_dir: Directory containing RAPTor ``.tdb`` databases.
+
+    Returns:
+        One table and figure per requested temperature. Element and composition
+        order in the result follow the resolved TDB filename.
+
+    Raises:
+        ValueError: If no temperature or more than three temperatures are given.
+        FileNotFoundError: If no database covers the requested elements.
+    """
     if len(temperatures) == 0:
         raise ValueError("Provide at least one temperature.")
 
@@ -168,6 +238,16 @@ def run_composition_splitting_prediction(
 
 @dataclass
 class PhaseDiagramResult:
+    """A binary temperature-composition or isothermal ternary phase diagram.
+
+    Attributes:
+        alloy_system: Elements in resolved TDB order.
+        composition: Hyphenated version of ``alloy_system``.
+        diagram_type: Either ``"binary"`` or ``"ternary"``.
+        figure: Generated Matplotlib figure.
+        axis: Matplotlib axis used by the plotter.
+        strategy: Ternary mapping strategy; ``None`` for binary diagrams.
+    """
     alloy_system: list[str]
     composition: str
     diagram_type: str
@@ -198,16 +278,31 @@ def run_phase_diagram_prediction(
     temperature_step: float = 10,
     composition_step: float | None = None,
 ) -> PhaseDiagramResult:
-    """
-    Adapter for binary and ternary phase-diagram plotting.
+    """Calculate a binary T-x or isothermal ternary phase diagram.
 
-    Binary:
-        alloy_system length = 2
-        returns T-x phase diagram
+    Args:
+        alloy_system: Exactly two elements for a binary diagram or three for a
+            ternary diagram.
+        tdb_dir: Directory containing RAPTor ``.tdb`` databases.
+        temperature: Isothermal temperature in kelvin. Required only for a
+            ternary diagram.
+        include_intermetallics: Include applicable intermetallic phases when
+            ``True``.
+        ternary_order: Plotting orientation passed to the ternary strategy.
+        temperature_min: Binary diagram lower temperature in kelvin.
+        temperature_max: Binary diagram upper temperature in kelvin.
+        temperature_step: Binary diagram temperature-grid spacing in kelvin.
+        composition_step: Mole-fraction grid spacing. Defaults to ``0.02`` for
+            binary and ``0.015`` for ternary calculations.
 
-    Ternary:
-        alloy_system length = 3
-        returns isothermal ternary phase diagram
+    Returns:
+        The diagram figure, plotting axis, normalized element order, and the
+        ternary strategy object when applicable.
+
+    Raises:
+        ValueError: If the system order is unsupported or a ternary temperature
+            is omitted.
+        FileNotFoundError: If no database covers the requested elements.
     """
 
     if len(alloy_system) not in [2, 3]:

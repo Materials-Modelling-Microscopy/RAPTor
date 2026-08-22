@@ -2,11 +2,10 @@
 RAPTor: CALPHAD-based phase stability predictions for multi-principal-element
 refractory alloys.
 
-This is a thin, stable façade over the calculation engine in
-``external/Rapid_Phase_Field_Prediction`` and its validated wrappers in
-``alloy_web/adapters``. Import from here rather than from those internal
-modules directly — their layout is free to change between releases; this
-namespace is not.
+This is a compact, result-oriented layer over the foundational calculation
+engine in ``external/Rapid_Phase_Field_Prediction`` and the validated wrappers
+in ``alloy_web/adapters``. Lower-level engine functions remain available
+directly when a project needs finer control over grids, models, or plotting.
 
     import raptor_alloys as rap
 
@@ -16,9 +15,7 @@ namespace is not.
     )
     result.figure.savefig("Cr-W.png")
 
-Every function accepts elements in any order and validates its own inputs;
-none of them require Streamlit or any of the optional ``[web]``/
-``[assistant]`` extras.
+Every function accepts elements in any order and validates its own inputs.
 """
 
 from __future__ import annotations
@@ -46,6 +43,7 @@ from alloy_web.adapters.pathway_adapter import (
 )
 from alloy_web.adapters.phasefield_adapter import (
     CompositionSplittingResult,
+    CompositionSplittingSingleResult,
     PhaseDiagramResult,
     PhaseFractionTemperatureResult,
     run_composition_splitting_prediction,
@@ -81,6 +79,7 @@ __all__ = [
     "PhaseFractionTemperatureResult",
     "run_composition_splitting_prediction",
     "CompositionSplittingResult",
+    "CompositionSplittingSingleResult",
     "run_phase_diagram_prediction",
     "PhaseDiagramResult",
     # Spinodal analysis

@@ -13,6 +13,23 @@ from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.pathway_anal
 
 @dataclass
 class PathwayAnalysisResult:
+    """Thermodynamic burdens for every unique sequential alloying pathway.
+
+    ``mean_integrated_burden`` is in meV/atom and
+    ``path_dependence_variance`` is in (meV/atom) squared.
+
+    Attributes:
+        alloy_system: Evaluated elements in caller-supplied order.
+        mol_ratio: Target mole fractions paired with ``alloy_system``.
+        temperature: Calculation temperature in kelvin.
+        points_per_segment: Composition samples per path segment.
+        tdb_path: Resolved thermodynamic database file.
+        paths: One aggregate row per unique pathway.
+        path_points: Sampled compositions and local burden along every path.
+        phase_fractions: Equilibrium phases at sampled compositions.
+        mean_integrated_burden: Mean path integral in meV/atom.
+        path_dependence_variance: Between-path variance in (meV/atom) squared.
+    """
     alloy_system: list[str]
     mol_ratio: list[float]
     temperature: float
@@ -40,7 +57,25 @@ def run_pathway_analysis(
     tdb_dir: str | Path,
     points_per_segment: int = 9,
 ) -> PathwayAnalysisResult:
-    """Validate inputs and run the shared processing-path calculation."""
+    """Calculate thermodynamic burden along sequential alloying pathways.
+
+    Args:
+        alloy_system: Three to five unique element symbols.
+        mol_ratio: Positive mole fractions paired with ``alloy_system`` and
+            summing to one.
+        temperature: Calculation temperature in kelvin.
+        tdb_dir: Directory containing RAPTor ``.tdb`` databases.
+        points_per_segment: Number of sampled compositions on each path segment;
+            must be at least two.
+
+    Returns:
+        Per-path summaries, sampled path points, phase fractions, and aggregate
+        burden metrics.
+
+    Raises:
+        ValueError: If the system, composition, temperature, or grid is invalid.
+        FileNotFoundError: If no database covers the requested elements.
+    """
     if not 3 <= len(alloy_system) <= 5:
         raise ValueError("Choose between three and five elements.")
     if len(set(alloy_system)) != len(alloy_system):

@@ -103,6 +103,22 @@ class MetricValue:
 
 @dataclass
 class InterSystemComparisonResult:
+    """Ranked candidate systems, Pareto membership, cache use, and run cost.
+
+    Attributes:
+        data: Candidate rows with raw metric, display, status, rank, and Pareto
+            columns.
+        selected_metrics: Exact metric identifiers requested by the caller.
+        pareto_metrics: Selected metrics with a defined optimization direction.
+        primary_metric: Metric used for the primary ranking.
+        candidate_count: Number of generated same-order systems.
+        complete_count: Candidates with all selected metrics available.
+        pareto_count: Complete candidates on the Pareto frontier.
+        cache_hits: Metric values reused from SQLite.
+        cache_misses: Metric values computed during this call.
+        equilibrium_calculations: Total equilibrium evaluations performed.
+        elapsed_seconds: Wall-clock runtime in seconds.
+    """
     data: pd.DataFrame
     selected_metrics: list[str]
     pareto_metrics: list[str]
@@ -308,6 +324,44 @@ def run_inter_system_comparison(
     pathway_points_per_segment: int = 5,
     progress_callback: Callable[[int, int, str], None] | None = None,
 ) -> InterSystemComparisonResult:
+    """Rank and Pareto-filter alloy systems generated from an element pool.
+
+    Args:
+        element_pool: Unique element symbols from which candidates are generated.
+        order: Number of elements in each candidate system.
+        selected_metrics: Metric identifiers. Supported values are
+            ``miscibility_temperature``, ``spinodal_temperature``, ``pmr``,
+            ``equimolar_solid_solution_fraction``, ``active_phase_count``,
+            ``metastability_gap``, ``mean_path_burden``, and
+            ``path_burden_variance``.
+        primary_metric: A member of ``selected_metrics`` used for ranking.
+        reference_temperature: Reference-state and PMR temperature in kelvin.
+        temperature_min: Lower transition-search bound in kelvin.
+        temperature_max: Upper transition-search bound in kelvin.
+        temperature_step: Transition-search spacing in kelvin.
+        lattice: Lattice identifier used for spinodal calculations.
+        tdb_dir: Directory containing RAPTor ``.tdb`` databases.
+        interaction_data_path: JSON file containing binary interaction models.
+        cache_path: SQLite cache path. Cache entries include settings and input
+            signatures so incompatible calculations are not silently reused.
+        miscibility_threshold: Minimum single-solid-solution fraction for the
+            miscibility classification.
+        max_sample_points: Approximate PMR sampling cap per system.
+        pathway_points_per_segment: Path grid density for pathway metrics.
+        progress_callback: Optional ``(completed, total, system_name)`` callback.
+
+    Returns:
+        A ranked DataFrame and counts describing completeness, Pareto membership,
+        cache behavior, equilibrium calculations, and elapsed time.
+
+    Raises:
+        ValueError: If candidate generation, metrics, or grids are invalid.
+
+    Notes:
+        Individual calculation failures are represented in the output rather
+        than aborting the entire comparison. This function can be expensive;
+        use a persistent ``cache_path`` for iterative studies.
+    """
     started_at = perf_counter()
     if len(set(element_pool)) != len(element_pool):
         raise ValueError("Element-pool entries must be unique.")

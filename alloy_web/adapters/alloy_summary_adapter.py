@@ -22,6 +22,27 @@ ACTIVE_PHASE_TOLERANCE = 1e-8
 
 @dataclass
 class AlloySystemSummaryResult:
+    """System and subsystem stability summary with provenance and cost counts.
+
+    Temperatures are in kelvin, ``miscible_percentage`` is in percent, and the
+    DataFrame fields retain display-ready column labels and units.
+
+    Attributes:
+        alloy_system: Evaluated element symbols.
+        reference_temperature: PMR/reference-state temperature in kelvin.
+        miscibility_threshold: Required single-solid-solution fraction.
+        sample_points: Number of points in the generated PMR grid.
+        evaluated_sample_points: Points for which equilibrium was evaluated.
+        miscible_sample_points: Evaluated points classified as miscible.
+        miscible_percentage: Miscible share of evaluated points in percent.
+        sample_phase_breakdown: Counts grouped by equilibrium phase outcome.
+        subsystems: Miscibility search results for every available subsystem.
+        intermetallics: Applicable intermetallic phases from the full TDB.
+        binary_interactions: Binary model parameters from interaction JSON.
+        tdb_interactions: Interaction parameters parsed from the full TDB.
+        elapsed_seconds: Wall-clock runtime in seconds.
+        equilibrium_calculations: Number of equilibrium evaluations performed.
+    """
     alloy_system: list[str]
     reference_temperature: float
     miscibility_threshold: float
@@ -609,6 +630,34 @@ def run_alloy_system_summary(
     miscibility_threshold: float = 0.99,
     max_sample_points: int = 400,
 ) -> AlloySystemSummaryResult:
+    """Summarize miscibility, phases, and interactions for a 2\u20135 element system.
+
+    Args:
+        alloy_system: Two to five unique element symbols.
+        reference_temperature: Temperature in kelvin used for PMR and reference
+            equilibrium states.
+        temperature_min: Lower miscibility-search bound in kelvin.
+        temperature_max: Upper miscibility-search bound in kelvin.
+        temperature_step: Miscibility-search spacing in kelvin.
+        tdb_dir: Directory containing RAPTor ``.tdb`` databases.
+        interaction_data_path: JSON file containing binary interaction models.
+        miscibility_threshold: Minimum fraction of one solid-solution phase used
+            to classify a point as miscible.
+        max_sample_points: Approximate cap on sampled PMR compositions.
+
+    Returns:
+        Full-system PMR statistics plus subsystem, intermetallic, and interaction
+        tables. Timing and equilibrium-calculation counts support reproducibility
+        and performance reporting.
+
+    Raises:
+        ValueError: If the system or temperature grid is invalid.
+        FileNotFoundError: If the full-system TDB is unavailable.
+
+    Notes:
+        Failures for individual subsystems are retained as table rows so that a
+        partial summary remains inspectable.
+    """
     started_at = perf_counter()
     elements = list(alloy_system)
     if len(elements) < 2 or len(elements) > 5:

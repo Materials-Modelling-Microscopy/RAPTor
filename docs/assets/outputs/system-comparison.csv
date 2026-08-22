@@ -1,0 +1,4 @@
+System,active_phase_count,active_phase_count__display,Solid solution phase,Data status,Pareto optimal,Rank
+Mo-W,1.0,1,,Complete,True,1
+Cr-Mo,2.0,2,,Complete,False,2
+Cr-W,2.0,2,,Complete,False,2

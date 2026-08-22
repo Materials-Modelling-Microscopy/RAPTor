@@ -1,0 +1,4 @@
+path_id,path,starting_binary,representative_order,equivalent_orders,integrated_burden_meV_per_atom
+2,MO-NB → CR-MO-NB,MO-NB,"('MO', 'NB', 'CR')","(('MO', 'NB', 'CR'), ('NB', 'MO', 'CR'))",22.444373402233506
+0,CR-MO → CR-MO-NB,CR-MO,"('CR', 'MO', 'NB')","(('CR', 'MO', 'NB'), ('MO', 'CR', 'NB'))",29.437212497998097
+1,CR-NB → CR-MO-NB,CR-NB,"('CR', 'NB', 'MO')","(('CR', 'NB', 'MO'), ('NB', 'CR', 'MO'))",60.98535254128417

@@ -1,0 +1,3683 @@
+{
+  "schema_version": 1,
+  "energy_unit": "eV/formula",
+  "interaction_unit": "J/mol",
+  "binaries": [
+    {
+      "binary": "Ag-Cu",
+      "file": "Ag-Cu.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Au-Ni",
+      "file": "Au-Ni.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Co-Cu",
+      "file": "Co-Cu.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Cr-Cu",
+      "file": "Cr-Cu.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Cr-Fe",
+      "file": "Cr-Fe.tdb",
+      "intermetallic_count": 8,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Cr-Hf",
+      "file": "Cr-Hf.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-Mo",
+      "file": "Cr-Mo.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-Nb",
+      "file": "Cr-Nb.tdb",
+      "intermetallic_count": 13,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-Ta",
+      "file": "Cr-Ta.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-Ti",
+      "file": "Cr-Ti.tdb",
+      "intermetallic_count": 6,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-V",
+      "file": "Cr-V.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-W",
+      "file": "Cr-W.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cr-Zr",
+      "file": "Cr-Zr.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Cu-Fe",
+      "file": "Cu-Fe.tdb",
+      "intermetallic_count": 7,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Cu-Mn",
+      "file": "Cu-Mn.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Cu-Ta",
+      "file": "Cu-Ta.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Hf-Mo",
+      "file": "Hf-Mo.tdb",
+      "intermetallic_count": 6,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Hf-Nb",
+      "file": "Hf-Nb.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Hf-Ta",
+      "file": "Hf-Ta.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Hf-Ti",
+      "file": "Hf-Ti.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Hf-V",
+      "file": "Hf-V.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Hf-W",
+      "file": "Hf-W.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Hf-Zr",
+      "file": "Hf-Zr.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Mo-Nb",
+      "file": "Mo-Nb.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Mo-Ta",
+      "file": "Mo-Ta.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Mo-Ti",
+      "file": "Mo-Ti.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Mo-V",
+      "file": "Mo-V.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Mo-W",
+      "file": "Mo-W.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Mo-Zr",
+      "file": "Mo-Zr.tdb",
+      "intermetallic_count": 5,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Nb-Ta",
+      "file": "Nb-Ta.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Nb-Ti",
+      "file": "Nb-Ti.tdb",
+      "intermetallic_count": 5,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Nb-V",
+      "file": "Nb-V.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Nb-W",
+      "file": "Nb-W.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Nb-Zr",
+      "file": "Nb-Zr.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Sc-Ti",
+      "file": "Sc-Ti.tdb",
+      "intermetallic_count": 0,
+      "interaction_count": 3
+    },
+    {
+      "binary": "Ta-Ti",
+      "file": "Ta-Ti.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Ta-V",
+      "file": "Ta-V.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Ta-W",
+      "file": "Ta-W.tdb",
+      "intermetallic_count": 3,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Ta-Zr",
+      "file": "Ta-Zr.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Ti-V",
+      "file": "Ti-V.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "Ti-W",
+      "file": "Ti-W.tdb",
+      "intermetallic_count": 1,
+      "interaction_count": 6
+    },
+    {
+      "binary": "Ti-Zr",
+      "file": "Ti-Zr.tdb",
+      "intermetallic_count": 5,
+      "interaction_count": 5
+    },
+    {
+      "binary": "V-W",
+      "file": "V-W.tdb",
+      "intermetallic_count": 2,
+      "interaction_count": 5
+    },
+    {
+      "binary": "V-Zr",
+      "file": "V-Zr.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    },
+    {
+      "binary": "W-Zr",
+      "file": "W-Zr.tdb",
+      "intermetallic_count": 4,
+      "interaction_count": 5
+    }
+  ],
+  "intermetallics": [
+    {
+      "id": "Ag-Cu|AG1CU3_MP|CU:AG:|0",
+      "binary": "Ag-Cu",
+      "phase": "AG1CU3_MP",
+      "constituents": "CU:AG:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 34879.29694641654,
+      "energy_ev_per_formula": 0.36149968333333204,
+      "energy_ev_per_atom": 0.09037492083333301
+    },
+    {
+      "id": "Ag-Cu|AG6CU2_MP|CU:AG:|0",
+      "binary": "Ag-Cu",
+      "phase": "AG6CU2_MP",
+      "constituents": "CU:AG:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 66156.14245309924,
+      "energy_ev_per_formula": 0.6856624599999921,
+      "energy_ev_per_atom": 0.08570780749999901
+    },
+    {
+      "id": "Au-Ni|AU1NI3_MP|NI:AU:|0",
+      "binary": "Au-Ni",
+      "phase": "AU1NI3_MP",
+      "constituents": "NI:AU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 37616.38021025,
+      "energy_ev_per_formula": 0.38986764999999995,
+      "energy_ev_per_atom": 0.09746691249999999
+    },
+    {
+      "id": "Au-Ni|AU6NI2_MP|NI:AU:|0",
+      "binary": "Au-Ni",
+      "phase": "AU6NI2_MP",
+      "constituents": "NI:AU:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 68580.9841761,
+      "energy_ev_per_formula": 0.71079426,
+      "energy_ev_per_atom": 0.0888492825
+    },
+    {
+      "id": "Au-Ni|AU2NI6_MP|NI:AU:|0",
+      "binary": "Au-Ni",
+      "phase": "AU2NI6_MP",
+      "constituents": "NI:AU:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 80813.809815,
+      "energy_ev_per_formula": 0.837579,
+      "energy_ev_per_atom": 0.104697375
+    },
+    {
+      "id": "Au-Ni|AU3NI1_MP|NI:AU:|0",
+      "binary": "Au-Ni",
+      "phase": "AU3NI1_MP",
+      "constituents": "NI:AU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 34318.12056779962,
+      "energy_ev_per_formula": 0.35568347999999606,
+      "energy_ev_per_atom": 0.08892086999999901
+    },
+    {
+      "id": "Co-Cu|CO3CU1_MP|CO:CU:|0",
+      "binary": "Co-Cu",
+      "phase": "CO3CU1_MP",
+      "constituents": "CO:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 45767.511645525,
+      "energy_ev_per_formula": 0.47434846500000005,
+      "energy_ev_per_atom": 0.11858711625000001
+    },
+    {
+      "id": "Cr-Cu|CR3CU1_MP|CR:CU:|0",
+      "binary": "Cr-Cu",
+      "phase": "CR3CU1_MP",
+      "constituents": "CR:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 113407.23495685,
+      "energy_ev_per_formula": 1.17538721,
+      "energy_ev_per_atom": 0.2938468025
+    },
+    {
+      "id": "Cr-Fe|CR3FE1_MP|CR:FE:|0",
+      "binary": "Cr-Fe",
+      "phase": "CR3FE1_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 104290.74745775001,
+      "energy_ev_per_formula": 1.08090115,
+      "energy_ev_per_atom": 0.2702252875
+    },
+    {
+      "id": "Cr-Fe|CR3FE1_MP|CR:FE:|1",
+      "binary": "Cr-Fe",
+      "phase": "CR3FE1_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 100116.94240160001,
+      "energy_ev_per_formula": 1.03764256,
+      "energy_ev_per_atom": 0.25941064
+    },
+    {
+      "id": "Cr-Fe|CR1FE3_MP|CR:FE:|0",
+      "binary": "Cr-Fe",
+      "phase": "CR1FE3_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 19298.125015100002,
+      "energy_ev_per_formula": 0.20001166000000004,
+      "energy_ev_per_atom": 0.05000291500000001
+    },
+    {
+      "id": "Cr-Fe|CR3FE1_MP|CR:FE:|2",
+      "binary": "Cr-Fe",
+      "phase": "CR3FE1_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 2,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 48934.032116250004,
+      "energy_ev_per_formula": 0.5071672500000001,
+      "energy_ev_per_atom": 0.12679181250000002
+    },
+    {
+      "id": "Cr-Fe|CR1FE3_MP|CR:FE:|1",
+      "binary": "Cr-Fe",
+      "phase": "CR1FE3_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 24574.3918025,
+      "energy_ev_per_formula": 0.2546965,
+      "energy_ev_per_atom": 0.063674125
+    },
+    {
+      "id": "Cr-Fe|CR4FE2_MP|CR:FE:|0",
+      "binary": "Cr-Fe",
+      "phase": "CR4FE2_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": 167445.91985039943,
+      "energy_ev_per_formula": 1.7354606399999941,
+      "energy_ev_per_atom": 0.289243439999999
+    },
+    {
+      "id": "Cr-Fe|CR1FE1_MP|CR:FE:|0",
+      "binary": "Cr-Fe",
+      "phase": "CR1FE1_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 17914.1132999,
+      "energy_ev_per_formula": 0.18566734000000001,
+      "energy_ev_per_atom": 0.09283367000000001
+    },
+    {
+      "id": "Cr-Fe|CR1FE4_MP|CR:FE:|0",
+      "binary": "Cr-Fe",
+      "phase": "CR1FE4_MP",
+      "constituents": "CR:FE:",
+      "occurrence": 0,
+      "atoms_per_formula": 5.0,
+      "energy_j_per_mol_formula": 14452.491044549519,
+      "energy_ev_per_formula": 0.14979002999999502,
+      "energy_ev_per_atom": 0.029958005999999003
+    },
+    {
+      "id": "Cr-Hf|CR8HF4_MP|HF:CR:|0",
+      "binary": "Cr-Hf",
+      "phase": "CR8HF4_MP",
+      "constituents": "HF:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": -96978.1242216473,
+      "energy_ev_per_formula": -1.0051108899999721,
+      "energy_ev_per_atom": -0.08375924083333101
+    },
+    {
+      "id": "Cr-Hf|CR16HF8_MP|HF:CR:|0",
+      "binary": "Cr-Hf",
+      "phase": "CR16HF8_MP",
+      "constituents": "HF:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 24.0,
+      "energy_j_per_mol_formula": -232012.69480884462,
+      "energy_ev_per_formula": -2.4046504099999444,
+      "energy_ev_per_atom": -0.10019376708333101
+    },
+    {
+      "id": "Cr-Hf|CR2HF8_MP|HF:CR:|0",
+      "binary": "Cr-Hf",
+      "phase": "CR2HF8_MP",
+      "constituents": "HF:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 875425.00910365,
+      "energy_ev_per_formula": 9.07317209,
+      "energy_ev_per_atom": 0.907317209
+    },
+    {
+      "id": "Cr-Hf|CR4HF2_MP|HF:CR:|0",
+      "binary": "Cr-Hf",
+      "phase": "CR4HF2_MP",
+      "constituents": "HF:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -60046.52217764885,
+      "energy_ev_per_formula": -0.622340489999988,
+      "energy_ev_per_atom": -0.103723414999998
+    },
+    {
+      "id": "Cr-Mo|CR1MO3_MP|CR:MO:|0",
+      "binary": "Cr-Mo",
+      "phase": "CR1MO3_MP",
+      "constituents": "CR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 172674.96398424963,
+      "energy_ev_per_formula": 1.789656049999996,
+      "energy_ev_per_atom": 0.447414012499999
+    },
+    {
+      "id": "Cr-Mo|CR1MO1_MP|CR:MO:|0",
+      "binary": "Cr-Mo",
+      "phase": "CR1MO1_MP",
+      "constituents": "CR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 22445.587286199618,
+      "energy_ev_per_formula": 0.23263291999999602,
+      "energy_ev_per_atom": 0.11631645999999801
+    },
+    {
+      "id": "Cr-Mo|CR3MO1_MP|CR:MO:|0",
+      "binary": "Cr-Mo",
+      "phase": "CR3MO1_MP",
+      "constituents": "CR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 40797.19445129961,
+      "energy_ev_per_formula": 0.42283457999999596,
+      "energy_ev_per_atom": 0.10570864499999899
+    },
+    {
+      "id": "Cr-Nb|CR16NB8_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR16NB8_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 24.0,
+      "energy_j_per_mol_formula": 463245.8178335008,
+      "energy_ev_per_formula": 4.801221100000008,
+      "energy_ev_per_atom": 0.200050879166667
+    },
+    {
+      "id": "Cr-Nb|CR3NB1_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR3NB1_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 138645.69249065002,
+      "energy_ev_per_formula": 1.4369662900000002,
+      "energy_ev_per_atom": 0.35924157250000005
+    },
+    {
+      "id": "Cr-Nb|CR1NB3_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR1NB3_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 106400.65152740001,
+      "energy_ev_per_formula": 1.1027688400000002,
+      "energy_ev_per_atom": 0.27569221000000005
+    },
+    {
+      "id": "Cr-Nb|CR7NB6_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR7NB6_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 13.0,
+      "energy_j_per_mol_formula": 16340.44005534701,
+      "energy_ev_per_formula": 0.169357309999969,
+      "energy_ev_per_atom": 0.013027485384613001
+    },
+    {
+      "id": "Cr-Nb|CR8NB4_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR8NB4_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": -11823.542057998842,
+      "energy_ev_per_formula": -0.122542799999988,
+      "energy_ev_per_atom": -0.010211899999999
+    },
+    {
+      "id": "Cr-Nb|CR16NB8_MP|NB:CR:|1",
+      "binary": "Cr-Nb",
+      "phase": "CR16NB8_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 1,
+      "atoms_per_formula": 24.0,
+      "energy_j_per_mol_formula": -46262.67025339846,
+      "energy_ev_per_formula": -0.479480439999984,
+      "energy_ev_per_atom": -0.019978351666666002
+    },
+    {
+      "id": "Cr-Nb|CR3NB1_MP|NB:CR:|1",
+      "binary": "Cr-Nb",
+      "phase": "CR3NB1_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 201044.47940944924,
+      "energy_ev_per_formula": 2.083686369999992,
+      "energy_ev_per_atom": 0.520921592499998
+    },
+    {
+      "id": "Cr-Nb|CR1NB3_MP|NB:CR:|1",
+      "binary": "Cr-Nb",
+      "phase": "CR1NB3_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 150153.6861452504,
+      "energy_ev_per_formula": 1.556238650000004,
+      "energy_ev_per_atom": 0.389059662500001
+    },
+    {
+      "id": "Cr-Nb|CR3NB1_MP|NB:CR:|2",
+      "binary": "Cr-Nb",
+      "phase": "CR3NB1_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 2,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 38643.633813700006,
+      "energy_ev_per_formula": 0.40051442000000004,
+      "energy_ev_per_atom": 0.10012860500000001
+    },
+    {
+      "id": "Cr-Nb|CR1NB3_MP|NB:CR:|2",
+      "binary": "Cr-Nb",
+      "phase": "CR1NB3_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 2,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 38115.63701850038,
+      "energy_ev_per_formula": 0.39504210000000395,
+      "energy_ev_per_atom": 0.09876052500000099
+    },
+    {
+      "id": "Cr-Nb|CR2NB4_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR2NB4_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": 377082.45701419964,
+      "energy_ev_per_formula": 3.9081977199999964,
+      "energy_ev_per_atom": 0.6513662866666661
+    },
+    {
+      "id": "Cr-Nb|CR2NB8_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR2NB8_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 1190027.702233101,
+      "energy_ev_per_formula": 12.333810460000011,
+      "energy_ev_per_atom": 1.2333810460000012
+    },
+    {
+      "id": "Cr-Nb|CR4NB2_MP|NB:CR:|0",
+      "binary": "Cr-Nb",
+      "phase": "CR4NB2_MP",
+      "constituents": "NB:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -17058.960955799423,
+      "energy_ev_per_formula": -0.176804279999994,
+      "energy_ev_per_atom": -0.029467379999999002
+    },
+    {
+      "id": "Cr-Ta|CR8TA4_MP|TA:CR:|0",
+      "binary": "Cr-Ta",
+      "phase": "CR8TA4_MP",
+      "constituents": "TA:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": -117310.41406074808,
+      "energy_ev_per_formula": -1.21584094999998,
+      "energy_ev_per_atom": -0.10132007916666501
+    },
+    {
+      "id": "Cr-Ta|CR2TA8_MP|TA:CR:|0",
+      "binary": "Cr-Ta",
+      "phase": "CR2TA8_MP",
+      "constituents": "TA:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 1331122.063417498,
+      "energy_ev_per_formula": 13.79615549999998,
+      "energy_ev_per_atom": 1.379615549999998
+    },
+    {
+      "id": "Cr-Ta|CR4TA2_MP|TA:CR:|0",
+      "binary": "Cr-Ta",
+      "phase": "CR4TA2_MP",
+      "constituents": "TA:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -66060.63291644942,
+      "energy_ev_per_formula": -0.684672569999994,
+      "energy_ev_per_atom": -0.11411209499999901
+    },
+    {
+      "id": "Cr-Ti|CR8TI4_MP|TI:CR:|0",
+      "binary": "Cr-Ti",
+      "phase": "CR8TI4_MP",
+      "constituents": "TI:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": -99119.782791265,
+      "energy_ev_per_formula": -1.027307693333316,
+      "energy_ev_per_atom": -0.085608974444443
+    },
+    {
+      "id": "Cr-Ti|CR16TI8_MP|TI:CR:|0",
+      "binary": "Cr-Ti",
+      "phase": "CR16TI8_MP",
+      "constituents": "TI:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 24.0,
+      "energy_j_per_mol_formula": -237338.02293228157,
+      "energy_ev_per_formula": -2.4598437366666484,
+      "energy_ev_per_atom": -0.10249348902777701
+    },
+    {
+      "id": "Cr-Ti|CR2TI8_MP|TI:CR:|0",
+      "binary": "Cr-Ti",
+      "phase": "CR2TI8_MP",
+      "constituents": "TI:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 749174.1013296655,
+      "energy_ev_per_formula": 7.764669133333322,
+      "energy_ev_per_atom": 0.7764669133333322
+    },
+    {
+      "id": "Cr-Ti|CR4TI2_MP|TI:CR:|0",
+      "binary": "Cr-Ti",
+      "phase": "CR4TI2_MP",
+      "constituents": "TI:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -60854.82397868289,
+      "energy_ev_per_formula": -0.6307179766666621,
+      "energy_ev_per_atom": -0.10511966277777701
+    },
+    {
+      "id": "Cr-Ti|CR1TI1_MP|TI:CR:|0",
+      "binary": "Cr-Ti",
+      "phase": "CR1TI1_MP",
+      "constituents": "TI:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 27668.210021683077,
+      "energy_ev_per_formula": 0.286761776666664,
+      "energy_ev_per_atom": 0.143380888333332
+    },
+    {
+      "id": "Cr-Ti|CR1TI4_MP|TI:CR:|0",
+      "binary": "Cr-Ti",
+      "phase": "CR1TI4_MP",
+      "constituents": "TI:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 5.0,
+      "energy_j_per_mol_formula": 44330.18440983317,
+      "energy_ev_per_formula": 0.459451566666665,
+      "energy_ev_per_atom": 0.091890313333333
+    },
+    {
+      "id": "Cr-V|CR1V3_MP|V:CR:|0",
+      "binary": "Cr-V",
+      "phase": "CR1V3_MP",
+      "constituents": "V:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -11011.253175150001,
+      "energy_ev_per_formula": -0.11412399000000001,
+      "energy_ev_per_atom": -0.028530997500000002
+    },
+    {
+      "id": "Cr-V|CR3V1_MP|V:CR:|0",
+      "binary": "Cr-V",
+      "phase": "CR3V1_MP",
+      "constituents": "V:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -20916.018299999614,
+      "energy_ev_per_formula": -0.216779999999996,
+      "energy_ev_per_atom": -0.054194999999999
+    },
+    {
+      "id": "Cr-V|CR1V1_MP|V:CR:|0",
+      "binary": "Cr-V",
+      "phase": "CR1V1_MP",
+      "constituents": "V:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -8019.764695649807,
+      "energy_ev_per_formula": -0.083119289999998,
+      "energy_ev_per_atom": -0.041559644999999
+    },
+    {
+      "id": "Cr-W|CR1W1_MP|CR:W:|0",
+      "binary": "Cr-W",
+      "phase": "CR1W1_MP",
+      "constituents": "CR:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 23386.99336089981,
+      "energy_ev_per_formula": 0.24238993999999803,
+      "energy_ev_per_atom": 0.12119496999999901
+    },
+    {
+      "id": "Cr-Zr|CR8ZR4_MP|ZR:CR:|0",
+      "binary": "Cr-Zr",
+      "phase": "CR8ZR4_MP",
+      "constituents": "ZR:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": -14285.049045848073,
+      "energy_ev_per_formula": -0.14805460999998002,
+      "energy_ev_per_atom": -0.012337884166665002
+    },
+    {
+      "id": "Cr-Zr|CR16ZR8_MP|ZR:CR:|0",
+      "binary": "Cr-Zr",
+      "phase": "CR16ZR8_MP",
+      "constituents": "ZR:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 24.0,
+      "energy_j_per_mol_formula": -64692.86541584769,
+      "energy_ev_per_formula": -0.6704966099999761,
+      "energy_ev_per_atom": -0.027937358749999003
+    },
+    {
+      "id": "Cr-Zr|CR2ZR8_MP|ZR:CR:|0",
+      "binary": "Cr-Zr",
+      "phase": "CR2ZR8_MP",
+      "constituents": "ZR:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 799817.8965316481,
+      "energy_ev_per_formula": 8.28955688999998,
+      "energy_ev_per_atom": 0.828955688999998
+    },
+    {
+      "id": "Cr-Zr|CR4ZR2_MP|ZR:CR:|0",
+      "binary": "Cr-Zr",
+      "phase": "CR4ZR2_MP",
+      "constituents": "ZR:CR:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -18775.050884599037,
+      "energy_ev_per_formula": -0.19459035999999003,
+      "energy_ev_per_atom": -0.032431726666665
+    },
+    {
+      "id": "Cu-Fe|CU1FE3_MP|FE:CU:|0",
+      "binary": "Cu-Fe",
+      "phase": "CU1FE3_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 51050.170081750395,
+      "energy_ev_per_formula": 0.5290995500000041,
+      "energy_ev_per_atom": 0.13227488750000102
+    },
+    {
+      "id": "Cu-Fe|CU4FE1_MP|FE:CU:|0",
+      "binary": "Cu-Fe",
+      "phase": "CU4FE1_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 5.0,
+      "energy_j_per_mol_formula": 29716.842578550004,
+      "energy_ev_per_formula": 0.30799443000000004,
+      "energy_ev_per_atom": 0.061598886000000005
+    },
+    {
+      "id": "Cu-Fe|CU6FE2_MP|FE:CU:|0",
+      "binary": "Cu-Fe",
+      "phase": "CU6FE2_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 139903.86750400002,
+      "energy_ev_per_formula": 1.4500064000000001,
+      "energy_ev_per_atom": 0.18125080000000002
+    },
+    {
+      "id": "Cu-Fe|CU1FE3_MP|FE:CU:|1",
+      "binary": "Cu-Fe",
+      "phase": "CU1FE3_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 69841.1245889,
+      "energy_ev_per_formula": 0.7238547399999999,
+      "energy_ev_per_atom": 0.18096368499999999
+    },
+    {
+      "id": "Cu-Fe|CU1FE1_MP|FE:CU:|0",
+      "binary": "Cu-Fe",
+      "phase": "CU1FE1_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 33158.10263949981,
+      "energy_ev_per_formula": 0.34366069999999804,
+      "energy_ev_per_atom": 0.17183034999999902
+    },
+    {
+      "id": "Cu-Fe|CU3FE1_MP|FE:CU:|0",
+      "binary": "Cu-Fe",
+      "phase": "CU3FE1_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 40721.40065955,
+      "energy_ev_per_formula": 0.42204903000000005,
+      "energy_ev_per_atom": 0.10551225750000001
+    },
+    {
+      "id": "Cu-Fe|CU1FE3_MP|FE:CU:|2",
+      "binary": "Cu-Fe",
+      "phase": "CU1FE3_MP",
+      "constituents": "FE:CU:",
+      "occurrence": 2,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 27170.651671050004,
+      "energy_ev_per_formula": 0.28160493000000003,
+      "energy_ev_per_atom": 0.07040123250000001
+    },
+    {
+      "id": "Cu-Mn|CU1MN4_MP|MN:CU:|0",
+      "binary": "Cu-Mn",
+      "phase": "CU1MN4_MP",
+      "constituents": "MN:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 5.0,
+      "energy_j_per_mol_formula": 65344.471872745875,
+      "energy_ev_per_formula": 0.677250058275855,
+      "energy_ev_per_atom": 0.135450011655171
+    },
+    {
+      "id": "Cu-Mn|CU6MN2_MP|MN:CU:|0",
+      "binary": "Cu-Mn",
+      "phase": "CU6MN2_MP",
+      "constituents": "MN:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 71591.266403148,
+      "energy_ev_per_formula": 0.7419937441379281,
+      "energy_ev_per_atom": 0.09274921801724101
+    },
+    {
+      "id": "Cu-Ta|CU1TA3_MP|TA:CU:|0",
+      "binary": "Cu-Ta",
+      "phase": "CU1TA3_MP",
+      "constituents": "TA:CU:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 63658.030985950005,
+      "energy_ev_per_formula": 0.65977127,
+      "energy_ev_per_atom": 0.1649428175
+    },
+    {
+      "id": "Hf-Mo|HF8MO16_MP|HF:MO:|0",
+      "binary": "Hf-Mo",
+      "phase": "HF8MO16_MP",
+      "constituents": "HF:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 24.0,
+      "energy_j_per_mol_formula": -381971.0856656008,
+      "energy_ev_per_formula": -3.958864960000008,
+      "energy_ev_per_atom": -0.164952706666667
+    },
+    {
+      "id": "Hf-Mo|HF8MO2_MP|HF:MO:|0",
+      "binary": "Hf-Mo",
+      "phase": "HF8MO2_MP",
+      "constituents": "HF:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 954752.81098025,
+      "energy_ev_per_formula": 9.89534965,
+      "energy_ev_per_atom": 0.989534965
+    },
+    {
+      "id": "Hf-Mo|HF2MO4_MP|HF:MO:|0",
+      "binary": "Hf-Mo",
+      "phase": "HF2MO4_MP",
+      "constituents": "HF:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -99461.7803061,
+      "energy_ev_per_formula": -1.03085226,
+      "energy_ev_per_atom": -0.17180871
+    },
+    {
+      "id": "Hf-Mo|HF1MO1_MP|HF:MO:|0",
+      "binary": "Hf-Mo",
+      "phase": "HF1MO1_MP",
+      "constituents": "HF:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 13553.501705550001,
+      "energy_ev_per_formula": 0.14047263000000001,
+      "energy_ev_per_atom": 0.07023631500000001
+    },
+    {
+      "id": "Hf-Mo|HF1MO2_MP|HF:MO:|0",
+      "binary": "Hf-Mo",
+      "phase": "HF1MO2_MP",
+      "constituents": "HF:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 3.0,
+      "energy_j_per_mol_formula": 10221.712560749711,
+      "energy_ev_per_formula": 0.10594094999999701,
+      "energy_ev_per_atom": 0.035313649999999
+    },
+    {
+      "id": "Hf-Mo|HF1MO4_MP|HF:MO:|0",
+      "binary": "Hf-Mo",
+      "phase": "HF1MO4_MP",
+      "constituents": "HF:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 5.0,
+      "energy_j_per_mol_formula": 17018.061929149517,
+      "energy_ev_per_formula": 0.176380389999995,
+      "energy_ev_per_atom": 0.035276077999999
+    },
+    {
+      "id": "Hf-Nb|HF1NB1_MP|HF:NB:|0",
+      "binary": "Hf-Nb",
+      "phase": "HF1NB1_MP",
+      "constituents": "HF:NB:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 21968.979366850002,
+      "energy_ev_per_formula": 0.22769321000000003,
+      "energy_ev_per_atom": 0.11384660500000002
+    },
+    {
+      "id": "Hf-Ta|HF3TA1_MP|HF:TA:|0",
+      "binary": "Hf-Ta",
+      "phase": "HF3TA1_MP",
+      "constituents": "HF:TA:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 57207.017835000006,
+      "energy_ev_per_formula": 0.5929110000000001,
+      "energy_ev_per_atom": 0.14822775000000002
+    },
+    {
+      "id": "Hf-Ta|HF1TA1_MP|HF:TA:|0",
+      "binary": "Hf-Ta",
+      "phase": "HF1TA1_MP",
+      "constituents": "HF:TA:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 30322.3081451,
+      "energy_ev_per_formula": 0.31426966,
+      "energy_ev_per_atom": 0.15713483
+    },
+    {
+      "id": "Hf-Ti|HF1TI1_MP|HF:TI:|0",
+      "binary": "Hf-Ti",
+      "phase": "HF1TI1_MP",
+      "constituents": "HF:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 10576.990270983462,
+      "energy_ev_per_formula": 0.109623156666668,
+      "energy_ev_per_atom": 0.054811578333334
+    },
+    {
+      "id": "Hf-Ti|HF2TI6_MP|HF:TI:|0",
+      "binary": "Hf-Ti",
+      "phase": "HF2TI6_MP",
+      "constituents": "HF:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 16720.18957774923,
+      "energy_ev_per_formula": 0.173293149999992,
+      "energy_ev_per_atom": 0.021661643749999
+    },
+    {
+      "id": "Hf-V|HF2V4_MP|HF:V:|0",
+      "binary": "Hf-V",
+      "phase": "HF2V4_MP",
+      "constituents": "HF:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": 19550.177604849232,
+      "energy_ev_per_formula": 0.20262400999999203,
+      "energy_ev_per_atom": 0.033770668333332005
+    },
+    {
+      "id": "Hf-V|HF2V4_MP|HF:V:|1",
+      "binary": "Hf-V",
+      "phase": "HF2V4_MP",
+      "constituents": "HF:V:",
+      "occurrence": 1,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": 20135.602272049036,
+      "energy_ev_per_formula": 0.20869152999999002,
+      "energy_ev_per_atom": 0.034781921666665
+    },
+    {
+      "id": "Hf-V|HF8V2_MP|HF:V:|0",
+      "binary": "Hf-V",
+      "phase": "HF8V2_MP",
+      "constituents": "HF:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 907960.5799098001,
+      "energy_ev_per_formula": 9.410380680000001,
+      "energy_ev_per_atom": 0.9410380680000001
+    },
+    {
+      "id": "Hf-V|HF2V4_MP|HF:V:|2",
+      "binary": "Hf-V",
+      "phase": "HF2V4_MP",
+      "constituents": "HF:V:",
+      "occurrence": 2,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": 19813.82479704923,
+      "energy_ev_per_formula": 0.20535652999999202,
+      "energy_ev_per_atom": 0.034226088333332
+    },
+    {
+      "id": "Hf-W|HF8W2_MP|HF:W:|0",
+      "binary": "Hf-W",
+      "phase": "HF8W2_MP",
+      "constituents": "HF:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 1131834.9010125,
+      "energy_ev_per_formula": 11.7306825,
+      "energy_ev_per_atom": 1.17306825
+    },
+    {
+      "id": "Hf-W|HF2W4_MP|HF:W:|0",
+      "binary": "Hf-W",
+      "phase": "HF2W4_MP",
+      "constituents": "HF:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -100072.04600140039,
+      "energy_ev_per_formula": -1.037177240000004,
+      "energy_ev_per_atom": -0.17286287333333403
+    },
+    {
+      "id": "Hf-W|HF1W2_MP|HF:W:|0",
+      "binary": "Hf-W",
+      "phase": "HF1W2_MP",
+      "constituents": "HF:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 3.0,
+      "energy_j_per_mol_formula": 27847.39939074981,
+      "energy_ev_per_formula": 0.28861894999999804,
+      "energy_ev_per_atom": 0.09620631666666601
+    },
+    {
+      "id": "Hf-Zr|HF1ZR1_MP|HF:ZR:|0",
+      "binary": "Hf-Zr",
+      "phase": "HF1ZR1_MP",
+      "constituents": "HF:ZR:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 337.48330330000005,
+      "energy_ev_per_formula": 0.0034977800000000007,
+      "energy_ev_per_atom": 0.0017488900000000003
+    },
+    {
+      "id": "Hf-Zr|HF2ZR6_MP|HF:ZR:|0",
+      "binary": "Hf-Zr",
+      "phase": "HF2ZR6_MP",
+      "constituents": "HF:ZR:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 2718.8546743992283,
+      "energy_ev_per_formula": 0.028179039999992002,
+      "energy_ev_per_atom": 0.0035223799999990002
+    },
+    {
+      "id": "Mo-Nb|MO1NB1_MP|NB:MO:|0",
+      "binary": "Mo-Nb",
+      "phase": "MO1NB1_MP",
+      "constituents": "NB:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -14337.585128349809,
+      "energy_ev_per_formula": -0.148599109999998,
+      "energy_ev_per_atom": -0.074299554999999
+    },
+    {
+      "id": "Mo-Ta|MO1TA1_MP|TA:MO:|0",
+      "binary": "Mo-Ta",
+      "phase": "MO1TA1_MP",
+      "constituents": "TA:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -20681.082149250193,
+      "energy_ev_per_formula": -0.214345050000002,
+      "energy_ev_per_atom": -0.107172525000001
+    },
+    {
+      "id": "Mo-Ti|MO1TI1_MP|TI:MO:|0",
+      "binary": "Mo-Ti",
+      "phase": "MO1TI1_MP",
+      "constituents": "TI:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -16617.32338146654,
+      "energy_ev_per_formula": -0.172227013333332,
+      "energy_ev_per_atom": -0.086113506666666
+    },
+    {
+      "id": "Mo-Ti|MO2TI1_MP|TI:MO:|0",
+      "binary": "Mo-Ti",
+      "phase": "MO2TI1_MP",
+      "constituents": "TI:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 3.0,
+      "energy_j_per_mol_formula": -22369.825656116733,
+      "energy_ev_per_formula": -0.23184770333333402,
+      "energy_ev_per_atom": -0.077282567777778
+    },
+    {
+      "id": "Mo-Ti|MO3TI1_MP|TI:MO:|0",
+      "binary": "Mo-Ti",
+      "phase": "MO3TI1_MP",
+      "constituents": "TI:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -56830.01363246693,
+      "energy_ev_per_formula": -0.5890036133333361,
+      "energy_ev_per_atom": -0.14725090333333402
+    },
+    {
+      "id": "Mo-Ti|MO2TI2_MP|TI:MO:|0",
+      "binary": "Mo-Ti",
+      "phase": "MO2TI2_MP",
+      "constituents": "TI:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 270438.8884184662,
+      "energy_ev_per_formula": 2.8029112133333287,
+      "energy_ev_per_atom": 0.7007278033333322
+    },
+    {
+      "id": "Mo-V|MO1V1_MP|V:MO:|0",
+      "binary": "Mo-V",
+      "phase": "MO1V1_MP",
+      "constituents": "V:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 66357.57129304962,
+      "energy_ev_per_formula": 0.6877501299999961,
+      "energy_ev_per_atom": 0.34387506499999804
+    },
+    {
+      "id": "Mo-V|MO1V3_MP|V:MO:|0",
+      "binary": "Mo-V",
+      "phase": "MO1V3_MP",
+      "constituents": "V:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -25883.638256049617,
+      "energy_ev_per_formula": -0.26826592999999604,
+      "energy_ev_per_atom": -0.06706648249999901
+    },
+    {
+      "id": "Mo-V|MO1V1_MP|V:MO:|1",
+      "binary": "Mo-V",
+      "phase": "MO1V1_MP",
+      "constituents": "V:MO:",
+      "occurrence": 1,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -19639.090462049808,
+      "energy_ev_per_formula": -0.203545529999998,
+      "energy_ev_per_atom": -0.101772764999999
+    },
+    {
+      "id": "Mo-W|MO1W11_MP|MO:W:|0",
+      "binary": "Mo-W",
+      "phase": "MO1W11_MP",
+      "constituents": "MO:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": 1981710.3395944005,
+      "energy_ev_per_formula": 20.539051040000004,
+      "energy_ev_per_atom": 1.711587586666667
+    },
+    {
+      "id": "Mo-W|MO1W1_MP|MO:W:|0",
+      "binary": "Mo-W",
+      "phase": "MO1W1_MP",
+      "constituents": "MO:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -1113.4291812000001,
+      "energy_ev_per_formula": -0.011539920000000002,
+      "energy_ev_per_atom": -0.005769960000000001
+    },
+    {
+      "id": "Mo-Zr|MO6ZR2_MP|ZR:MO:|0",
+      "binary": "Mo-Zr",
+      "phase": "MO6ZR2_MP",
+      "constituents": "ZR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 175716.79737189924,
+      "energy_ev_per_formula": 1.8211825399999921,
+      "energy_ev_per_atom": 0.22764781749999902
+    },
+    {
+      "id": "Mo-Zr|MO2ZR8_MP|ZR:MO:|0",
+      "binary": "Mo-Zr",
+      "phase": "MO2ZR8_MP",
+      "constituents": "ZR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 877941.792347999,
+      "energy_ev_per_formula": 9.09925679999999,
+      "energy_ev_per_atom": 0.9099256799999991
+    },
+    {
+      "id": "Mo-Zr|MO4ZR2_MP|ZR:MO:|0",
+      "binary": "Mo-Zr",
+      "phase": "MO4ZR2_MP",
+      "constituents": "ZR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -80658.79508430058,
+      "energy_ev_per_formula": -0.8359723800000061,
+      "energy_ev_per_atom": -0.139328730000001
+    },
+    {
+      "id": "Mo-Zr|MO1ZR1_MP|ZR:MO:|0",
+      "binary": "Mo-Zr",
+      "phase": "MO1ZR1_MP",
+      "constituents": "ZR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 20181.13354355,
+      "energy_ev_per_formula": 0.20916343,
+      "energy_ev_per_atom": 0.104581715
+    },
+    {
+      "id": "Mo-Zr|MO2ZR1_MP|ZR:MO:|0",
+      "binary": "Mo-Zr",
+      "phase": "MO2ZR1_MP",
+      "constituents": "ZR:MO:",
+      "occurrence": 0,
+      "atoms_per_formula": 3.0,
+      "energy_j_per_mol_formula": 16785.28414784971,
+      "energy_ev_per_formula": 0.173967809999997,
+      "energy_ev_per_atom": 0.057989269999999
+    },
+    {
+      "id": "Nb-Ta|NB1TA1_MP|TA:NB:|0",
+      "binary": "Nb-Ta",
+      "phase": "NB1TA1_MP",
+      "constituents": "TA:NB:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 19.445586899807033,
+      "energy_ev_per_formula": 0.00020153999999800002,
+      "energy_ev_per_atom": 0.00010076999999900001
+    },
+    {
+      "id": "Nb-Ti|NB1TI3_MP|TI:NB:|0",
+      "binary": "Nb-Ti",
+      "phase": "NB1TI3_MP",
+      "constituents": "TI:NB:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 31622.456063149613,
+      "energy_ev_per_formula": 0.327744789999996,
+      "energy_ev_per_atom": 0.081936197499999
+    },
+    {
+      "id": "Nb-Ti|NB2TI6_MP|TI:NB:|0",
+      "binary": "Nb-Ti",
+      "phase": "NB2TI6_MP",
+      "constituents": "TI:NB:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 60093.98218429847,
+      "energy_ev_per_formula": 0.6228323799999841,
+      "energy_ev_per_atom": 0.07785404749999801
+    },
+    {
+      "id": "Nb-Ti|NB1TI3_MP|TI:NB:|1",
+      "binary": "Nb-Ti",
+      "phase": "NB1TI3_MP",
+      "constituents": "TI:NB:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 32592.78158689923,
+      "energy_ev_per_formula": 0.337801539999992,
+      "energy_ev_per_atom": 0.084450384999998
+    },
+    {
+      "id": "Nb-Ti|NB1TI3_MP|TI:NB:|2",
+      "binary": "Nb-Ti",
+      "phase": "NB1TI3_MP",
+      "constituents": "TI:NB:",
+      "occurrence": 2,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 21390.224707699617,
+      "energy_ev_per_formula": 0.22169481999999605,
+      "energy_ev_per_atom": 0.05542370499999901
+    },
+    {
+      "id": "Nb-Ti|NB1TI1_MP|TI:NB:|0",
+      "binary": "Nb-Ti",
+      "phase": "NB1TI1_MP",
+      "constituents": "TI:NB:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 6726.559516583077,
+      "energy_ev_per_formula": 0.06971611666666401,
+      "energy_ev_per_atom": 0.034858058333332005
+    },
+    {
+      "id": "Nb-V|NB1V1_MP|NB:V:|0",
+      "binary": "Nb-V",
+      "phase": "NB1V1_MP",
+      "constituents": "NB:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 17522.852152149422,
+      "energy_ev_per_formula": 0.181612189999994,
+      "energy_ev_per_atom": 0.090806094999997
+    },
+    {
+      "id": "Nb-V|NB2V4_MP|NB:V:|0",
+      "binary": "Nb-V",
+      "phase": "NB2V4_MP",
+      "constituents": "NB:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -24848.7160248,
+      "energy_ev_per_formula": -0.25753968,
+      "energy_ev_per_atom": -0.04292328
+    },
+    {
+      "id": "Nb-W|NB1W1_MP|NB:W:|0",
+      "binary": "Nb-W",
+      "phase": "NB1W1_MP",
+      "constituents": "NB:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -8011.474704449808,
+      "energy_ev_per_formula": -0.08303336999999801,
+      "energy_ev_per_atom": -0.041516684999999005
+    },
+    {
+      "id": "Nb-Zr|NB1ZR1_MP|ZR:NB:|0",
+      "binary": "Nb-Zr",
+      "phase": "NB1ZR1_MP",
+      "constituents": "ZR:NB:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 21386.522578250002,
+      "energy_ev_per_formula": 0.22165645000000003,
+      "energy_ev_per_atom": 0.11082822500000002
+    },
+    {
+      "id": "Ta-Ti|TA1TI3_MP|TA:TI:|0",
+      "binary": "Ta-Ti",
+      "phase": "TA1TI3_MP",
+      "constituents": "TA:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 37623.6233392,
+      "energy_ev_per_formula": 0.38994272,
+      "energy_ev_per_atom": 0.09748568
+    },
+    {
+      "id": "Ta-Ti|TA1TI3_MP|TA:TI:|1",
+      "binary": "Ta-Ti",
+      "phase": "TA1TI3_MP",
+      "constituents": "TA:TI:",
+      "occurrence": 1,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 36651.64599224923,
+      "energy_ev_per_formula": 0.379868849999992,
+      "energy_ev_per_atom": 0.094967212499998
+    },
+    {
+      "id": "Ta-Ti|TA1TI3_MP|TA:TI:|2",
+      "binary": "Ta-Ti",
+      "phase": "TA1TI3_MP",
+      "constituents": "TA:TI:",
+      "occurrence": 2,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 37627.37274629962,
+      "energy_ev_per_formula": 0.38998157999999605,
+      "energy_ev_per_atom": 0.09749539499999901
+    },
+    {
+      "id": "Ta-Ti|TA1TI1_MP|TA:TI:|0",
+      "binary": "Ta-Ti",
+      "phase": "TA1TI1_MP",
+      "constituents": "TA:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 11693.592843833076,
+      "energy_ev_per_formula": 0.12119596666666399,
+      "energy_ev_per_atom": 0.060597983333331995
+    },
+    {
+      "id": "Ta-V|TA8V2_MP|TA:V:|0",
+      "binary": "Ta-V",
+      "phase": "TA8V2_MP",
+      "constituents": "TA:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 1390433.907316599,
+      "energy_ev_per_formula": 14.41088155999999,
+      "energy_ev_per_atom": 1.4410881559999988
+    },
+    {
+      "id": "Ta-V|TA2V4_MP|TA:V:|0",
+      "binary": "Ta-V",
+      "phase": "TA2V4_MP",
+      "constituents": "TA:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -60367.731356000775,
+      "energy_ev_per_formula": -0.625669600000008,
+      "energy_ev_per_atom": -0.104278266666668
+    },
+    {
+      "id": "Ta-V|TA1V1_MP|TA:V:|0",
+      "binary": "Ta-V",
+      "phase": "TA1V1_MP",
+      "constituents": "TA:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 16452.5025586,
+      "energy_ev_per_formula": 0.17051876000000002,
+      "energy_ev_per_atom": 0.08525938000000001
+    },
+    {
+      "id": "Ta-W|TA3W1_MP|TA:W:|0",
+      "binary": "Ta-W",
+      "phase": "TA3W1_MP",
+      "constituents": "TA:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -16519.699536849614,
+      "energy_ev_per_formula": -0.17121520999999598,
+      "energy_ev_per_atom": -0.042803802499998996
+    },
+    {
+      "id": "Ta-W|TA1W3_MP|TA:W:|0",
+      "binary": "Ta-W",
+      "phase": "TA1W3_MP",
+      "constituents": "TA:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -34824.82601805001,
+      "energy_ev_per_formula": -0.3609351300000001,
+      "energy_ev_per_atom": -0.09023378250000003
+    },
+    {
+      "id": "Ta-W|TA1W1_MP|TA:W:|0",
+      "binary": "Ta-W",
+      "phase": "TA1W1_MP",
+      "constituents": "TA:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -13032.173953550002,
+      "energy_ev_per_formula": -0.13506943000000002,
+      "energy_ev_per_atom": -0.06753471500000001
+    },
+    {
+      "id": "Ta-Zr|TA2ZR6_MP|ZR:TA:|0",
+      "binary": "Ta-Zr",
+      "phase": "TA2ZR6_MP",
+      "constituents": "ZR:TA:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 118299.21935654925,
+      "energy_ev_per_formula": 1.2260892299999921,
+      "energy_ev_per_atom": 0.15326115374999902
+    },
+    {
+      "id": "Ta-Zr|TA1ZR3_MP|ZR:TA:|0",
+      "binary": "Ta-Zr",
+      "phase": "TA1ZR3_MP",
+      "constituents": "ZR:TA:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": 63437.657316249235,
+      "energy_ev_per_formula": 0.6574872499999921,
+      "energy_ev_per_atom": 0.16437181249999802
+    },
+    {
+      "id": "Ti-V|TI1V1_MP|TI:V:|0",
+      "binary": "Ti-V",
+      "phase": "TI1V1_MP",
+      "constituents": "TI:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 22887.62816783327,
+      "energy_ev_per_formula": 0.237214366666666,
+      "energy_ev_per_atom": 0.118607183333333
+    },
+    {
+      "id": "Ti-V|TI4V1_MP|TI:V:|0",
+      "binary": "Ti-V",
+      "phase": "TI4V1_MP",
+      "constituents": "TI:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 5.0,
+      "energy_j_per_mol_formula": 44981.79296278269,
+      "energy_ev_per_formula": 0.46620503666665997,
+      "energy_ev_per_atom": 0.09324100733333199
+    },
+    {
+      "id": "Ti-W|TI1W1_MP|TI:W:|0",
+      "binary": "Ti-W",
+      "phase": "TI1W1_MP",
+      "constituents": "TI:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -3867.315951016345,
+      "energy_ev_per_formula": -0.04008204333333,
+      "energy_ev_per_atom": -0.020041021666665
+    },
+    {
+      "id": "Ti-Zr|TI1ZR1_MP|ZR:TI:|0",
+      "binary": "Ti-Zr",
+      "phase": "TI1ZR1_MP",
+      "constituents": "ZR:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 17046.072167883078,
+      "energy_ev_per_formula": 0.17667069666666402,
+      "energy_ev_per_atom": 0.08833534833333201
+    },
+    {
+      "id": "Ti-Zr|TI1ZR1_MP|ZR:TI:|1",
+      "binary": "Ti-Zr",
+      "phase": "TI1ZR1_MP",
+      "constituents": "ZR:TI:",
+      "occurrence": 1,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": 15367.37307113327,
+      "energy_ev_per_formula": 0.159272146666666,
+      "energy_ev_per_atom": 0.079636073333333
+    },
+    {
+      "id": "Ti-Zr|TI2ZR1_MP|ZR:TI:|0",
+      "binary": "Ti-Zr",
+      "phase": "TI2ZR1_MP",
+      "constituents": "ZR:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 3.0,
+      "energy_j_per_mol_formula": 9433.954345916442,
+      "energy_ev_per_formula": 0.097776383333331,
+      "energy_ev_per_atom": 0.032592127777777
+    },
+    {
+      "id": "Ti-Zr|TI6ZR2_MP|ZR:TI:|0",
+      "binary": "Ti-Zr",
+      "phase": "TI6ZR2_MP",
+      "constituents": "ZR:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 24123.49810049923,
+      "energy_ev_per_formula": 0.250023299999992,
+      "energy_ev_per_atom": 0.031252912499999
+    },
+    {
+      "id": "Ti-Zr|TI4ZR2_MP|ZR:TI:|0",
+      "binary": "Ti-Zr",
+      "phase": "TI4ZR2_MP",
+      "constituents": "ZR:TI:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": 89874.62611233328,
+      "energy_ev_per_formula": 0.9314880666666662,
+      "energy_ev_per_atom": 0.15524801111111103
+    },
+    {
+      "id": "V-W|V1W3_MP|V:W:|0",
+      "binary": "V-W",
+      "phase": "V1W3_MP",
+      "constituents": "V:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 4.0,
+      "energy_j_per_mol_formula": -33412.80277765039,
+      "energy_ev_per_formula": -0.346300490000004,
+      "energy_ev_per_atom": -0.086575122500001
+    },
+    {
+      "id": "V-W|V1W1_MP|V:W:|0",
+      "binary": "V-W",
+      "phase": "V1W1_MP",
+      "constituents": "V:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 2.0,
+      "energy_j_per_mol_formula": -13225.210528200001,
+      "energy_ev_per_formula": -0.13707012000000002,
+      "energy_ev_per_atom": -0.06853506000000001
+    },
+    {
+      "id": "V-Zr|V8ZR4_MP|ZR:V:|0",
+      "binary": "V-Zr",
+      "phase": "V8ZR4_MP",
+      "constituents": "ZR:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 12.0,
+      "energy_j_per_mol_formula": 37706.33124604846,
+      "energy_ev_per_formula": 0.39079992999998403,
+      "energy_ev_per_atom": 0.032566660833332005
+    },
+    {
+      "id": "V-Zr|V2ZR6_MP|ZR:V:|0",
+      "binary": "V-Zr",
+      "phase": "V2ZR6_MP",
+      "constituents": "ZR:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 8.0,
+      "energy_j_per_mol_formula": 138094.85480139923,
+      "energy_ev_per_formula": 1.4312572399999919,
+      "energy_ev_per_atom": 0.17890715499999899
+    },
+    {
+      "id": "V-Zr|V2ZR8_MP|ZR:V:|0",
+      "binary": "V-Zr",
+      "phase": "V2ZR8_MP",
+      "constituents": "ZR:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 809930.073531299,
+      "energy_ev_per_formula": 8.39436257999999,
+      "energy_ev_per_atom": 0.839436257999999
+    },
+    {
+      "id": "V-Zr|V4ZR2_MP|ZR:V:|0",
+      "binary": "V-Zr",
+      "phase": "V4ZR2_MP",
+      "constituents": "ZR:V:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -35313.51,
+      "energy_ev_per_formula": -0.366,
+      "energy_ev_per_atom": -0.061
+    },
+    {
+      "id": "W-Zr|W10ZR6_MP|ZR:W:|0",
+      "binary": "W-Zr",
+      "phase": "W10ZR6_MP",
+      "constituents": "ZR:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 16.0,
+      "energy_j_per_mol_formula": 682406.0497200985,
+      "energy_ev_per_formula": 7.072664659999984,
+      "energy_ev_per_atom": 0.442041541249999
+    },
+    {
+      "id": "W-Zr|W2ZR8_MP|ZR:W:|0",
+      "binary": "W-Zr",
+      "phase": "W2ZR8_MP",
+      "constituents": "ZR:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 10.0,
+      "energy_j_per_mol_formula": 1034786.1632787499,
+      "energy_ev_per_formula": 10.72483975,
+      "energy_ev_per_atom": 1.072483975
+    },
+    {
+      "id": "W-Zr|W4ZR2_MP|ZR:W:|0",
+      "binary": "W-Zr",
+      "phase": "W4ZR2_MP",
+      "constituents": "ZR:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 6.0,
+      "energy_j_per_mol_formula": -84440.7369263002,
+      "energy_ev_per_formula": -0.8751695800000021,
+      "energy_ev_per_atom": -0.145861596666667
+    },
+    {
+      "id": "W-Zr|W2ZR1_MP|ZR:W:|0",
+      "binary": "W-Zr",
+      "phase": "W2ZR1_MP",
+      "constituents": "ZR:W:",
+      "occurrence": 0,
+      "atoms_per_formula": 3.0,
+      "energy_j_per_mol_formula": 34593.848646849816,
+      "energy_ev_per_formula": 0.3585412099999981,
+      "energy_ev_per_atom": 0.11951373666666604
+    }
+  ],
+  "interactions": [
+    {
+      "id": "Ag-Cu|FCC_A1|0",
+      "binary": "Ag-Cu",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "AG,CU",
+      "value_j_per_mol": 40012.3295,
+      "value_ev_per_formula": 0.4147
+    },
+    {
+      "id": "Ag-Cu|BCC_A2|0",
+      "binary": "Ag-Cu",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "AG,CU",
+      "value_j_per_mol": 39153.613,
+      "value_ev_per_formula": 0.4058
+    },
+    {
+      "id": "Ag-Cu|HCP_A3|0",
+      "binary": "Ag-Cu",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "AG,CU",
+      "value_j_per_mol": 40793.858,
+      "value_ev_per_formula": 0.4228
+    },
+    {
+      "id": "Au-Ni|FCC_A1|0",
+      "binary": "Au-Ni",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "AU,NI",
+      "value_j_per_mol": 50857.243500000004,
+      "value_ev_per_formula": 0.5271
+    },
+    {
+      "id": "Au-Ni|BCC_A2|0",
+      "binary": "Au-Ni",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "AU,NI",
+      "value_j_per_mol": 43688.407999999996,
+      "value_ev_per_formula": 0.4528
+    },
+    {
+      "id": "Au-Ni|HCP_A3|0",
+      "binary": "Au-Ni",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "AU,NI",
+      "value_j_per_mol": 46592.6065,
+      "value_ev_per_formula": 0.4829
+    },
+    {
+      "id": "Co-Cu|FCC_A1|0",
+      "binary": "Co-Cu",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CO,CU",
+      "value_j_per_mol": 45926.86,
+      "value_ev_per_formula": 0.476
+    },
+    {
+      "id": "Co-Cu|BCC_A2|0",
+      "binary": "Co-Cu",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CO,CU",
+      "value_j_per_mol": 39935.1415,
+      "value_ev_per_formula": 0.4139
+    },
+    {
+      "id": "Co-Cu|HCP_A3|0",
+      "binary": "Co-Cu",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CO,CU",
+      "value_j_per_mol": 46293.503,
+      "value_ev_per_formula": 0.47979999999999995
+    },
+    {
+      "id": "Cr-Cu|FCC_A1|0",
+      "binary": "Cr-Cu",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,CU",
+      "value_j_per_mol": 31676.0255,
+      "value_ev_per_formula": 0.3283
+    },
+    {
+      "id": "Cr-Cu|BCC_A2|0",
+      "binary": "Cr-Cu",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,CU",
+      "value_j_per_mol": 108835.07999999999,
+      "value_ev_per_formula": 1.128
+    },
+    {
+      "id": "Cr-Cu|HCP_A3|0",
+      "binary": "Cr-Cu",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,CU",
+      "value_j_per_mol": 48618.7915,
+      "value_ev_per_formula": 0.5039
+    },
+    {
+      "id": "Cr-Fe|FCC_A1|0",
+      "binary": "Cr-Fe",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,FE",
+      "value_j_per_mol": -35516.1285,
+      "value_ev_per_formula": -0.3681
+    },
+    {
+      "id": "Cr-Fe|BCC_A2|0",
+      "binary": "Cr-Fe",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,FE",
+      "value_j_per_mol": 31579.5405,
+      "value_ev_per_formula": 0.3273
+    },
+    {
+      "id": "Cr-Fe|HCP_A3|0",
+      "binary": "Cr-Fe",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,FE",
+      "value_j_per_mol": -34329.363,
+      "value_ev_per_formula": -0.35579999999999995
+    },
+    {
+      "id": "Cr-Hf|FCC_A1|0",
+      "binary": "Cr-Hf",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,HF",
+      "value_j_per_mol": 28762.178499999998,
+      "value_ev_per_formula": 0.2981
+    },
+    {
+      "id": "Cr-Hf|BCC_A2|0",
+      "binary": "Cr-Hf",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,HF",
+      "value_j_per_mol": 51529.433039749165,
+      "value_ev_per_formula": 0.5340667776312293
+    },
+    {
+      "id": "Cr-Hf|BCC_A2|1",
+      "binary": "Cr-Hf",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,HF",
+      "value_j_per_mol": -92850.77168040506,
+      "value_ev_per_formula": -0.9623337480479355
+    },
+    {
+      "id": "Cr-Hf|HCP_A3|0",
+      "binary": "Cr-Hf",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,HF",
+      "value_j_per_mol": 89693.2197752595,
+      "value_ev_per_formula": 0.9296079159999948
+    },
+    {
+      "id": "Cr-Hf|HCP_A3|1",
+      "binary": "Cr-Hf",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,HF",
+      "value_j_per_mol": -40699.029454478565,
+      "value_ev_per_formula": -0.42181716799998514
+    },
+    {
+      "id": "Cr-Mo|FCC_A1|0",
+      "binary": "Cr-Mo",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,MO",
+      "value_j_per_mol": -26764.939,
+      "value_ev_per_formula": -0.2774
+    },
+    {
+      "id": "Cr-Mo|BCC_A2|0",
+      "binary": "Cr-Mo",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,MO",
+      "value_j_per_mol": 35895.69820505349,
+      "value_ev_per_formula": 0.37203397631811674
+    },
+    {
+      "id": "Cr-Mo|BCC_A2|1",
+      "binary": "Cr-Mo",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,MO",
+      "value_j_per_mol": -5197.2484185657295,
+      "value_ev_per_formula": -0.053865869498530644
+    },
+    {
+      "id": "Cr-Mo|HCP_A3|0",
+      "binary": "Cr-Mo",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,MO",
+      "value_j_per_mol": -10676.916963939524,
+      "value_ev_per_formula": -0.11065882742332511
+    },
+    {
+      "id": "Cr-Mo|HCP_A3|1",
+      "binary": "Cr-Mo",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,MO",
+      "value_j_per_mol": -6383.7638527056015,
+      "value_ev_per_formula": -0.06616327773960307
+    },
+    {
+      "id": "Cr-Nb|FCC_A1|0",
+      "binary": "Cr-Nb",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,NB",
+      "value_j_per_mol": -21284.591,
+      "value_ev_per_formula": -0.2206
+    },
+    {
+      "id": "Cr-Nb|BCC_A2|0",
+      "binary": "Cr-Nb",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,NB",
+      "value_j_per_mol": 57908.775968294955,
+      "value_ev_per_formula": 0.6001842355629886
+    },
+    {
+      "id": "Cr-Nb|BCC_A2|1",
+      "binary": "Cr-Nb",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,NB",
+      "value_j_per_mol": -12494.45561403492,
+      "value_ev_per_formula": -0.1294963529464157
+    },
+    {
+      "id": "Cr-Nb|HCP_A3|0",
+      "binary": "Cr-Nb",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,NB",
+      "value_j_per_mol": -9627.749935900272,
+      "value_ev_per_formula": -0.09978494000000282
+    },
+    {
+      "id": "Cr-Nb|HCP_A3|1",
+      "binary": "Cr-Nb",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,NB",
+      "value_j_per_mol": -31233.351217311432,
+      "value_ev_per_formula": -0.323711988571399
+    },
+    {
+      "id": "Cr-Ta|FCC_A1|0",
+      "binary": "Cr-Ta",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,TA",
+      "value_j_per_mol": -19895.207,
+      "value_ev_per_formula": -0.2062
+    },
+    {
+      "id": "Cr-Ta|BCC_A2|0",
+      "binary": "Cr-Ta",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,TA",
+      "value_j_per_mol": 41902.71438601961,
+      "value_ev_per_formula": 0.43429252615452774
+    },
+    {
+      "id": "Cr-Ta|BCC_A2|1",
+      "binary": "Cr-Ta",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,TA",
+      "value_j_per_mol": -5751.2073590804885,
+      "value_ev_per_formula": -0.059607269099657856
+    },
+    {
+      "id": "Cr-Ta|HCP_A3|0",
+      "binary": "Cr-Ta",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,TA",
+      "value_j_per_mol": 12439.994757440403,
+      "value_ev_per_formula": 0.12893190400000418
+    },
+    {
+      "id": "Cr-Ta|HCP_A3|1",
+      "binary": "Cr-Ta",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,TA",
+      "value_j_per_mol": 22015.64781056194,
+      "value_ev_per_formula": 0.22817689600002009
+    },
+    {
+      "id": "Cr-Ti|FCC_A1|0",
+      "binary": "Cr-Ti",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,TI",
+      "value_j_per_mol": -9214.317500000001,
+      "value_ev_per_formula": -0.09550000000000002
+    },
+    {
+      "id": "Cr-Ti|BCC_A2|0",
+      "binary": "Cr-Ti",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,TI",
+      "value_j_per_mol": 7813.434852635017,
+      "value_ev_per_formula": 0.08098082450779931
+    },
+    {
+      "id": "Cr-Ti|BCC_A2|1",
+      "binary": "Cr-Ti",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,TI",
+      "value_j_per_mol": -2618.074805649013,
+      "value_ev_per_formula": -0.027134526668902037
+    },
+    {
+      "id": "Cr-Ti|HCP_A3|0",
+      "binary": "Cr-Ti",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,TI",
+      "value_j_per_mol": 44221.366621344656,
+      "value_ev_per_formula": 0.4583237458811697
+    },
+    {
+      "id": "Cr-Ti|HCP_A3|1",
+      "binary": "Cr-Ti",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,TI",
+      "value_j_per_mol": 64858.35346458436,
+      "value_ev_per_formula": 0.6722117786659518
+    },
+    {
+      "id": "Cr-V|FCC_A1|0",
+      "binary": "Cr-V",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,V",
+      "value_j_per_mol": -48146.015,
+      "value_ev_per_formula": -0.499
+    },
+    {
+      "id": "Cr-V|BCC_A2|0",
+      "binary": "Cr-V",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,V",
+      "value_j_per_mol": -21378.369293265136,
+      "value_ev_per_formula": -0.22157194686495452
+    },
+    {
+      "id": "Cr-V|BCC_A2|1",
+      "binary": "Cr-V",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,V",
+      "value_j_per_mol": 12101.615460872159,
+      "value_ev_per_formula": 0.12542483765219628
+    },
+    {
+      "id": "Cr-V|HCP_A3|0",
+      "binary": "Cr-V",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,V",
+      "value_j_per_mol": -45055.959280729294,
+      "value_ev_per_formula": -0.4669737190312411
+    },
+    {
+      "id": "Cr-V|HCP_A3|1",
+      "binary": "Cr-V",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,V",
+      "value_j_per_mol": -8548.427307594215,
+      "value_ev_per_formula": -0.08859851072803249
+    },
+    {
+      "id": "Cr-W|FCC_A1|0",
+      "binary": "Cr-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,W",
+      "value_j_per_mol": -28231.511000000002,
+      "value_ev_per_formula": -0.2926
+    },
+    {
+      "id": "Cr-W|BCC_A2|0",
+      "binary": "Cr-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,W",
+      "value_j_per_mol": 40558.69273449327,
+      "value_ev_per_formula": 0.42036267538470506
+    },
+    {
+      "id": "Cr-W|BCC_A2|1",
+      "binary": "Cr-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,W",
+      "value_j_per_mol": -4151.658336919299,
+      "value_ev_per_formula": -0.0430290546397813
+    },
+    {
+      "id": "Cr-W|HCP_A3|0",
+      "binary": "Cr-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,W",
+      "value_j_per_mol": 11238.933811040793,
+      "value_ev_per_formula": 0.11648374162865516
+    },
+    {
+      "id": "Cr-W|HCP_A3|1",
+      "binary": "Cr-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,W",
+      "value_j_per_mol": 5903.375481800472,
+      "value_ev_per_formula": 0.06118438598539122
+    },
+    {
+      "id": "Cr-Zr|FCC_A1|0",
+      "binary": "Cr-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CR,ZR",
+      "value_j_per_mol": 44257.669499999996,
+      "value_ev_per_formula": 0.45869999999999994
+    },
+    {
+      "id": "Cr-Zr|BCC_A2|0",
+      "binary": "Cr-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CR,ZR",
+      "value_j_per_mol": 83494.32783675828,
+      "value_ev_per_formula": 0.8653607072265977
+    },
+    {
+      "id": "Cr-Zr|BCC_A2|1",
+      "binary": "Cr-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "CR,ZR",
+      "value_j_per_mol": -73465.78501477106,
+      "value_ev_per_formula": -0.7614218273801219
+    },
+    {
+      "id": "Cr-Zr|HCP_A3|0",
+      "binary": "Cr-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CR,ZR",
+      "value_j_per_mol": 52346.561838749556,
+      "value_ev_per_formula": 0.5425357499999954
+    },
+    {
+      "id": "Cr-Zr|HCP_A3|1",
+      "binary": "Cr-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "CR,ZR",
+      "value_j_per_mol": 60021.17974916666,
+      "value_ev_per_formula": 0.6220778333333332
+    },
+    {
+      "id": "Cu-Fe|FCC_A1|0",
+      "binary": "Cu-Fe",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CU,FE",
+      "value_j_per_mol": 20840.76,
+      "value_ev_per_formula": 0.21599999999999997
+    },
+    {
+      "id": "Cu-Fe|BCC_A2|0",
+      "binary": "Cu-Fe",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CU,FE",
+      "value_j_per_mol": 52468.543,
+      "value_ev_per_formula": 0.5438
+    },
+    {
+      "id": "Cu-Fe|HCP_A3|0",
+      "binary": "Cu-Fe",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CU,FE",
+      "value_j_per_mol": 20175.0135,
+      "value_ev_per_formula": 0.2091
+    },
+    {
+      "id": "Cu-Mn|FCC_A1|0",
+      "binary": "Cu-Mn",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CU,MN",
+      "value_j_per_mol": 58296.236999999994,
+      "value_ev_per_formula": 0.6042
+    },
+    {
+      "id": "Cu-Mn|BCC_A2|0",
+      "binary": "Cu-Mn",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CU,MN",
+      "value_j_per_mol": 41228.0405,
+      "value_ev_per_formula": 0.4273
+    },
+    {
+      "id": "Cu-Mn|HCP_A3|0",
+      "binary": "Cu-Mn",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CU,MN",
+      "value_j_per_mol": 49101.2165,
+      "value_ev_per_formula": 0.5089
+    },
+    {
+      "id": "Cu-Ta|FCC_A1|0",
+      "binary": "Cu-Ta",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "CU,TA",
+      "value_j_per_mol": 37117.7795,
+      "value_ev_per_formula": 0.3847
+    },
+    {
+      "id": "Cu-Ta|BCC_A2|0",
+      "binary": "Cu-Ta",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "CU,TA",
+      "value_j_per_mol": 64538.81650000001,
+      "value_ev_per_formula": 0.6689
+    },
+    {
+      "id": "Cu-Ta|HCP_A3|0",
+      "binary": "Cu-Ta",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "CU,TA",
+      "value_j_per_mol": 23436.2065,
+      "value_ev_per_formula": 0.2429
+    },
+    {
+      "id": "Hf-Mo|FCC_A1|0",
+      "binary": "Hf-Mo",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,MO",
+      "value_j_per_mol": -21709.125,
+      "value_ev_per_formula": -0.225
+    },
+    {
+      "id": "Hf-Mo|BCC_A2|0",
+      "binary": "Hf-Mo",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,MO",
+      "value_j_per_mol": -19857.708405176414,
+      "value_ev_per_formula": -0.2058113531137111
+    },
+    {
+      "id": "Hf-Mo|BCC_A2|1",
+      "binary": "Hf-Mo",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,MO",
+      "value_j_per_mol": -25301.41987586977,
+      "value_ev_per_formula": -0.26223164093765633
+    },
+    {
+      "id": "Hf-Mo|HCP_A3|0",
+      "binary": "Hf-Mo",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,MO",
+      "value_j_per_mol": 96861.5103279801,
+      "value_ev_per_formula": 1.003902268000001
+    },
+    {
+      "id": "Hf-Mo|HCP_A3|1",
+      "binary": "Hf-Mo",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,MO",
+      "value_j_per_mol": 198709.98836311916,
+      "value_ev_per_formula": 2.0594909919999913
+    },
+    {
+      "id": "Hf-Nb|FCC_A1|0",
+      "binary": "Hf-Nb",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,NB",
+      "value_j_per_mol": -6213.634,
+      "value_ev_per_formula": -0.0644
+    },
+    {
+      "id": "Hf-Nb|BCC_A2|0",
+      "binary": "Hf-Nb",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,NB",
+      "value_j_per_mol": -10305.08471981733,
+      "value_ev_per_formula": -0.10680504451279817
+    },
+    {
+      "id": "Hf-Nb|BCC_A2|1",
+      "binary": "Hf-Nb",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,NB",
+      "value_j_per_mol": 25867.66992636286,
+      "value_ev_per_formula": 0.2681004293554735
+    },
+    {
+      "id": "Hf-Nb|HCP_A3|0",
+      "binary": "Hf-Nb",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,NB",
+      "value_j_per_mol": 15882.258159918647,
+      "value_ev_per_formula": 0.1646085729379556
+    },
+    {
+      "id": "Hf-Nb|HCP_A3|1",
+      "binary": "Hf-Nb",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,NB",
+      "value_j_per_mol": -24100.2320930408,
+      "value_ev_per_formula": -0.2497821639948261
+    },
+    {
+      "id": "Hf-Ta|FCC_A1|0",
+      "binary": "Hf-Ta",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,TA",
+      "value_j_per_mol": 17048.8995,
+      "value_ev_per_formula": 0.1767
+    },
+    {
+      "id": "Hf-Ta|BCC_A2|0",
+      "binary": "Hf-Ta",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,TA",
+      "value_j_per_mol": 9954.789195771145,
+      "value_ev_per_formula": 0.10317447474499813
+    },
+    {
+      "id": "Hf-Ta|BCC_A2|1",
+      "binary": "Hf-Ta",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,TA",
+      "value_j_per_mol": 14745.765914651212,
+      "value_ev_per_formula": 0.1528296203000592
+    },
+    {
+      "id": "Hf-Ta|HCP_A3|0",
+      "binary": "Hf-Ta",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,TA",
+      "value_j_per_mol": 16456.171430744984,
+      "value_ev_per_formula": 0.17055678531113627
+    },
+    {
+      "id": "Hf-Ta|HCP_A3|1",
+      "binary": "Hf-Ta",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,TA",
+      "value_j_per_mol": -15767.320581004456,
+      "value_ev_per_formula": -0.16341732477591808
+    },
+    {
+      "id": "Hf-Ti|FCC_A1|0",
+      "binary": "Hf-Ti",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,TI",
+      "value_j_per_mol": 12398.3225,
+      "value_ev_per_formula": 0.1285
+    },
+    {
+      "id": "Hf-Ti|BCC_A2|0",
+      "binary": "Hf-Ti",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,TI",
+      "value_j_per_mol": -29584.22385354249,
+      "value_ev_per_formula": -0.3066199290412239
+    },
+    {
+      "id": "Hf-Ti|BCC_A2|1",
+      "binary": "Hf-Ti",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,TI",
+      "value_j_per_mol": -2350.349438613903,
+      "value_ev_per_formula": -0.024359739219711907
+    },
+    {
+      "id": "Hf-Ti|HCP_A3|0",
+      "binary": "Hf-Ti",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,TI",
+      "value_j_per_mol": 37934.03199073028,
+      "value_ev_per_formula": 0.39315989004228924
+    },
+    {
+      "id": "Hf-Ti|HCP_A3|1",
+      "binary": "Hf-Ti",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,TI",
+      "value_j_per_mol": 31430.367444660096,
+      "value_ev_per_formula": 0.325753924907085
+    },
+    {
+      "id": "Hf-V|FCC_A1|0",
+      "binary": "Hf-V",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,V",
+      "value_j_per_mol": 33403.107,
+      "value_ev_per_formula": 0.34620000000000006
+    },
+    {
+      "id": "Hf-V|BCC_A2|0",
+      "binary": "Hf-V",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,V",
+      "value_j_per_mol": 26177.981888088467,
+      "value_ev_per_formula": 0.2713165972751046
+    },
+    {
+      "id": "Hf-V|BCC_A2|1",
+      "binary": "Hf-V",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,V",
+      "value_j_per_mol": 51228.635603852796,
+      "value_ev_per_formula": 0.5309492211623859
+    },
+    {
+      "id": "Hf-V|HCP_A3|0",
+      "binary": "Hf-V",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,V",
+      "value_j_per_mol": 74298.04028329562,
+      "value_ev_per_formula": 0.7700475750976381
+    },
+    {
+      "id": "Hf-V|HCP_A3|1",
+      "binary": "Hf-V",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,V",
+      "value_j_per_mol": -8100.403006181581,
+      "value_ev_per_formula": -0.08395505007184102
+    },
+    {
+      "id": "Hf-W|FCC_A1|0",
+      "binary": "Hf-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,W",
+      "value_j_per_mol": 7873.176,
+      "value_ev_per_formula": 0.0816
+    },
+    {
+      "id": "Hf-W|BCC_A2|0",
+      "binary": "Hf-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,W",
+      "value_j_per_mol": 15102.004799589207,
+      "value_ev_per_formula": 0.1565217888748428
+    },
+    {
+      "id": "Hf-W|BCC_A2|1",
+      "binary": "Hf-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,W",
+      "value_j_per_mol": -33817.77739385827,
+      "value_ev_per_formula": -0.35049777057426823
+    },
+    {
+      "id": "Hf-W|HCP_A3|0",
+      "binary": "Hf-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,W",
+      "value_j_per_mol": 10019.500829970077,
+      "value_ev_per_formula": 0.10384516588039672
+    },
+    {
+      "id": "Hf-W|HCP_A3|1",
+      "binary": "Hf-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,W",
+      "value_j_per_mol": -44314.1345806552,
+      "value_ev_per_formula": -0.45928522133653105
+    },
+    {
+      "id": "Hf-Zr|FCC_A1|0",
+      "binary": "Hf-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "HF,ZR",
+      "value_j_per_mol": -106.13350000000001,
+      "value_ev_per_formula": -0.0011
+    },
+    {
+      "id": "Hf-Zr|BCC_A2|0",
+      "binary": "Hf-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "HF,ZR",
+      "value_j_per_mol": -15214.98319759184,
+      "value_ev_per_formula": -0.15769273148771146
+    },
+    {
+      "id": "Hf-Zr|BCC_A2|1",
+      "binary": "Hf-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "HF,ZR",
+      "value_j_per_mol": -14480.346700493037,
+      "value_ev_per_formula": -0.1500787345234289
+    },
+    {
+      "id": "Hf-Zr|HCP_A3|0",
+      "binary": "Hf-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "HF,ZR",
+      "value_j_per_mol": 362.88715194087973,
+      "value_ev_per_formula": 0.0037610732439330437
+    },
+    {
+      "id": "Hf-Zr|HCP_A3|1",
+      "binary": "Hf-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "HF,ZR",
+      "value_j_per_mol": 168.48899906340048,
+      "value_ev_per_formula": 0.0017462714314494532
+    },
+    {
+      "id": "Mo-Nb|FCC_A1|0",
+      "binary": "Mo-Nb",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "MO,NB",
+      "value_j_per_mol": -52584.325000000004,
+      "value_ev_per_formula": -0.545
+    },
+    {
+      "id": "Mo-Nb|BCC_A2|0",
+      "binary": "Mo-Nb",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "MO,NB",
+      "value_j_per_mol": -25113.801594941142,
+      "value_ev_per_formula": -0.26028710778816544
+    },
+    {
+      "id": "Mo-Nb|BCC_A2|1",
+      "binary": "Mo-Nb",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "MO,NB",
+      "value_j_per_mol": 9259.581343129697,
+      "value_ev_per_formula": 0.09596912829071563
+    },
+    {
+      "id": "Mo-Nb|HCP_A3|0",
+      "binary": "Mo-Nb",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "MO,NB",
+      "value_j_per_mol": -85433.42538575489,
+      "value_ev_per_formula": -0.8854581062937751
+    },
+    {
+      "id": "Mo-Nb|HCP_A3|1",
+      "binary": "Mo-Nb",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "MO,NB",
+      "value_j_per_mol": 89017.1781735604,
+      "value_ev_per_formula": 0.9226012144225569
+    },
+    {
+      "id": "Mo-Ta|FCC_A1|0",
+      "binary": "Mo-Ta",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "MO,TA",
+      "value_j_per_mol": -50172.200000000004,
+      "value_ev_per_formula": -0.52
+    },
+    {
+      "id": "Mo-Ta|BCC_A2|0",
+      "binary": "Mo-Ta",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "MO,TA",
+      "value_j_per_mol": -41604.6504649639,
+      "value_ev_per_formula": -0.43120330066812357
+    },
+    {
+      "id": "Mo-Ta|BCC_A2|1",
+      "binary": "Mo-Ta",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "MO,TA",
+      "value_j_per_mol": 13172.314484165256,
+      "value_ev_per_formula": 0.13652188924874598
+    },
+    {
+      "id": "Mo-Ta|HCP_A3|0",
+      "binary": "Mo-Ta",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "MO,TA",
+      "value_j_per_mol": -129221.69283631524,
+      "value_ev_per_formula": -1.3392930801297118
+    },
+    {
+      "id": "Mo-Ta|HCP_A3|1",
+      "binary": "Mo-Ta",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "MO,TA",
+      "value_j_per_mol": 10025.719349663294,
+      "value_ev_per_formula": 0.10390961651721298
+    },
+    {
+      "id": "Mo-Ti|FCC_A1|0",
+      "binary": "Mo-Ti",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "MO,TI",
+      "value_j_per_mol": -45859.3205,
+      "value_ev_per_formula": -0.4753
+    },
+    {
+      "id": "Mo-Ti|BCC_A2|0",
+      "binary": "Mo-Ti",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "MO,TI",
+      "value_j_per_mol": -54950.52149557654,
+      "value_ev_per_formula": -0.5695239829566932
+    },
+    {
+      "id": "Mo-Ti|BCC_A2|1",
+      "binary": "Mo-Ti",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "MO,TI",
+      "value_j_per_mol": 17177.571130778604,
+      "value_ev_per_formula": 0.17803359206901181
+    },
+    {
+      "id": "Mo-Ti|HCP_A3|0",
+      "binary": "Mo-Ti",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "MO,TI",
+      "value_j_per_mol": 160376.87821848047,
+      "value_ev_per_formula": 1.6621949341190907
+    },
+    {
+      "id": "Mo-Ti|HCP_A3|1",
+      "binary": "Mo-Ti",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "MO,TI",
+      "value_j_per_mol": -115267.06933260824,
+      "value_ev_per_formula": -1.1946631013381173
+    },
+    {
+      "id": "Mo-V|FCC_A1|0",
+      "binary": "Mo-V",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "MO,V",
+      "value_j_per_mol": -55314.8505,
+      "value_ev_per_formula": -0.5733
+    },
+    {
+      "id": "Mo-V|BCC_A2|0",
+      "binary": "Mo-V",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "MO,V",
+      "value_j_per_mol": -36110.88367059733,
+      "value_ev_per_formula": -0.37426422418611527
+    },
+    {
+      "id": "Mo-V|BCC_A2|1",
+      "binary": "Mo-V",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "MO,V",
+      "value_j_per_mol": 10820.168629529911,
+      "value_ev_per_formula": 0.11214353142488379
+    },
+    {
+      "id": "Mo-V|HCP_A3|0",
+      "binary": "Mo-V",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "MO,V",
+      "value_j_per_mol": -88139.7491306038,
+      "value_ev_per_formula": -0.9135072719138083
+    },
+    {
+      "id": "Mo-V|HCP_A3|1",
+      "binary": "Mo-V",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "MO,V",
+      "value_j_per_mol": 33215.38292868702,
+      "value_ev_per_formula": 0.3442543704066644
+    },
+    {
+      "id": "Mo-W|FCC_A1|0",
+      "binary": "Mo-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "MO,W",
+      "value_j_per_mol": 1640.2450000000001,
+      "value_ev_per_formula": 0.017
+    },
+    {
+      "id": "Mo-W|BCC_A2|0",
+      "binary": "Mo-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "MO,W",
+      "value_j_per_mol": 78.76446249353143,
+      "value_ev_per_formula": 0.0008163389386280917
+    },
+    {
+      "id": "Mo-W|BCC_A2|1",
+      "binary": "Mo-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "MO,W",
+      "value_j_per_mol": 1480.7537350948085,
+      "value_ev_per_formula": 0.015346983832666306
+    },
+    {
+      "id": "Mo-W|HCP_A3|0",
+      "binary": "Mo-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "MO,W",
+      "value_j_per_mol": -90030.51895488008,
+      "value_ev_per_formula": -0.9331037876859625
+    },
+    {
+      "id": "Mo-W|HCP_A3|1",
+      "binary": "Mo-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "MO,W",
+      "value_j_per_mol": -26587.05895161907,
+      "value_ev_per_formula": -0.2755563968660317
+    },
+    {
+      "id": "Mo-Zr|FCC_A1|0",
+      "binary": "Mo-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "MO,ZR",
+      "value_j_per_mol": -7911.77,
+      "value_ev_per_formula": -0.082
+    },
+    {
+      "id": "Mo-Zr|BCC_A2|0",
+      "binary": "Mo-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "MO,ZR",
+      "value_j_per_mol": 1298.4650355763404,
+      "value_ev_per_formula": 0.013457688092204387
+    },
+    {
+      "id": "Mo-Zr|BCC_A2|1",
+      "binary": "Mo-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "MO,ZR",
+      "value_j_per_mol": 10269.760712750556,
+      "value_ev_per_formula": 0.10643893571799301
+    },
+    {
+      "id": "Mo-Zr|HCP_A3|0",
+      "binary": "Mo-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "MO,ZR",
+      "value_j_per_mol": -5927.269130993872,
+      "value_ev_per_formula": -0.061432027061137706
+    },
+    {
+      "id": "Mo-Zr|HCP_A3|1",
+      "binary": "Mo-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "MO,ZR",
+      "value_j_per_mol": 131100.40243107625,
+      "value_ev_per_formula": 1.3587646000007902
+    },
+    {
+      "id": "Nb-Ta|FCC_A1|0",
+      "binary": "Nb-Ta",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "NB,TA",
+      "value_j_per_mol": -414.8855,
+      "value_ev_per_formula": -0.0043
+    },
+    {
+      "id": "Nb-Ta|BCC_A2|0",
+      "binary": "Nb-Ta",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "NB,TA",
+      "value_j_per_mol": -1149.278727206624,
+      "value_ev_per_formula": -0.011911475640841829
+    },
+    {
+      "id": "Nb-Ta|BCC_A2|1",
+      "binary": "Nb-Ta",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "NB,TA",
+      "value_j_per_mol": -335.8688959987423,
+      "value_ev_per_formula": -0.0034810477897988528
+    },
+    {
+      "id": "Nb-Ta|HCP_A3|0",
+      "binary": "Nb-Ta",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "NB,TA",
+      "value_j_per_mol": -27130.879661608527,
+      "value_ev_per_formula": -0.2811927207504641
+    },
+    {
+      "id": "Nb-Ta|HCP_A3|1",
+      "binary": "Nb-Ta",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "NB,TA",
+      "value_j_per_mol": -34807.169015719526,
+      "value_ev_per_formula": -0.36075212743659146
+    },
+    {
+      "id": "Nb-Ti|FCC_A1|0",
+      "binary": "Nb-Ti",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "NB,TI",
+      "value_j_per_mol": -18689.144500000002,
+      "value_ev_per_formula": -0.1937
+    },
+    {
+      "id": "Nb-Ti|BCC_A2|0",
+      "binary": "Nb-Ti",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "NB,TI",
+      "value_j_per_mol": -7430.477381023426,
+      "value_ev_per_formula": -0.07701173634267944
+    },
+    {
+      "id": "Nb-Ti|BCC_A2|1",
+      "binary": "Nb-Ti",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "NB,TI",
+      "value_j_per_mol": -4903.809116930478,
+      "value_ev_per_formula": -0.05082457497984638
+    },
+    {
+      "id": "Nb-Ti|HCP_A3|0",
+      "binary": "Nb-Ti",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "NB,TI",
+      "value_j_per_mol": 16029.845815989105,
+      "value_ev_per_formula": 0.16613821646876825
+    },
+    {
+      "id": "Nb-Ti|HCP_A3|1",
+      "binary": "Nb-Ti",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "NB,TI",
+      "value_j_per_mol": 44896.378844541425,
+      "value_ev_per_formula": 0.46531977866550683
+    },
+    {
+      "id": "Nb-V|FCC_A1|0",
+      "binary": "Nb-V",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "NB,V",
+      "value_j_per_mol": -12137.813,
+      "value_ev_per_formula": -0.1258
+    },
+    {
+      "id": "Nb-V|BCC_A2|0",
+      "binary": "Nb-V",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "NB,V",
+      "value_j_per_mol": 27077.305889425024,
+      "value_ev_per_formula": 0.28063746581774396
+    },
+    {
+      "id": "Nb-V|BCC_A2|1",
+      "binary": "Nb-V",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "NB,V",
+      "value_j_per_mol": 1298.1104329975485,
+      "value_ev_per_formula": 0.01345401288280612
+    },
+    {
+      "id": "Nb-V|HCP_A3|0",
+      "binary": "Nb-V",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "NB,V",
+      "value_j_per_mol": 15843.518476084131,
+      "value_ev_per_formula": 0.16420706302621269
+    },
+    {
+      "id": "Nb-V|HCP_A3|1",
+      "binary": "Nb-V",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "NB,V",
+      "value_j_per_mol": -21473.86986554244,
+      "value_ev_per_formula": -0.2225617439554588
+    },
+    {
+      "id": "Nb-W|FCC_A1|0",
+      "binary": "Nb-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "NB,W",
+      "value_j_per_mol": -34097.799,
+      "value_ev_per_formula": -0.3534
+    },
+    {
+      "id": "Nb-W|BCC_A2|0",
+      "binary": "Nb-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "NB,W",
+      "value_j_per_mol": -12579.902773616417,
+      "value_ev_per_formula": -0.13038195339810765
+    },
+    {
+      "id": "Nb-W|BCC_A2|1",
+      "binary": "Nb-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "NB,W",
+      "value_j_per_mol": -16015.503960543116,
+      "value_ev_per_formula": -0.16598957309989237
+    },
+    {
+      "id": "Nb-W|HCP_A3|0",
+      "binary": "Nb-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "NB,W",
+      "value_j_per_mol": 13109.9641670501,
+      "value_ev_per_formula": 0.13587567152459035
+    },
+    {
+      "id": "Nb-W|HCP_A3|1",
+      "binary": "Nb-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "NB,W",
+      "value_j_per_mol": 10268.607990499573,
+      "value_ev_per_formula": 0.10642698855262034
+    },
+    {
+      "id": "Nb-Zr|FCC_A1|0",
+      "binary": "Nb-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "NB,ZR",
+      "value_j_per_mol": 2634.0405,
+      "value_ev_per_formula": 0.0273
+    },
+    {
+      "id": "Nb-Zr|BCC_A2|0",
+      "binary": "Nb-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "NB,ZR",
+      "value_j_per_mol": 8568.8673771306,
+      "value_ev_per_formula": 0.0888103578497238
+    },
+    {
+      "id": "Nb-Zr|BCC_A2|1",
+      "binary": "Nb-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "NB,ZR",
+      "value_j_per_mol": -21529.62914519286,
+      "value_ev_per_formula": -0.22313965015487236
+    },
+    {
+      "id": "Nb-Zr|HCP_A3|0",
+      "binary": "Nb-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "NB,ZR",
+      "value_j_per_mol": 23035.537375067437,
+      "value_ev_per_formula": 0.23874734285191934
+    },
+    {
+      "id": "Nb-Zr|HCP_A3|1",
+      "binary": "Nb-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "NB,ZR",
+      "value_j_per_mol": 15947.556625143006,
+      "value_ev_per_formula": 0.16528534616928026
+    },
+    {
+      "id": "Sc-Ti|FCC_A1|0",
+      "binary": "Sc-Ti",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "SC,TI",
+      "value_j_per_mol": 28192.917,
+      "value_ev_per_formula": 0.2922
+    },
+    {
+      "id": "Sc-Ti|BCC_A2|0",
+      "binary": "Sc-Ti",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "SC,TI",
+      "value_j_per_mol": 17647.1065,
+      "value_ev_per_formula": 0.1829
+    },
+    {
+      "id": "Sc-Ti|HCP_A3|0",
+      "binary": "Sc-Ti",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "SC,TI",
+      "value_j_per_mol": 26813.1815,
+      "value_ev_per_formula": 0.2779
+    },
+    {
+      "id": "Ta-Ti|FCC_A1|0",
+      "binary": "Ta-Ti",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TA,TI",
+      "value_j_per_mol": -3540.9995000000004,
+      "value_ev_per_formula": -0.0367
+    },
+    {
+      "id": "Ta-Ti|BCC_A2|0",
+      "binary": "Ta-Ti",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TA,TI",
+      "value_j_per_mol": 4066.6895305890957,
+      "value_ev_per_formula": 0.042148411987242534
+    },
+    {
+      "id": "Ta-Ti|BCC_A2|1",
+      "binary": "Ta-Ti",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TA,TI",
+      "value_j_per_mol": -3886.6918847566335,
+      "value_ev_per_formula": -0.04028286142671538
+    },
+    {
+      "id": "Ta-Ti|HCP_A3|0",
+      "binary": "Ta-Ti",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TA,TI",
+      "value_j_per_mol": 5107.408955303024,
+      "value_ev_per_formula": 0.05293474587037389
+    },
+    {
+      "id": "Ta-Ti|HCP_A3|1",
+      "binary": "Ta-Ti",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TA,TI",
+      "value_j_per_mol": 69614.22776131937,
+      "value_ev_per_formula": 0.7215031119999935
+    },
+    {
+      "id": "Ta-V|FCC_A1|0",
+      "binary": "Ta-V",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TA,V",
+      "value_j_per_mol": -2662.986,
+      "value_ev_per_formula": -0.0276
+    },
+    {
+      "id": "Ta-V|BCC_A2|0",
+      "binary": "Ta-V",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TA,V",
+      "value_j_per_mol": 22468.88704170799,
+      "value_ev_per_formula": 0.2328744057802559
+    },
+    {
+      "id": "Ta-V|BCC_A2|1",
+      "binary": "Ta-V",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TA,V",
+      "value_j_per_mol": 1453.3791179097973,
+      "value_ev_per_formula": 0.015063264941802325
+    },
+    {
+      "id": "Ta-V|HCP_A3|0",
+      "binary": "Ta-V",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TA,V",
+      "value_j_per_mol": -22488.506460276058,
+      "value_ev_per_formula": -0.2330777474247402
+    },
+    {
+      "id": "Ta-V|HCP_A3|1",
+      "binary": "Ta-V",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TA,V",
+      "value_j_per_mol": 30438.699749459603,
+      "value_ev_per_formula": 0.31547597812571493
+    },
+    {
+      "id": "Ta-W|FCC_A1|0",
+      "binary": "Ta-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TA,W",
+      "value_j_per_mol": -30238.399,
+      "value_ev_per_formula": -0.3134
+    },
+    {
+      "id": "Ta-W|BCC_A2|0",
+      "binary": "Ta-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TA,W",
+      "value_j_per_mol": -27808.36638427157,
+      "value_ev_per_formula": -0.2882144000028146
+    },
+    {
+      "id": "Ta-W|BCC_A2|1",
+      "binary": "Ta-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TA,W",
+      "value_j_per_mol": -17101.250223393865,
+      "value_ev_per_formula": -0.17724257888162787
+    },
+    {
+      "id": "Ta-W|HCP_A3|0",
+      "binary": "Ta-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TA,W",
+      "value_j_per_mol": -63890.944625092736,
+      "value_ev_per_formula": -0.6621852580721639
+    },
+    {
+      "id": "Ta-W|HCP_A3|1",
+      "binary": "Ta-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TA,W",
+      "value_j_per_mol": 12497.94178800277,
+      "value_ev_per_formula": 0.1295324847178605
+    },
+    {
+      "id": "Ta-Zr|FCC_A1|0",
+      "binary": "Ta-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TA,ZR",
+      "value_j_per_mol": 23387.964,
+      "value_ev_per_formula": 0.2424
+    },
+    {
+      "id": "Ta-Zr|BCC_A2|0",
+      "binary": "Ta-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TA,ZR",
+      "value_j_per_mol": 31521.718053612043,
+      "value_ev_per_formula": 0.32670071051056687
+    },
+    {
+      "id": "Ta-Zr|BCC_A2|1",
+      "binary": "Ta-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TA,ZR",
+      "value_j_per_mol": 3034.939603460897,
+      "value_ev_per_formula": 0.031455040715768226
+    },
+    {
+      "id": "Ta-Zr|HCP_A3|0",
+      "binary": "Ta-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TA,ZR",
+      "value_j_per_mol": 8072.655899512876,
+      "value_ev_per_formula": 0.08366747058623492
+    },
+    {
+      "id": "Ta-Zr|HCP_A3|1",
+      "binary": "Ta-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TA,ZR",
+      "value_j_per_mol": 52737.35020990597,
+      "value_ev_per_formula": 0.5465859999990255
+    },
+    {
+      "id": "Ti-V|FCC_A1|0",
+      "binary": "Ti-V",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TI,V",
+      "value_j_per_mol": 4727.765,
+      "value_ev_per_formula": 0.049
+    },
+    {
+      "id": "Ti-V|BCC_A2|0",
+      "binary": "Ti-V",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TI,V",
+      "value_j_per_mol": 7665.124164351919,
+      "value_ev_per_formula": 0.07944368725036968
+    },
+    {
+      "id": "Ti-V|BCC_A2|1",
+      "binary": "Ti-V",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TI,V",
+      "value_j_per_mol": 11535.41217483541,
+      "value_ev_per_formula": 0.11955653391548333
+    },
+    {
+      "id": "Ti-V|HCP_A3|0",
+      "binary": "Ti-V",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TI,V",
+      "value_j_per_mol": 41425.1647532306,
+      "value_ev_per_formula": 0.4293430559489102
+    },
+    {
+      "id": "Ti-V|HCP_A3|1",
+      "binary": "Ti-V",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TI,V",
+      "value_j_per_mol": -51042.603200692596,
+      "value_ev_per_formula": -0.5290211245343068
+    },
+    {
+      "id": "Ti-W|FCC_A1|0",
+      "binary": "Ti-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TI,W",
+      "value_j_per_mol": -19789.073500000002,
+      "value_ev_per_formula": -0.20510000000000003
+    },
+    {
+      "id": "Ti-W|BCC_A2|0",
+      "binary": "Ti-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TI,W",
+      "value_j_per_mol": -17812.2174211,
+      "value_ev_per_formula": -0.18461125999999997
+    },
+    {
+      "id": "Ti-W|BCC_A2|1",
+      "binary": "Ti-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TI,W",
+      "value_j_per_mol": -13323.54321595,
+      "value_ev_per_formula": -0.13808927
+    },
+    {
+      "id": "Ti-W|BCC_A2|2",
+      "binary": "Ti-W",
+      "lattice": "BCC",
+      "order": 2,
+      "constituents": "TI,W",
+      "value_j_per_mol": -71272.1225694,
+      "value_ev_per_formula": -0.73868604
+    },
+    {
+      "id": "Ti-W|HCP_A3|0",
+      "binary": "Ti-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TI,W",
+      "value_j_per_mol": -41186.86770025447,
+      "value_ev_per_formula": -0.42687327253204616
+    },
+    {
+      "id": "Ti-W|HCP_A3|1",
+      "binary": "Ti-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TI,W",
+      "value_j_per_mol": -81721.7766326125,
+      "value_ev_per_formula": -0.8469894453294553
+    },
+    {
+      "id": "Ti-Zr|FCC_A1|0",
+      "binary": "Ti-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "TI,ZR",
+      "value_j_per_mol": 14656.0715,
+      "value_ev_per_formula": 0.1519
+    },
+    {
+      "id": "Ti-Zr|BCC_A2|0",
+      "binary": "Ti-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "TI,ZR",
+      "value_j_per_mol": -11658.162364980933,
+      "value_ev_per_formula": -0.12082875436576601
+    },
+    {
+      "id": "Ti-Zr|BCC_A2|1",
+      "binary": "Ti-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "TI,ZR",
+      "value_j_per_mol": 4233.984769311228,
+      "value_ev_per_formula": 0.04388231092202133
+    },
+    {
+      "id": "Ti-Zr|HCP_A3|0",
+      "binary": "Ti-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "TI,ZR",
+      "value_j_per_mol": 43221.465603136094,
+      "value_ev_per_formula": 0.4479604664262434
+    },
+    {
+      "id": "Ti-Zr|HCP_A3|1",
+      "binary": "Ti-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "TI,ZR",
+      "value_j_per_mol": -32048.72989643337,
+      "value_ev_per_formula": -0.3321628221633764
+    },
+    {
+      "id": "V-W|FCC_A1|0",
+      "binary": "V-W",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "V,W",
+      "value_j_per_mol": -39472.0135,
+      "value_ev_per_formula": -0.4091
+    },
+    {
+      "id": "V-W|BCC_A2|0",
+      "binary": "V-W",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "V,W",
+      "value_j_per_mol": -22636.91986154183,
+      "value_ev_per_formula": -0.23461594923088389
+    },
+    {
+      "id": "V-W|BCC_A2|1",
+      "binary": "V-W",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "V,W",
+      "value_j_per_mol": -22474.07128499973,
+      "value_ev_per_formula": -0.23292813686064912
+    },
+    {
+      "id": "V-W|HCP_A3|0",
+      "binary": "V-W",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "V,W",
+      "value_j_per_mol": -33059.222398756,
+      "value_ev_per_formula": -0.3426358749935845
+    },
+    {
+      "id": "V-W|HCP_A3|1",
+      "binary": "V-W",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "V,W",
+      "value_j_per_mol": 14411.399511076133,
+      "value_ev_per_formula": 0.14936414480049887
+    },
+    {
+      "id": "V-Zr|FCC_A1|0",
+      "binary": "V-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "V,ZR",
+      "value_j_per_mol": 43591.922999999995,
+      "value_ev_per_formula": 0.4517999999999999
+    },
+    {
+      "id": "V-Zr|BCC_A2|0",
+      "binary": "V-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "V,ZR",
+      "value_j_per_mol": 54380.49734885902,
+      "value_ev_per_formula": 0.563616078653252
+    },
+    {
+      "id": "V-Zr|BCC_A2|1",
+      "binary": "V-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "V,ZR",
+      "value_j_per_mol": -42562.1514622463,
+      "value_ev_per_formula": -0.4411271333600694
+    },
+    {
+      "id": "V-Zr|HCP_A3|0",
+      "binary": "V-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "V,ZR",
+      "value_j_per_mol": 37965.658996738945,
+      "value_ev_per_formula": 0.39348768198931383
+    },
+    {
+      "id": "V-Zr|HCP_A3|1",
+      "binary": "V-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "V,ZR",
+      "value_j_per_mol": 45117.412684032635,
+      "value_ev_per_formula": 0.46761064086679416
+    },
+    {
+      "id": "W-Zr|FCC_A1|0",
+      "binary": "W-Zr",
+      "lattice": "FCC",
+      "order": 0,
+      "constituents": "W,ZR",
+      "value_j_per_mol": 35766.989499999996,
+      "value_ev_per_formula": 0.3707
+    },
+    {
+      "id": "W-Zr|BCC_A2|0",
+      "binary": "W-Zr",
+      "lattice": "BCC",
+      "order": 0,
+      "constituents": "W,ZR",
+      "value_j_per_mol": 41983.7054714057,
+      "value_ev_per_formula": 0.4351319424926745
+    },
+    {
+      "id": "W-Zr|BCC_A2|1",
+      "binary": "W-Zr",
+      "lattice": "BCC",
+      "order": 1,
+      "constituents": "W,ZR",
+      "value_j_per_mol": 28900.91815602685,
+      "value_ev_per_formula": 0.2995379401567793
+    },
+    {
+      "id": "W-Zr|HCP_A3|0",
+      "binary": "W-Zr",
+      "lattice": "HCP",
+      "order": 0,
+      "constituents": "W,ZR",
+      "value_j_per_mol": 22174.967105242747,
+      "value_ev_per_formula": 0.2298281298154402
+    },
+    {
+      "id": "W-Zr|HCP_A3|1",
+      "binary": "W-Zr",
+      "lattice": "HCP",
+      "order": 1,
+      "constituents": "W,ZR",
+      "value_j_per_mol": 20866.032732356514,
+      "value_ev_per_formula": 0.21626193431472782
+    }
+  ],
+  "updated_at": "2026-08-17T23:38:32.649738+00:00"
+}

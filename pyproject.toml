@@ -49,6 +49,11 @@ assistant = [
     "sentence-transformers==5.5.0",
     "groq==1.6.0",
 ]
+# Documentation is deliberately separate from the scientific runtime.
+docs = [
+    "mkdocs-material>=9,<10",
+    "mkdocstrings[python]>=0.30,<1",
+]
 
 [project.urls]
 Homepage = "https://github.com/Materials-Modelling-Microscopy/RAPTor"
@@ -68,6 +73,7 @@ exclude = [
 
 [tool.setuptools.package-data]
 "external.Rapid_Phase_Field_Prediction" = [
+    "TDB_creation/*.json",
     "input/tdb/*.tdb",
     "input/DFT_calculated/*.json",
     "input/Empirical_database/*.json",

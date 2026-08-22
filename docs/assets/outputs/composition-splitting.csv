@@ -1,0 +1,3 @@
+temperature_K,input_mol,label,splitting
+1000.0,"[0.5, 0.5]",Cr$_{0.50}$W$_{0.50}$,"[{'phase': 'BCC_A2', 'phase_fraction': 0.5045046918989802, 'phase_composition': array([0.98630837, 0.01369163]), 'phase_instance': 'BCC_A2 #1'}, {'phase': 'BCC_A2', 'phase_fraction': 0.4954953081010198, 'phase_composition': array([0.00484928, 0.99515072]), 'phase_instance': 'BCC_A2 #2'}]"
+1800.0,"[0.5, 0.5]",Cr$_{0.50}$W$_{0.50}$,"[{'phase': 'BCC_A2', 'phase_fraction': 0.5406069190117551, 'phase_composition': array([0.86171208, 0.13828792]), 'phase_instance': 'BCC_A2 #1'}, {'phase': 'BCC_A2', 'phase_fraction': 0.4593930809882399, 'phase_composition': array([0.07434263, 0.92565737]), 'phase_instance': 'BCC_A2 #2'}]"

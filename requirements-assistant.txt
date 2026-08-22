@@ -1,0 +1,8 @@
+# Optional literature-assistant/RAG environment. This extends the web runtime
+# and is intentionally excluded from the default container because
+# sentence-transformers brings in the large PyTorch/CUDA dependency chain.
+-r requirements.txt
+
+pypdf==6.10.0
+sentence-transformers==5.5.0
+groq==1.6.0

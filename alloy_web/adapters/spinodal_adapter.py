@@ -19,6 +19,23 @@ from external.Rapid_Phase_Field_Prediction.phase_diagram_generators.spinodal_ana
 
 @dataclass
 class SpinodalPageResult:
+    """Spinodal eigenvalue spectrum, soft mode, plots, and interpretation.
+
+    Temperatures are in kelvin. ``spinodal_temperature`` is ``None`` if no
+    zero crossing is found on the requested temperature grid.
+
+    Attributes:
+        alloy_system: Element symbols in input order.
+        mol_ratio: Mole fractions paired with ``alloy_system``.
+        lattice: Evaluated solid-solution lattice identifier.
+        spectrum_data: Temperature-dependent Hessian eigenvalue table.
+        spinodal_temperature: Estimated minimum-eigenvalue crossing in kelvin.
+        mode_temperature: Temperature in kelvin used for the soft mode.
+        mode_result: Eigenvalues, eigenvectors, and selected mode data.
+        eigenvalue_figure: Eigenvalue-spectrum plot.
+        mode_figure: Element-resolved soft-mode plot.
+        interpretation: Sign-separated soft-mode interpretation.
+    """
     alloy_system: list[str]
     mol_ratio: list[float]
     lattice: str
@@ -50,6 +67,28 @@ def run_spinodal_analysis(
     mode_temperature: float,
     interaction_data_path: str | Path,
 ) -> SpinodalPageResult:
+    """Calculate the constrained-composition spinodal spectrum and a soft mode.
+
+    Args:
+        alloy_system: Element symbols paired with ``mol_ratio``.
+        mol_ratio: Mole fractions that sum to one.
+        lattice: Solid-solution lattice identifier, such as ``"BCC"``.
+        temperature_min: Inclusive lower grid bound in kelvin.
+        temperature_max: Upper grid bound in kelvin.
+        temperature_step: Grid spacing in kelvin.
+        mode_temperature: Temperature in kelvin at which to evaluate the soft
+            eigenmode.
+        interaction_data_path: JSON file containing binary interaction models.
+
+    Returns:
+        The eigenvalue table, estimated crossing temperature, soft-mode data,
+        figures, and a sign-separated interpretation of the mode.
+
+    Raises:
+        ValueError: If the element and composition lengths differ or the mole
+            fractions do not sum to one.
+        FileNotFoundError: If the interaction data file does not exist.
+    """
 
     if len(alloy_system) != len(mol_ratio):
         raise ValueError("Number of elements and mole fractions must match.")

@@ -6,6 +6,7 @@ venv/
 .idea/
 .streamlit/secrets.toml
 alloy_web/data/*.sqlite3*
+site/
 
 # Local research projects that are not part of the public RAPTor repository.
 eutectics/
@@ -15,9 +16,15 @@ phase_field/
 tests/test_eutectic_annotation_database.py
 tests/test_validated_eutectic_analysis.py
 
+# Local rollback snapshots created by the private TDB maintenance tool.
+external/Rapid_Phase_Field_Prediction/TDB_creation/maintenance_backups/
+
 # ASM Handbook collector: keep licensed source files and browser state local.
 eutectics/.cache/
 eutectics/data/asm_volume3/raw/
 eutectics/data/asm_volume3/download_state.json
 eutectics/data/asm_volume3/extracted/
 eutectics/annotation/previews/
+
+*.egg-info/
+.claude/

@@ -1,0 +1,68 @@
+site_name: RAPTor Python API
+site_description: Python API documentation for RAPTor alloy calculations
+site_url: https://materials-modelling-microscopy.github.io/RAPTor/
+repo_url: https://github.com/Materials-Modelling-Microscopy/RAPTor
+repo_name: Materials-Modelling-Microscopy/RAPTor
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [.]
+          options:
+            docstring_style: google
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: true
+            separate_signature: true
+            show_source: false
+            members_order: source
+            filters: ["!^_"]
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: getting-started/installation.md
+      - First calculation: getting-started/first-calculation.md
+      - Working with results: getting-started/working-with-results.md
+  - Calculation guides:
+      - Overview: guides/index.md
+      - Phase stability: guides/phase-stability.md
+      - Phase diagrams and splitting: guides/phase-diagrams.md
+      - Spinodal analysis: guides/spinodal.md
+      - SymPlex maps: guides/symplex.md
+      - Processing pathways: guides/pathways.md
+      - Summaries and comparison: guides/system-screening.md
+  - API reference:
+      - Functions: reference/api.md
+      - Result objects: reference/results.md
+      - Comparison metrics: reference/comparison-metrics.md
+  - Scientific conventions:
+      - Definitions and units: concepts/definitions-and-units.md
+      - Reproducibility: concepts/reproducibility.md
+  - Development:
+      - Promote a research module: development/module-promotion.md
+      - Documentation standard: development/documentation-style.md
+  - Changelog: changelog.md

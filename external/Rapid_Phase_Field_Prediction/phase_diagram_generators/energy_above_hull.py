@@ -2,12 +2,124 @@ from __future__ import annotations
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pycalphad import calculate, Database
+from pycalphad import calculate, Database, Workspace
+from pycalphad import variables as v
+from pycalphad.core.utils import filter_phases
+from pycalphad.property_framework.metaproperties import IsolatedPhase
 
 
 J_PER_MOL_PER_MEV_ATOM = 96.485
 STABLE_TOLERANCE_MEV_ATOM = 1e-6
 METASTABLE_LIMIT_MEV_ATOM = 50.0
+
+
+def _single_value(value, label: str) -> float:
+    array = np.asarray(value, dtype=float).squeeze()
+    if array.size != 1:
+        raise ValueError(
+            f"{label} should contain one value; received shape {array.shape}."
+        )
+    result = float(array.reshape(-1)[0])
+    if not np.isfinite(result):
+        raise ValueError(f"{label} is not finite.")
+    return result
+
+
+def calculate_energy_above_hull_state(
+    database: Database,
+    composition: dict[str, float],
+    temperature: float,
+    parent_phase: str = "BCC_A2",
+    pressure: float = 101325.0,
+) -> dict:
+    """Evaluate one homogeneous parent state against global equilibrium.
+
+    Zero-fraction components are omitted from the active calculation. This is
+    required for pathway endpoints on binary and ternary faces of a higher-
+    order thermodynamic database.
+    """
+    supplied_composition = {
+        str(component).upper(): float(fraction)
+        for component, fraction in composition.items()
+    }
+    if any(fraction < 0.0 for fraction in supplied_composition.values()):
+        raise ValueError("Composition fractions cannot be negative.")
+    composition = {
+        component: fraction
+        for component, fraction in supplied_composition.items()
+        if fraction > 1e-12
+    }
+    if len(composition) < 2:
+        raise ValueError("At least two active components are required.")
+    if not np.isclose(sum(composition.values()), 1.0, atol=1e-8):
+        raise ValueError("Composition fractions must sum to 1.")
+    if temperature <= 0.0:
+        raise ValueError("temperature must be positive.")
+
+    parent_phase = str(parent_phase).upper()
+    if parent_phase not in database.phases:
+        raise ValueError(
+            f"Parent phase {parent_phase!r} is not available in the database."
+        )
+
+    real_components = list(composition)
+    components = real_components.copy()
+    if "VA" in database.elements:
+        components.append("VA")
+
+    dependent_component = max(composition, key=composition.get)
+    conditions = {
+        v.P: float(pressure),
+        v.T: float(temperature),
+    }
+    for component, fraction in composition.items():
+        if component != dependent_component:
+            conditions[v.X(component)] = fraction
+
+    equilibrium_phases = filter_phases(
+        database,
+        components,
+        list(database.phases),
+    )
+    if not equilibrium_phases:
+        raise ValueError("No valid equilibrium phases were found.")
+
+    equilibrium_workspace = Workspace(
+        database=database,
+        components=components,
+        phases=equilibrium_phases,
+        conditions=conditions,
+    )
+    equilibrium_result = equilibrium_workspace.eq.get_dataset()
+    equilibrium_gibbs = _single_value(
+        equilibrium_workspace.get("GM"),
+        "Equilibrium Gibbs energy",
+    )
+
+    parent_workspace = Workspace(
+        database=database,
+        components=components,
+        phases=[parent_phase],
+        conditions=conditions,
+    )
+    isolated_parent = IsolatedPhase(
+        parent_phase,
+        parent_workspace,
+    )(f"GM({parent_phase})")
+    parent_gibbs = _single_value(
+        parent_workspace.get(isolated_parent),
+        f"Homogeneous {parent_phase} Gibbs energy",
+    )
+
+    burden = float(
+        energy_above_hull_mev(parent_gibbs, equilibrium_gibbs)
+    )
+    return {
+        "parent_gibbs_J_per_mol": parent_gibbs,
+        "equilibrium_gibbs_J_per_mol": equilibrium_gibbs,
+        "energy_above_hull_meV_per_atom": burden,
+        "equilibrium_result": equilibrium_result,
+    }
 
 
 def calculate_homogeneous_bcc_gibbs(

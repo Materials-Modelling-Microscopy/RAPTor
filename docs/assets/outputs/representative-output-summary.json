@@ -1,0 +1,77 @@
+{
+  "phase_stability": {
+    "composition": "Cr-W",
+    "metastable_temperature_K": 931.5309436679877,
+    "stable_temperature_K": null,
+    "columns": [
+      "temperature",
+      "BCC_A2",
+      "2.BCC_A2"
+    ]
+  },
+  "phase_diagram": {
+    "composition": "Cr-W",
+    "diagram_type": "binary"
+  },
+  "composition_splitting": {
+    "alloy_system": [
+      "Cr",
+      "W"
+    ],
+    "temperatures_K": [
+      1000.0,
+      1800.0
+    ]
+  },
+  "spinodal": {
+    "spinodal_temperature_K": 1866.1582802827543,
+    "mode_temperature_K": 1500,
+    "interpretation": {
+      "positive_group": [
+        "Ta",
+        "W"
+      ],
+      "negative_group": [
+        "Cr",
+        "Ti"
+      ],
+      "near_zero": []
+    }
+  },
+  "symplex": {
+    "alloy_system": [
+      "Cr",
+      "Mo",
+      "Nb",
+      "Ta"
+    ],
+    "temperature_K": 1500,
+    "property_name": "Minimum Spinodal Eigenvalue"
+  },
+  "pathways": {
+    "starting_binaries": [
+      "CR-MO",
+      "CR-NB",
+      "MO-NB"
+    ],
+    "mean_integrated_burden_meV_atom": 37.62231281383859,
+    "path_dependence_variance_meV2_atom2": 281.06577908964255
+  },
+  "system_summary": {
+    "alloy_system": [
+      "Cr",
+      "W"
+    ],
+    "reference_temperature_K": 1500.0,
+    "miscible_percentage": 16.666666666666668,
+    "sample_points": 30,
+    "evaluated_sample_points": 30
+  },
+  "system_comparison": {
+    "candidate_count": 3,
+    "complete_count": 3,
+    "pareto_count": 1,
+    "cache_hits": 0,
+    "cache_misses": 3
+  }
+}

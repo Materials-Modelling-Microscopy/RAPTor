@@ -2,9 +2,9 @@
 
 **Rapid Alloy Phase-field generaTOR** is research software for exploring phase stability in multi-principal-element and refractory alloy systems. It combines thermodynamic equilibrium calculations, spinodal analysis, high-dimensional SymPlex maps, phase-diagram plotting, system-level summaries, and experimental evidence in one source repository.
 
-The Streamlit website is one way to use RAPTor. The numerical routines and validated adapter functions can also be run directly from Python for scripted studies, batch calculations, and downstream analysis. Access the website here: https://rapgen.streamlit.app
+Use the hosted RAPTor application at [raptor.engr.wustl.edu](https://raptor.engr.wustl.edu), or call the numerical routines directly from Python for scripted studies, batch calculations, and downstream analysis.
 
-> **Research-code status:** the calculation engine and its adapters are installable as the `raptor_alloys` Python package from a checkout of this repository (not yet published to PyPI), but the interface is pre-1.0 and may still evolve. The Streamlit website is a separate, unaffected way to use the same code and continues to run from a plain `requirements.txt` install as before. Both come from this one repository, updated together.
+> **Research-code status:** the calculation engine and its adapters are installable as the `raptor_alloys` Python package from a checkout of this repository (not yet published to PyPI), but the interface is pre-1.0 and may still evolve.
 
 ## What RAPTor can calculate
 
@@ -21,46 +21,13 @@ The Streamlit website is one way to use RAPTor. The numerical routines and valid
 
 The current thermodynamic calculations focus on the BCC_A2, FCC_A1, and HCP_A3 solid-solution phases represented in the supplied thermodynamic databases, together with applicable intermetallic phases.
 
-## Quick start: Streamlit website
-
-Python 3.11 is the supported runtime
-
-```bash
-git clone https://github.com/Pravanop/Phase_Field_Prediction_Visualization.git
-cd Phase_Field_Prediction_Visualization
-
-python3.11 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-streamlit run app.py
-```
-
-`requirements.txt` contains only the Streamlit interface and its calculation
-runtime. The optional literature assistant is kept separate because its
-embedding stack installs PyTorch and can make an environment or container much
-larger:
-
-```bash
-python -m pip install -r requirements-assistant.txt
-```
-
-The default container is likewise the lightweight web deployment. Use the
-assistant variant only when PDF ingestion, embeddings, or Groq-backed Q&A is
-required:
-
-```bash
-docker build -t raptor-web .
-docker build -f Dockerfile.assistant -t raptor-assistant .
-```
-
 ## Quick start: compute package (`raptor_alloys`)
 
-If you just want to call calculations from your own scripts or notebooks — no Streamlit, no web browser — install the `raptor_alloys` package from the same checkout instead of `requirements.txt`. It pulls in only what the calculations themselves need (numpy, pandas, matplotlib, scipy, pycalphad, symengine, xarray, tinydb, pymatgen, pyyaml); Streamlit and the Alloy Assistant's dependencies are left out unless you ask for them.
+Python 3.11 is the supported runtime. Install the `raptor_alloys` package from a checkout to use RAPTor in scripts and notebooks. The base installation contains the numerical and plotting dependencies required by the calculations.
 
 ```bash
-git clone https://github.com/Pravanop/Phase_Field_Prediction_Visualization.git
-cd Phase_Field_Prediction_Visualization
+git clone https://github.com/Materials-Modelling-Microscopy/RAPTor.git
+cd RAPTor
 
 python3.11 -m venv .venv
 source .venv/bin/activate
@@ -78,32 +45,22 @@ result = rap.run_phase_diagram_prediction(
 result.figure.savefig("Cr-W.png", dpi=300, bbox_inches="tight")
 ```
 
-This installs in editable mode, so the package always reflects your current checkout — pulling the repository picks up updates to both the compute package and the website together, since they're built from the same source. `pip install .` (without `-e`) instead builds a self-contained copy if you'd rather not track the checkout.
-
-Two optional extras add back what the base install leaves out:
-
-```bash
-python -m pip install -e ".[web]"        # streamlit, to also run the website from this environment
-python -m pip install -e ".[assistant]"  # duckdb, sentence-transformers, groq, for alloy_assistant
-```
-
-`raptor_alloys` is a thin, stable façade over the same calculation engine and adapters the website calls — see [Using the calculations without Streamlit](#using-the-calculations-without-streamlit) below for what it exposes.
+This installs in editable mode, so the package always reflects your current checkout. `pip install .` (without `-e`) instead builds a self-contained copy. See [Using the calculations](#using-the-calculations) below for the available entry points.
 
 ## Repository guide
 
 | Path | Role |
 | --- | --- |
-| [`raptor_alloys/`](raptor_alloys/) | Public, installable façade over the calculation engine and adapters below. The stable entry point for calling RAPTor from your own scripts. |
-| [`external/Rapid_Phase_Field_Prediction/`](external/Rapid_Phase_Field_Prediction/) | Thermodynamic, phase-field, spinodal, and phase-diagram calculation engine. See its [calculation guide](external/Rapid_Phase_Field_Prediction/README.md). |
-| [`external/Symplex/`](external/Symplex/) | High-dimensional simplex decomposition and plotting. See the [SymPlex guide](external/Symplex/README.md). |
-| [`alloy_web/`](alloy_web/) | Validation and result adapters shared by the pages, plus UI components. See the [adapter guide](alloy_web/README.md). |
-| [`pages/`](pages/) | Streamlit presentation layer. Scientific calculations should remain outside this directory. |
+| [`raptor_alloys/`](raptor_alloys/) | Compact, installable entry point returning named result objects. |
+| [`external/Rapid_Phase_Field_Prediction/`](external/Rapid_Phase_Field_Prediction/) | Foundational thermodynamic, phase-field, spinodal, and phase-diagram functions. See its [calculation guide](external/Rapid_Phase_Field_Prediction/README.md). |
+| [`external/Symplex/`](external/Symplex/) | Foundational high-dimensional simplex decomposition and plotting functions. See the [SymPlex guide](external/Symplex/README.md). |
+| [`alloy_web/`](alloy_web/) | Validated calculation adapters plus application components. See the [adapter guide](alloy_web/README.md). |
 | [`alloy_assistant/`](alloy_assistant/) | Local DuckDB knowledge workspace, ingestion, reviewed queries, retrieval, and citation-preserving evidence. See the [assistant guide](alloy_assistant/README.md). |
 | [`tests/`](tests/) | Tests for web adapters and cross-layer behavior. |
 
-## Using the calculations without Streamlit
+## Using the calculations
 
-Install `raptor_alloys` as shown above, then import it directly — no `sys.path` setup required, and no Streamlit dependency pulled in. It re-exports the same adapter functions the website calls, so results are identical to what the corresponding page produces.
+Install `raptor_alloys` as shown above, then import it directly with no `sys.path` setup required. It provides validated, result-oriented access to the foundational compute functions.
 
 ### Phase fractions and BCC energy above hull
 
@@ -161,7 +118,7 @@ print(result.interpretation)
 
 The remaining six calculations (`run_phase_diagram_prediction`, `run_composition_splitting_prediction`, `run_symplex_prediction`, `run_pathway_analysis`, `run_alloy_system_summary`, `run_inter_system_comparison`) follow the same pattern — call `rap.<name>(...)`; run `help(rap)` or check [`raptor_alloys/__init__.py`](raptor_alloys/__init__.py) for the full list and each function's result type.
 
-If you're working from a checkout without installing (e.g. editing the adapters themselves), the same functions are reachable directly as `alloy_web.adapters.<module>.run_...` after calling `alloy_web.config.ensure_project_imports()` — that's what `raptor_alloys` does internally. Direct, lower-level engine functions below the adapter layer are documented in the [calculation-engine guide](external/Rapid_Phase_Field_Prediction/README.md); use those when you need finer control over grids or plotting than an adapter exposes.
+The foundational, lower-level functions are documented in the [calculation-engine guide](external/Rapid_Phase_Field_Prediction/README.md) and [SymPlex guide](external/Symplex/README.md). Use them directly when you need finer control over grids, thermodynamic models, intermediate data, or plotting than the result-oriented interface exposes.
 
 ## Scientific definitions used by the interface
 
