@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from alloy_web.analytics import enable_google_analytics
 from alloy_web.config import ensure_project_imports
 
 ensure_project_imports()
@@ -47,3 +48,4 @@ if os.environ.get("RAPTOR_ENABLE_TDB_MAINTENANCE", "").lower() in {"1", "true", 
 pg = st.navigation(pages)
 
 pg.run()
+enable_google_analytics()

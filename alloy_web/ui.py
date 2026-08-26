@@ -1,11 +1,15 @@
+from __future__ import annotations
+
 import io
-from typing import Sequence, Any
+from typing import TYPE_CHECKING, Any, Sequence
 
 from pathlib import Path
-import matplotlib.figure
 import streamlit as st
 
 from alloy_web.config import AVAILABLE_ELEMENTS
+
+if TYPE_CHECKING:
+    import matplotlib.figure
 
 # Mirrors the real periodic-table positions of the 9 available elements:
 # groups 4-6 across periods 4-6.
@@ -132,15 +136,25 @@ def mole_fraction_inputs(elements: Sequence[str]) -> list[float]:
 
     st.markdown("#### Mole fractions")
 
+    if len(elements) == 1:
+        st.number_input(
+            f"x_{elements[0]}",
+            min_value=0.0,
+            max_value=1.0,
+            value=1.0,
+            format="%.4f",
+        )
+        return [1.0]
+
     # Keep the underlying value exactly equimolar. The widget controls how the
     # number is displayed, so rounding here can make valid ternaries sum to
     # 0.9999 and disable calculations across every analysis page.
     default_fraction = 1.0 / len(elements)
-    values = []
+    values: list[float] = []
 
     cols = st.columns(len(elements))
 
-    for col, element in zip(cols, elements):
+    for col, element in zip(cols[:-1], elements[:-1]):
         with col:
             value = st.number_input(
                 f"x_{element}",
@@ -152,10 +166,52 @@ def mole_fraction_inputs(elements: Sequence[str]) -> list[float]:
             )
             values.append(float(value))
 
-    total = sum(values)
+    entered_total = sum(values)
+    remainder = max(0.0, 1.0 - entered_total)
 
-    if abs(total - 1.0) > 1e-6:
-        st.warning(f"Mole fractions currently sum to {total:.4f}, not 1.0000.")
+    calculated_key = f"_mole_fraction_remainder__{'_'.join(elements)}"
+    calculated_container_key = (
+        f"mole_fraction_remainder__{'_'.join(elements)}"
+    )
+    st.session_state[calculated_key] = remainder
+
+    # Keep the dependent value read-only without the usual muted/grey visual
+    # treatment. Its label deliberately matches every other component.
+    st.markdown(
+        f"""
+        <style>
+            .st-key-{calculated_container_key} [data-testid="stNumberInput"],
+            .st-key-{calculated_container_key} input:disabled {{
+                opacity: 1 !important;
+            }}
+            .st-key-{calculated_container_key} input:disabled {{
+                color: var(--text-color) !important;
+                -webkit-text-fill-color: var(--text-color) !important;
+                background-color: var(--secondary-background-color) !important;
+                cursor: default !important;
+            }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    with cols[-1]:
+        with st.container(key=calculated_container_key):
+            st.number_input(
+                f"x_{elements[-1]}",
+                min_value=0.0,
+                max_value=1.0,
+                format="%.4f",
+                disabled=True,
+                key=calculated_key,
+            )
+
+    values.append(remainder)
+
+    if entered_total > 1.0 + 1e-6:
+        st.warning(
+            f"The editable mole fractions sum to {entered_total:.4f}. "
+            "Reduce them to 1.0000 or less so the composition can be balanced."
+        )
 
     return values
 

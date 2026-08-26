@@ -28,3 +28,6 @@ eutectics/annotation/previews/
 
 *.egg-info/
 .claude/
+
+# Private operator notes. Keep deployment details and maintenance procedures local.
+INTERNAL_MAINTAINER_RUNBOOK.md

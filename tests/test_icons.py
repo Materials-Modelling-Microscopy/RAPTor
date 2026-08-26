@@ -1,7 +1,13 @@
 import unittest
 from xml.etree import ElementTree
 
-from alloy_web.icons import ICON_NAMES, brand_favicon, icon_markup, icon_path
+from alloy_web.icons import (
+    BRAND_FAVICON_PATH,
+    ICON_NAMES,
+    brand_favicon,
+    icon_markup,
+    icon_path,
+)
 
 
 class IconSystemTests(unittest.TestCase):
@@ -23,6 +29,8 @@ class IconSystemTests(unittest.TestCase):
         self.assertIn('aria-hidden="true"', markup)
 
     def test_brand_favicon_is_a_transparent_rgba_image(self):
+        self.assertTrue(BRAND_FAVICON_PATH.exists())
+
         favicon = brand_favicon()
 
         self.assertEqual(favicon.mode, "RGBA")

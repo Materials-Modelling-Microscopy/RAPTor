@@ -5,11 +5,12 @@ from html import escape
 from pathlib import Path
 from textwrap import dedent
 
-from PIL import Image, ImageDraw
+from PIL import Image
 import streamlit as st
 
 
 ICON_DIR = Path(__file__).resolve().parent / "assets" / "icons"
+BRAND_FAVICON_PATH = ICON_DIR / "raptor-wordmark.png"
 ICON_NAMES = {
     "brand",
     "symplex",
@@ -42,35 +43,9 @@ def icon_markup(name: str, size: int = 28, class_name: str = "") -> str:
 
 
 def brand_favicon() -> Image.Image:
-    """Render the RAPTor mark to a small raster image Streamlit can use as a favicon."""
-    image = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(image)
-    draw.rounded_rectangle((2, 2, 62, 62), radius=14, fill=(70, 86, 181, 255))
-
-    triangle = [(32, 9), (11, 52), (53, 52), (32, 9)]
-    draw.line(triangle, fill="white", width=5, joint="curve")
-    for x, y in triangle[:3]:
-        draw.ellipse((x - 4, y - 4, x + 4, y + 4), fill="white")
-
-    curve = []
-    start = (17.0, 40.0)
-    control = (30.0, 25.0)
-    end = (47.0, 36.0)
-    for index in range(21):
-        fraction = index / 20.0
-        inverse = 1.0 - fraction
-        curve.append(
-            (
-                inverse * inverse * start[0]
-                + 2 * inverse * fraction * control[0]
-                + fraction * fraction * end[0],
-                inverse * inverse * start[1]
-                + 2 * inverse * fraction * control[1]
-                + fraction * fraction * end[1],
-            )
-        )
-    draw.line(curve, fill="white", width=3)
-    return image
+    """Load the compact RAPTor wordmark Streamlit uses as its favicon."""
+    with Image.open(BRAND_FAVICON_PATH) as source:
+        return source.convert("RGBA").resize((64, 64), Image.Resampling.LANCZOS)
 
 
 def page_title(title: str, icon: str, subtitle: str | None = None) -> None:
