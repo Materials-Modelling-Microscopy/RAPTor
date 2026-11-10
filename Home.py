@@ -1,3 +1,4 @@
+import base64
 from pathlib import Path
 import sys
 
@@ -25,6 +26,23 @@ LAB_URL = "https://mcube.wustl.edu"
 PROFILE_URL = "https://github.com/Pravanop/"
 REPO_URL = "https://github.com/Pravanop/Phase_Field_Prediction_Visualization"
 CONTACT_EMAIL = "mailto:rmishra@wustl.edu"
+PARTNER_LOGO_DIR = ROOT / "alloy_web" / "assets" / "partners"
+
+
+def _image_data_uri(filename: str, media_type: str) -> str:
+    """Encode a trusted local partner logo for use in the page header."""
+    payload = (PARTNER_LOGO_DIR / filename).read_bytes()
+    encoded = base64.b64encode(payload).decode("ascii")
+    return f"data:{media_type};base64,{encoded}"
+
+
+WASHU_LOGO = _image_data_uri("washu-logo.jpg", "image/jpeg")
+UW_MADISON_LOGO = _image_data_uri(
+    "uw-logo-horizontal-color-web-digital.svg", "image/svg+xml"
+)
+SCHMIDT_FUTURES_LOGO = _image_data_uri(
+    "schmidt-futures-logo.png", "image/png"
+)
 
 
 st.markdown(
@@ -40,6 +58,96 @@ st.markdown(
             max-width: 1120px;
             padding-top: 2.2rem;
             padding-bottom: 4rem;
+        }
+
+        .partner-band {
+            position: relative;
+            overflow: hidden;
+            margin: 0 0 1.25rem;
+            padding: 1.15rem;
+            border: 1px solid rgba(67, 82, 143, 0.16);
+            border-radius: 1.25rem;
+            background:
+                radial-gradient(circle at 7% 10%, rgba(186, 12, 47, 0.11), transparent 15rem),
+                radial-gradient(circle at 94% 10%, rgba(52, 82, 178, 0.12), transparent 17rem),
+                linear-gradient(120deg, rgba(255,255,255,0.98), rgba(245,247,255,0.96));
+            box-shadow: 0 14px 38px rgba(27, 42, 91, 0.09);
+        }
+
+        .partner-band-header {
+            display: flex;
+            align-items: baseline;
+            margin: 0 0 0.85rem 0.2rem;
+        }
+
+        .partner-band-kicker {
+            color: #4052a3;
+            font-size: 0.72rem;
+            font-weight: 850;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .partner-logos {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.8rem;
+        }
+
+        .partner-logo-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            min-height: 110px;
+            padding: 1rem 1.25rem;
+            overflow: hidden;
+            border: 1px solid rgba(40, 53, 103, 0.12);
+            border-radius: 0.9rem;
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(29, 43, 90, 0.07);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .partner-logo-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            height: 4px;
+            background: var(--partner-accent);
+        }
+
+        .partner-logo-card:nth-child(1) { --partner-accent: #ba0c2f; }
+        .partner-logo-card:nth-child(2) { --partner-accent: #c5050c; }
+        .partner-logo-card:nth-child(3) { --partner-accent: #3653a4; }
+
+        .partner-logo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(29, 43, 90, 0.13);
+        }
+
+        .partner-role {
+            color: #536084;
+            font-size: 0.62rem;
+            font-weight: 850;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .partner-logo-card img {
+            display: block;
+            width: 100%;
+            max-width: 255px;
+            max-height: 58px;
+            object-fit: contain;
+        }
+
+        .partner-logo-card:nth-child(3) img {
+            max-width: 203px;
+            max-height: 48px;
         }
 
         .raptor-hero {
@@ -287,6 +395,9 @@ st.markdown(
         }
 
         @media (max-width: 700px) {
+            .partner-band { padding: 0.9rem; border-radius: 1rem; }
+            .partner-logos { grid-template-columns: 1fr; gap: 0.65rem; }
+            .partner-logo-card { min-height: 96px; }
             .raptor-hero { border-radius: 1rem; }
             .raptor-hero h1 { font-size: 2.6rem; }
             .workflow-strip { justify-content: flex-start; }
@@ -300,6 +411,28 @@ st.markdown(
 
 st.markdown(
     f"""
+    <section class="partner-band" aria-label="Research partners and supporters">
+        <div class="partner-band-header">
+            <span class="partner-band-kicker">Collaboration &amp; support</span>
+        </div>
+        <div class="partner-logos">
+            <a class="partner-logo-card" href="https://washu.edu/" target="_blank"
+               rel="noopener noreferrer" aria-label="Visit WashU">
+                <span class="partner-role">In collaboration with</span>
+                <img src="{WASHU_LOGO}" alt="WashU" />
+            </a>
+            <a class="partner-logo-card" href="https://www.wisc.edu/" target="_blank"
+               rel="noopener noreferrer" aria-label="Visit the University of Wisconsin–Madison">
+                <span class="partner-role">In collaboration with</span>
+                <img src="{UW_MADISON_LOGO}" alt="University of Wisconsin–Madison" />
+            </a>
+            <a class="partner-logo-card" href="https://www.schmidtfutures.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="Visit Schmidt Futures">
+                <span class="partner-role">Partially supported by</span>
+                <img src="{SCHMIDT_FUTURES_LOGO}" alt="Schmidt Futures" />
+            </a>
+        </div>
+    </section>
     <section class="raptor-hero">
         <div class="raptor-brand-mark">{icon_markup("brand", 62)}</div>
         <div class="raptor-eyebrow">RAPTor · First-principle based alloy thermodynamics</div>
