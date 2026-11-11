@@ -18,6 +18,12 @@ RUN useradd --create-home --uid 10001 raptor
 
 COPY --chown=raptor:raptor . .
 
+# Streamlit's initial HTML uses the generic title "Streamlit" and a generic
+# no-JavaScript message. Search crawlers can index that shell before the app
+# updates the page in the browser, so install RAPTor's crawler-facing metadata
+# directly into the static document served by Streamlit.
+RUN python scripts/patch_streamlit_index.py
+
 USER raptor
 
 EXPOSE 7860
