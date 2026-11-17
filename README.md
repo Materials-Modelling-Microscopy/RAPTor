@@ -1,29 +1,101 @@
-# RAPTor
+<p align="center">
+  <img src="alloy_web/assets/icons/raptor-github-logo.png#gh-light-mode-only" alt="RAPTor logo" width="240">
+  <img src="alloy_web/assets/icons/raptor-github-logo-dark.png#gh-dark-mode-only" alt="RAPTor logo" width="240">
+</p>
 
-**Rapid Alloy Phase-field generaTOR** is research software for exploring phase stability in multi-principal-element and refractory alloy systems. It combines thermodynamic equilibrium calculations, spinodal analysis, high-dimensional SymPlex maps, phase-diagram plotting, system-level summaries, and experimental evidence in one source repository.
+<h1 align="center">RAPTor</h1>
 
-Use the hosted RAPTor application at [raptor.engr.wustl.edu](https://raptor.engr.wustl.edu), or call the numerical routines directly from Python for scripted studies, batch calculations, and downstream analysis.
+<p align="center">
+  <strong>Rapid Alloy Phase-field generaTOR</strong><br>
+  Research software for computational alloy thermodynamics and phase-stability analysis
+</p>
 
-> **Research-code status:** the calculation engine and its adapters are installable as the `raptor_alloys` Python package from a checkout of this repository (not yet published to PyPI), but the interface is pre-1.0 and may still evolve.
+<p align="center">
+  <a href="https://github.com/Materials-Modelling-Microscopy/RAPTor/actions/workflows/docs.yml"><img src="https://github.com/Materials-Modelling-Microscopy/RAPTor/actions/workflows/docs.yml/badge.svg" alt="Documentation workflow"></a>
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&amp;logoColor=white" alt="Python 3.11">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/status-research%20software-6f42c1" alt="Research software status">
+  <a href="https://raptor.engr.wustl.edu"><img src="https://img.shields.io/badge/launch-hosted%20application-2ea44f" alt="Launch the hosted RAPTor application"></a>
+  <a href="https://doi.org/10.48550/arXiv.2609.06627"><img src="https://img.shields.io/badge/DOI-10.48550%2FarXiv.2609.06627-blue" alt="RAPTor paper DOI"></a>
+</p>
 
-## What RAPTor can calculate
+<p align="center">
+  <a href="https://raptor.engr.wustl.edu"><strong>Launch RAPTor</strong></a>
+  ·
+  <a href="docs/index.md">Documentation</a>
+  ·
+  <a href="docs/getting-started/installation.md">Installation</a>
+  ·
+  <a href="#citation">Citation</a>
+</p>
 
-| Capability | Main outputs | Implementation |
-| --- | --- | --- |
-| SymPlex property maps | SPSS phase fraction, BCC energy above hull, phase count, minimum spinodal eigenvalue | `external/Rapid_Phase_Field_Prediction/phase_diagram_generators/` and `external/Symplex/` |
-| Composition-specific temperature profiles | Phase fractions and BCC energy above hull versus temperature | `external/Rapid_Phase_Field_Prediction/phase_diagram_analysis/` |
-| Composition splitting | Equilibrium phase compositions at selected temperatures | `external/Rapid_Phase_Field_Prediction/phase_diagram_analysis/` |
-| Phase diagrams | Binary temperature-composition and isothermal ternary diagrams | `external/Rapid_Phase_Field_Prediction/phase_diagram_analysis/` |
-| Spinodal stability | Hessian eigenvalue spectra, spinodal crossing temperature, and soft eigenmodes | `external/Rapid_Phase_Field_Prediction/phase_diagram_generators/` |
-| Alloy-system summaries | Miscibility temperature, percentage miscible region (PMR), subsystem behavior, and considered intermetallics | `alloy_web/adapters/alloy_summary_adapter.py` |
-| Inter-system comparison | Ranking, Pareto filtering, and a local SQLite calculation cache | `alloy_web/adapters/inter_system_adapter.py` |
-| Experimental and literature evidence | Provenance-preserving structured records, document retrieval, and reviewed queries | `alloy_assistant/` |
+---
 
-The current thermodynamic calculations focus on the BCC_A2, FCC_A1, and HCP_A3 solid-solution phases represented in the supplied thermodynamic databases, together with applicable intermetallic phases.
+## Funding and acknowledgements
 
-## Quick start: compute package (`raptor_alloys`)
+RAPTor is developed through a collaboration between researchers at Washington
+University in St. Louis and the University of Wisconsin–Madison. Development
+of this project has been partially supported by Schmidt Futures.
 
-Python 3.11 is the supported runtime. Install the `raptor_alloys` package from a checkout to use RAPTor in scripts and notebooks. The base installation contains the numerical and plotting dependencies required by the calculations.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="alloy_web/assets/partners/washu-logo.jpg" alt="Washington University in St. Louis" width="360">
+    </td>
+    <td align="center" width="50%">
+      <img src="alloy_web/assets/partners/uw-logo-horizontal-color-web-digital.svg" alt="University of Wisconsin–Madison" width="360">
+    </td>
+  </tr>
+</table>
+
+<p align="center"><em>Partially supported by</em></p>
+
+<p align="center">
+  <img src="alloy_web/assets/partners/schmidt-futures-logo.png" alt="Schmidt Futures" width="315">
+</p>
+
+## Overview
+
+RAPTor is an open-source research platform for exploring phase stability in
+multi-principal-element and refractory alloy systems. It brings together
+thermodynamic equilibrium calculations, spinodal analysis, high-dimensional
+SymPlex maps, phase-diagram construction, system-level comparisons, and
+experimental evidence within a unified Python and web interface.
+
+The project can be used in two ways:
+
+- **Interactive application:** run calculations and inspect results through the
+  hosted interface at [raptor.engr.wustl.edu](https://raptor.engr.wustl.edu).
+- **Python API:** call the numerical routines directly in scripts, notebooks,
+  batch studies, and downstream analysis pipelines.
+
+> [!IMPORTANT]
+> RAPTor is pre-1.0 research software. Its interfaces and scientific models may
+> continue to evolve. Results should be interpreted in the context of the
+> selected thermodynamic database, modeled phases, numerical settings, and
+> sampling resolution.
+
+## Scientific capabilities
+
+| Capability | Representative outputs |
+| --- | --- |
+| **SymPlex property maps** | SPSS phase fraction, BCC energy above hull, phase count, and minimum spinodal eigenvalue across high-dimensional composition spaces |
+| **Temperature-dependent phase stability** | Equilibrium phase fractions and BCC energy above hull for a selected alloy composition |
+| **Composition splitting** | Equilibrium phase compositions and elemental partitioning at selected temperatures |
+| **Phase diagrams** | Binary temperature–composition diagrams and isothermal ternary diagrams |
+| **Spinodal analysis** | Constrained-composition Hessian spectra, spinodal crossing temperatures, and soft composition modes |
+| **Alloy-system summaries** | Miscibility temperature, percentage miscible region, subsystem behavior, and considered intermetallic phases |
+| **Inter-system comparison** | Ranking and Pareto filtering across multiple alloy systems and stability metrics |
+| **Experimental evidence** | Provenance-preserving records and reviewed literature evidence associated with alloy systems |
+
+The current thermodynamic workflows focus on the `BCC_A2`, `FCC_A1`, and
+`HCP_A3` solid-solution phases represented in the supplied thermodynamic
+databases, together with applicable intermetallic phases.
+
+## Quick start
+
+Python 3.11 is the supported runtime. Clone the repository and install RAPTor
+in a virtual environment:
 
 ```bash
 git clone https://github.com/Materials-Modelling-Microscopy/RAPTor.git
@@ -35,134 +107,122 @@ python -m pip install --upgrade pip
 python -m pip install -e .
 ```
 
+The editable installation keeps the Python package synchronized with the local
+checkout. Use `python -m pip install .` instead when a self-contained installed
+copy is preferred.
+
+### Minimal example
+
 ```python
 import raptor_alloys as rap
 
 result = rap.run_phase_diagram_prediction(
-    alloy_system=["Cr", "W"],  # any element order is fine
+    alloy_system=["Cr", "W"],
     tdb_dir=rap.TDB_DIR,
 )
+
 result.figure.savefig("Cr-W.png", dpi=300, bbox_inches="tight")
 ```
 
-This installs in editable mode, so the package always reflects your current checkout. `pip install .` (without `-e`) instead builds a self-contained copy. See [Using the calculations](#using-the-calculations) below for the available entry points.
+For additional examples, see the guides for
+[phase stability](docs/guides/phase-stability.md),
+[phase diagrams](docs/guides/phase-diagrams.md),
+[spinodal analysis](docs/guides/spinodal.md),
+[SymPlex maps](docs/guides/symplex.md), and
+[system screening](docs/guides/system-screening.md).
 
-## Repository guide
+## Repository structure
 
-| Path | Role |
+| Path | Purpose |
 | --- | --- |
-| [`raptor_alloys/`](raptor_alloys/) | Compact, installable entry point returning named result objects. |
-| [`external/Rapid_Phase_Field_Prediction/`](external/Rapid_Phase_Field_Prediction/) | Foundational thermodynamic, phase-field, spinodal, and phase-diagram functions. See its [calculation guide](external/Rapid_Phase_Field_Prediction/README.md). |
-| [`external/Symplex/`](external/Symplex/) | Foundational high-dimensional simplex decomposition and plotting functions. See the [SymPlex guide](external/Symplex/README.md). |
-| [`alloy_web/`](alloy_web/) | Validated calculation adapters plus application components. See the [adapter guide](alloy_web/README.md). |
-| [`alloy_assistant/`](alloy_assistant/) | Local DuckDB knowledge workspace, ingestion, reviewed queries, retrieval, and citation-preserving evidence. See the [assistant guide](alloy_assistant/README.md). |
-| [`tests/`](tests/) | Tests for web adapters and cross-layer behavior. |
+| [`raptor_alloys/`](raptor_alloys/) | Public, result-oriented Python API |
+| [`alloy_web/`](alloy_web/) | Validated calculation adapters and Streamlit application components |
+| [`alloy_assistant/`](alloy_assistant/) | Local evidence workspace, ingestion, retrieval, and citation-preserving records |
+| [`external/Rapid_Phase_Field_Prediction/`](external/Rapid_Phase_Field_Prediction/) | Foundational thermodynamic, phase-field, spinodal, and phase-diagram routines |
+| [`external/Symplex/`](external/Symplex/) | High-dimensional simplex decomposition and visualization routines |
+| [`docs/`](docs/) | Concepts, calculation guides, API references, and development documentation |
+| [`tests/`](tests/) | Web-adapter, API, documentation, and cross-layer tests |
 
-## Using the calculations
+## Scientific definitions and interpretation
 
-Install `raptor_alloys` as shown above, then import it directly with no `sys.path` setup required. It provides validated, result-oriented access to the foundational compute functions.
+- **Miscible:** at least 99% of the equilibrium material is present in one
+  solid-solution phase: `BCC_A2`, `FCC_A1`, or `HCP_A3`. Two composition sets
+  of the same phase count as a multiphase state rather than a miscible state.
+- **Percentage miscible region (PMR):** the percentage of sampled compositions
+  in a system that meet the miscibility definition at the selected temperature.
+- **BCC energy above hull:** the homogeneous `BCC_A2` Gibbs energy minus the
+  equilibrium Gibbs-energy hull, reported in meV/atom. Zero indicates
+  thermodynamic stability; the interface identifies values up to 50 meV/atom
+  as metastable.
+- **Spinodal temperature:** the estimated temperature at which the minimum
+  constrained-composition Hessian eigenvalue crosses zero. The associated
+  eigenvector describes the soft composition-fluctuation mode.
 
-### Phase fractions and BCC energy above hull
+Temperatures are reported in kelvin. Thermodynamic interaction parameters
+retain the units defined by their source model. Database coverage, phase-model
+selection, temperature increments, and composition sampling density all affect
+the numerical results and should be reported in scientific use.
 
-```python
-import raptor_alloys as rap
+## Documentation and testing
 
-result = rap.run_phase_fraction_temperature_prediction(
-    alloy_system=["Cr", "Ta", "Ti", "W"],
-    mol_ratio=[0.25, 0.25, 0.25, 0.25],
-    temperature_min=300,
-    temperature_max=3000,
-    temperature_step=50,
-    tdb_dir=rap.TDB_DIR,
-)
+The repository documentation begins at [`docs/index.md`](docs/index.md). Public
+functions and result types are listed in the
+[API reference](docs/reference/api.md), while calculation-specific workflows
+are described in the [user guides](docs/guides/index.md).
 
-result.data.to_csv("phase_fractions.csv", index=False)
-result.energy_above_hull_data.to_csv("bcc_energy_above_hull.csv", index=False)
-result.figure.savefig("phase_fractions.png", dpi=300, bbox_inches="tight")
-result.energy_above_hull_figure.savefig(
-    "bcc_energy_above_hull.png", dpi=300, bbox_inches="tight"
-)
-print("Metastability threshold:", result.metastable_temperature)
-print("Stable BCC threshold:", result.stable_temperature)
-```
-
-### Spinodal spectrum and soft mode
-
-```python
-from pathlib import Path
-
-import raptor_alloys as rap
-
-interaction_file = Path(
-    "external/Rapid_Phase_Field_Prediction/input/spinodal/"
-    "binary_interactions.json"
-)
-
-result = rap.run_spinodal_analysis(
-    alloy_system=["Cr", "Ta", "Ti", "W"],
-    mol_ratio=[0.25, 0.25, 0.25, 0.25],
-    lattice="BCC",
-    temperature_min=300,
-    temperature_max=3000,
-    temperature_step=25,
-    mode_temperature=1500,
-    interaction_data_path=interaction_file,
-)
-
-result.spectrum_data.to_csv("spinodal_spectrum.csv", index=False)
-result.eigenvalue_figure.savefig("spinodal_spectrum.png", dpi=300)
-result.mode_figure.savefig("spinodal_mode.png", dpi=300)
-print("Estimated spinodal temperature:", result.spinodal_temperature)
-print(result.interpretation)
-```
-
-The remaining six calculations (`run_phase_diagram_prediction`, `run_composition_splitting_prediction`, `run_symplex_prediction`, `run_pathway_analysis`, `run_alloy_system_summary`, `run_inter_system_comparison`) follow the same pattern — call `rap.<name>(...)`; run `help(rap)` or check [`raptor_alloys/__init__.py`](raptor_alloys/__init__.py) for the full list and each function's result type.
-
-The foundational, lower-level functions are documented in the [calculation-engine guide](external/Rapid_Phase_Field_Prediction/README.md) and [SymPlex guide](external/Symplex/README.md). Use them directly when you need finer control over grids, thermodynamic models, intermediate data, or plotting than the result-oriented interface exposes.
-
-## Scientific definitions used by the interface
-
-- **Miscible:** at least 99% of the equilibrium material is in one solid-solution phase: BCC_A2, FCC_A1, or HCP_A3. Two composition sets of the same phase, such as two distinct BCC_A2 solutions, count as multiphase rather than miscible.
-- **Percentage miscible region (PMR):** the percentage of sampled compositions in a system that meet the miscibility definition at the selected temperature.
-- **BCC energy above hull:** the homogeneous BCC_A2 Gibbs energy minus the equilibrium Gibbs-energy hull, reported in meV/atom. Zero indicates stability; the interface marks values up to 50 meV/atom as metastable.
-- **Spinodal temperature:** the estimated temperature where the minimum constrained-composition Hessian eigenvalue crosses zero. The associated eigenvector describes the soft composition fluctuation mode.
-
-These are operational definitions used by this codebase. Sampling density, temperature step, database coverage, and enabled phases affect the numerical result and should be reported with published calculations.
-
-## Inputs, units, and data behavior
-
-- Supply elements and mole fractions in the same order. Mole fractions must sum to one.
-- Temperatures are in kelvin.
-- BCC energy above hull is reported in meV/atom; thermodynamic interaction parameters retain the units defined by their source model.
-- Thermodynamic databases live in `external/Rapid_Phase_Field_Prediction/input/tdb/`. They are calculation inputs and are treated as read-only by the current workflows.
-- Many database filenames encode element order. Preserve the order used by an available filename when calling lower-level routines directly.
-- The inter-system SQLite database is a generated calculation cache, not a scientific source of record. It may be rebuilt when inputs or calculation settings change.
-- Experimental evidence is returned only when the stored record matches the requested alloy system under the adapter's matching rules. Citations remain attached to their source records.
-
-## Testing
-
-Run the web and adapter tests from the repository root:
+Run the primary test suite from the repository root:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-Run the Alloy Assistant tests separately:
+Run the evidence-workspace tests separately:
 
 ```bash
 python -m unittest discover -s alloy_assistant/tests -v
 ```
 
-Some thermodynamic tests and examples are computationally expensive. A successful import or UI launch is not a substitute for checking numerical output against the database, composition, temperature grid, and phase selection used in a study.
+Some thermodynamic tests and examples are computationally expensive. A
+successful import or application launch is not a substitute for validating
+scientific output against the database, composition, temperature grid, and
+phase selection used in a study.
 
 ## Citation
 
-If you use the SymPlex visualization method, cite:
+If RAPTor is used in research, please cite the primary publication:
 
-> J. Cavin, P. Omprakash, A. Couet, and R. Mishra, “SymPlex plots for visualizing properties in high-dimensional alloy spaces,” *Scripta Materialia* 268 (2025) 116840.
+> P. Omprakash, N. Crnkovich, J. Cavin, N. Curtis, A. Couet, and R. Mishra,
+> “First-principles-based Prediction of Phase Fields: Part I. Binary and
+> Ternary Refractory Alloys,” *arXiv:2609.06627* (`cond-mat.mtrl-sci`, 2026).
+> <https://doi.org/10.48550/arXiv.2609.06627>
 
-Other RAPTor components are associated with work in preparation. Until component-specific citations are published, cite the repository and record the commit or release used so the calculation can be reproduced.
+For reproducibility, also record the RAPTor release or commit hash,
+thermodynamic database, modeled phases, and calculation settings used to
+produce the reported results.
+
+### Method-specific citation
+
+For use of the SymPlex visualization method, please cite:
+
+> J. Cavin, P. Omprakash, A. Couet, and R. Mishra, “SymPlex plots for
+> visualizing properties in high-dimensional alloy spaces,” *Scripta
+> Materialia* **268** (2025), 116840.
+
+Other RAPTor components are associated with work in preparation. Additional
+component-specific references are provided in the application and
+documentation where applicable.
+
+## Contributing
+
+Bug reports, scientific validation cases, documentation improvements, and
+well-scoped code contributions are welcome through GitHub Issues and pull
+requests. Please describe the thermodynamic database, modeled phases,
+composition, temperature range, and expected behavior when reporting a
+scientific discrepancy.
 
 ## License
 
-RAPTor is provided under the [MIT License](LICENSE). Thermodynamic databases and literature sources may have their own terms; users are responsible for complying with the terms of the data they supply or redistribute.
+RAPTor is distributed under the [MIT License](LICENSE). Thermodynamic databases
+and literature sources may be governed by separate terms; users are responsible
+for complying with the licenses and redistribution requirements of the data
+they supply or reuse.
